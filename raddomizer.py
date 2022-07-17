@@ -23,7 +23,7 @@ class bigRaddomizer(QMainWindow): #I goofed by following a tutorial that started
         self.raddomizer = Raddomizer()
         self.setCentralWidget(self.raddomizer)
 
-        self.resize(760, 770)
+        self.resize(750, 800)
         self.setWindowTitle("FE12 Randomizer")
         self.setWindowIcon(QIcon(self.directory+"\\randomizer_assets\\marthicon.png"))
         self.windows = []
@@ -242,7 +242,12 @@ class Raddomizer(QWidget):
         seed = self.advancedDict["Seed"].getSeed()
 
         if not os.path.exists(inputPath+"\\data\\dispos\\") and not os.path.exists(inputPath+"\\dispos\\"):
-            error = errorWindow(self.font, self.directory, "Make sure your input directory\ncontains an unpacked FE12 ROM.")
+            error = errorWindow(self.font, self.directory, '''
+            <div style = "text-align:center">
+            &nbsp;&nbsp;Make sure your input directory&nbsp;&nbsp;<br>
+            &nbsp;&nbsp;contains an unpacked FE12 ROM.&nbsp;&nbsp;
+            </div>
+            ''')
             self.windows.append(error)
             error.show()
 
@@ -475,9 +480,9 @@ class romInfoWindow(QWidget):
         infoImage2 = resizeImageLabel(self.directory + "//randomizer_assets//lukefiles.png")
 
 
-        text1 = self.customTextLabel("Please make sure your directory looks like the following:")
+        text1 = self.customTextLabel("  Please make sure your directory looks like the following:  ")
 
-        text2 = self.customTextLabel("You can use a tool like DSLazy to unpack your ROM.")
+        text2 = self.customTextLabel("  You can use a tool like DSLazy to unpack your ROM.  ")
 
 
         self.grid.addWidget(text1, 0, 0, 3, 5)
@@ -547,7 +552,7 @@ class errorWindow(QWidget):
         errorImage = resizeImageLabel(self.directory + "//randomizer_assets//error.png")
 
 
-        text1 = self.customTextLabel("Whoops, we've run into an error!")
+        text1 = self.customTextLabel("  Whoops, we've run into an error!  ")
 
         text2 = self.customTextLabel(errorText)
 
@@ -771,7 +776,7 @@ class randomizeButton(QPushButton):
 
         self.setStyleSheet("margin: 10px")
 
-        self.setMinimumSize(210, 60)
+        self.setFixedSize(210, 60)
 
         self.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
 
@@ -1311,7 +1316,7 @@ class customStepSlider(QWidget):
         self.grid = QGridLayout()
         self.setLayout(self.grid)
 
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        #self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
 
         self.slider = QRangeSlider(Qt.Orientation.Horizontal)
         self.slider.setTickInterval(1)
@@ -1321,26 +1326,27 @@ class customStepSlider(QWidget):
         self.slider.setValue((0, 8))
         self.slider.valueChanged.connect(self.updateLabels)
 
-        self.minLabel = QLabel(self)
+        self.minLabel = QLabel()
         self.minLabel.setText("   0%")
         self.minLabel.setFont(font)
-        self.maxLabel = QLabel(self)
+        self.maxLabel = QLabel()
         self.maxLabel.setText("80%")
         self.maxLabel.setFont(font)
 
-        self.titleLabel = QLabel(self)
+        self.titleLabel = dynamicLabel()
         self.titleLabel.setText("Growths Range")
-        self.titleLabel.setFont(font)       
+        self.titleLabel.setFont(font)   
+        self.titleLabel.setMinSize(20)
 
-        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spacer = QSpacerItem(20, 60)
 
         self.grid.addItem(spacer, 0, 0)
-        self.grid.addItem(spacer, 0, 30)
 
         self.grid.addWidget(self.minLabel, 0, 1, 1, 1)
         self.grid.addWidget(self.slider, 0, 2, 1, 20)
         self.grid.addWidget(self.maxLabel,0 , 23, 1, 1)
-        self.grid.addWidget(self.titleLabel, 1, 2, 1, 20, Qt.AlignCenter)
+        self.grid.addWidget(self.titleLabel, 1, 2, 3, 20, Qt.AlignCenter)
+
 
     def setValue(self, value):
         self.slider.setValue((value[0], value[-1]))
