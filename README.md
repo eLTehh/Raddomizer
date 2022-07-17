@@ -1,4 +1,6 @@
 # An FE12 randomizer, complete with a GUI and built-in instructions!
+## Get the latest version [here!](https://github.com/eLTehh/Raddomizer/releases/tag/raddomizer) 
+
 ## Intro
 <img src = "readme_images/raddomizer.PNG" width = 25% height = 25%>
 
