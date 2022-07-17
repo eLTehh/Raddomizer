@@ -1,0 +1,1066 @@
+{
+  "Lord": {
+    "Pointer": [
+      171,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 0,
+    "Tier": "-"
+  },
+  "Pegasus Knight": {
+    "Pointer": [
+      26,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Flier",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 1,
+    "Tier": "U"
+  },
+  "Pegasus Knight F": {
+    "Pointer": [
+      44,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Flier",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 2,
+    "Tier": "U"
+  },
+  "Falcon Knight": {
+    "Pointer": [
+      32,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Flier",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 31,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 3,
+    "Tier": "P"
+  },
+  "Dracoknight": {
+    "Pointer": [
+      214,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Flier",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 31,
+      "Axe": 1,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 4,
+    "Tier": "P"
+  },
+  "Dracoknight (F)": {
+    "Pointer": [
+      231,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Flier",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 31,
+      "Axe": 1,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 5,
+    "Tier": "P"
+  },
+  "Cavalier": {
+    "Pointer": [
+      156,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Cavalier",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 6,
+    "Tier": "U"
+  },
+  "Cavalier (F)": {
+    "Pointer": [
+      173,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Cavalier",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 7,
+    "Tier": "U"
+  },
+  "Paladin": {
+    "Pointer": [
+      0,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Cavalier",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 31,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 8,
+    "Tier": "P"
+  },
+  "Paladin (F)": {
+    "Pointer": [
+      12,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Cavalier",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 31,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 9,
+    "Tier": "P"
+  },
+  "Knight": {
+    "Pointer": [
+      75,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Knight",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 10,
+    "Tier": "U"
+  },
+  "Knight F": {
+    "Pointer": [
+      91,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Knight",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 11,
+    "Tier": "U"
+  },
+  "General": {
+    "Pointer": [
+      78,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Knight",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 31,
+      "Axe": 0,
+      "Bow": 1,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 12,
+    "Tier": "P"
+  },
+  "General F": {
+    "Pointer": [
+      90,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Knight",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 31,
+      "Axe": 0,
+      "Bow": 1,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 13,
+    "Tier": "P"
+  },
+  "Archer": {
+    "Pointer": [
+      51,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Archer",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 1,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 14,
+    "Tier": "U"
+  },
+  "Archer (F)": {
+    "Pointer": [
+      62,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Archer",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 1,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 15,
+    "Tier": "U"
+  },
+  "Sniper": {
+    "Pointer": [
+      132,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Archer",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 76,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 16,
+    "Tier": "P"
+  },
+  "Sniper (F)": {
+    "Pointer": [
+      143,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Archer",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 76,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 17,
+    "Tier": "P"
+  },
+  "Mercenary": {
+    "Pointer": [
+      242,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Mercenary",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 18,
+    "Tier": "U"
+  },
+  "Hero": {
+    "Pointer": [
+      124,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Mercenary",
+    "Weapon Ranks": {
+      "Sword": 31,
+      "Lance": 0,
+      "Axe": 1,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 19,
+    "Tier": "P"
+  },
+  "Myrmidon": {
+    "Pointer": [
+      217,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Myrmidon",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 20,
+    "Tier": "U"
+  },
+  "Myrmidon (F)": {
+    "Pointer": [
+      234,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Myrmidon",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 21,
+    "Tier": "U"
+  },
+  "Swordmaster": {
+    "Pointer": [
+      253,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Myrmidon",
+    "Weapon Ranks": {
+      "Sword": 76,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 22,
+    "Tier": "P"
+  },
+  "Swordmaster (F)": {
+    "Pointer": [
+      13,
+      13,
+      1,
+      0
+    ],
+    "Class Slot": "Myrmidon",
+    "Weapon Ranks": {
+      "Sword": 76,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 23,
+    "Tier": "P"
+  },
+  "Fighter": {
+    "Pointer": [
+      51,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Fighter",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 1,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 24,
+    "Tier": "U"
+  },
+  "Warrior": {
+    "Pointer": [
+      41,
+      13,
+      1,
+      0
+    ],
+    "Class Slot": "Fighter",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 31,
+      "Bow": 1,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 25,
+    "Tier": "P"
+  },
+  "Hunter": {
+    "Pointer": [
+      146,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Hunter",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 1,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 26,
+    "Tier": "U"
+  },
+  "Horsemen": {
+    "Pointer": [
+      133,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Hunter",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 31,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 27,
+    "Tier": "P"
+  },
+  "Barbarian": {
+    "Pointer": [
+      109,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 1,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 28,
+    "Tier": "-"
+  },
+  "Pirate": {
+    "Pointer": [
+      64,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Pirate",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 1,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 29,
+    "Tier": "U"
+  },
+  "Berserker": {
+    "Pointer": [
+      123,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Pirate",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 31,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 30,
+    "Tier": "P"
+  },
+  "Dark Mage": {
+    "Pointer": [
+      201,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Dark Mage",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 1,
+      "Staff": 0
+    },
+    "Dispos Pointer": 31,
+    "Tier": "U"
+  },
+  "Sorcerer": {
+    "Pointer": [
+      204,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Dark Mage",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 31,
+      "Staff": 1
+    },
+    "Dispos Pointer": 32,
+    "Tier": "P"
+  },
+  "Mage": {
+    "Pointer": [
+      180,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Mage",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 1,
+      "Staff": 0
+    },
+    "Dispos Pointer": 33,
+    "Tier": "U"
+  },
+  "Mage (F)": {
+    "Pointer": [
+      189,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "Mage",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 1,
+      "Staff": 0
+    },
+    "Dispos Pointer": 34,
+    "Tier": "U"
+  },
+  "Curate": {
+    "Pointer": [
+      76,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Cleric",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 1
+    },
+    "Dispos Pointer": 35,
+    "Tier": "U"
+  },
+  "Cleric": {
+    "Pointer": [
+      119,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Cleric",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 1
+    },
+    "Dispos Pointer": 36,
+    "Tier": "U"
+  },
+  "Sage": {
+    "Pointer": [
+      87,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Mage",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 31,
+      "Staff": 1
+    },
+    "Dispos Pointer": 37,
+    "Tier": "P"
+  },
+  "Sage (F)": {
+    "Pointer": [
+      96,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "Mage",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 31,
+      "Staff": 1
+    },
+    "Dispos Pointer": 38,
+    "Tier": "P"
+  },
+  "Bishop": {
+    "Pointer": [
+      137,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Cleric",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 1,
+      "Staff": 31
+    },
+    "Dispos Pointer": 39,
+    "Tier": "P"
+  },
+  "Bishop (F)": {
+    "Pointer": [
+      148,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "Cleric",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 1,
+      "Staff": 31
+    },
+    "Dispos Pointer": 40,
+    "Tier": "P"
+  },
+  "Thief": {
+    "Pointer": [
+      31,
+      13,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 41,
+    "Tier": "-"
+  },
+  "Manakete": {
+    "Pointer": [
+      216,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 42,
+    "Tier": "U"
+  },
+  "Manakete (F)": {
+    "Pointer": [
+      228,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 43,
+    "Tier": "P"
+  },
+  "Ballistician": {
+    "Pointer": [
+      107,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 44,
+    "Tier": "-"
+  },
+  "Chameleon": {
+    "Pointer": [
+      161,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 45,
+    "Tier": "-"
+  },
+  "Dancer": {
+    "Pointer": [
+      173,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 1,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 46,
+    "Tier": "-"
+  },
+  "Soldier": {
+    "Pointer": [
+      192,
+      12,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 47,
+    "Tier": "-"
+  },
+  "Emperor": {
+    "Pointer": [
+      20,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 1,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 48,
+    "Tier": "-"
+  },
+  "Magic Dragon": {
+    "Pointer": [
+      200,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 49,
+    "Tier": "-"
+  },
+  "Earth Dragon": {
+    "Pointer": [
+      4,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 50,
+    "Tier": "-"
+  },
+  "Fire Dragon": {
+    "Pointer": [
+      63,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 51,
+    "Tier": "-"
+  },
+  "Ice Dragon": {
+    "Pointer": [
+      157,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 52,
+    "Tier": "-"
+  },
+  "Wyvern": {
+    "Pointer": [
+      53,
+      13,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 53,
+    "Tier": "-"
+  },
+  "Divine Dragon": {
+    "Pointer": [
+      104,
+      11,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 54,
+    "Tier": "-"
+  },
+  "Dark Dragon": {
+    "Pointer": [
+      186,
+      10,
+      1,
+      0
+    ],
+    "Class Slot": "None",
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Dispos Pointer": 55,
+    "Tier": "-"
+  }
+}

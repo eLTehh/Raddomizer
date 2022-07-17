@@ -1,0 +1,158 @@
+{
+  "Iron": {
+    "Sword": {
+      "Name": "Iron Sword",
+      "Pointer": 1
+    },
+    "Axe": {
+      "Name": "Iron Axe",
+      "Pointer": 28
+    },
+    "Lance": {
+      "Name": "Iron Lance",
+      "Pointer": 17
+    },
+    "Bow": {
+      "Name": "Iron Bow",
+      "Pointer": 39
+    },
+    "Magic": {
+      "Name": "Fire",
+      "Pointer": 46
+    },
+    "Staff": {
+      "Name": "Heal",
+      "Pointer": 78
+    }
+  },
+  "Steel": {
+    "Sword": {
+      "Name": "Steel Sword",
+      "Pointer": 2
+    },
+    "Axe": {
+      "Name": "Steel Axe",
+      "Pointer": 29
+    },
+    "Lance": {
+      "Name": "Steel Lance",
+      "Pointer": 18
+    },
+    "Bow": {
+      "Name": "Steel Bow",
+      "Pointer": 40
+    },
+    "Magic": {
+      "Name": "Elfire",
+      "Pointer": 50
+    },
+    "Staff": {
+      "Name": "Mend",
+      "Pointer": 79
+    }
+  },
+  "Silver": {
+    "Sword": {
+      "Name": "Silver Sword",
+      "Pointer": 3
+    },
+    "Axe": {
+      "Name": "Silver Axe",
+      "Pointer": 30
+    },
+    "Lance": {
+      "Name": "Silver Lance",
+      "Pointer": 19
+    },
+    "Bow": {
+      "Name": "Silver Bow",
+      "Pointer": 41
+    },
+    "Magic": {
+      "Name": "Thoron",
+      "Pointer": 53
+    },
+    "Staff": {
+      "Name": "Physic",
+      "Pointer": 81
+    }
+  },
+  "Killer": {
+    "Sword": {
+      "Name": "Killing Edge",
+      "Pointer": 4
+    },
+    "Axe": {
+      "Name": "Killer Axe",
+      "Pointer": 33
+    },
+    "Lance": {
+      "Name": "Killer Lance",
+      "Pointer": 22
+    },
+    "Bow": {
+      "Name": "Killer Bow",
+      "Pointer": 42
+    },
+    "Magic": {
+      "Name": "Shaver",
+      "Pointer": 49
+    },
+    "Staff": {
+      "Name": "Mend",
+      "Pointer": 79
+    }
+  },
+  "Ranged": {
+    "Sword": {
+      "Name": "-",
+      "Pointer": null
+    },
+    "Axe": {
+      "Name": "Hand Axe",
+      "Pointer": 31
+    },
+    "Lance": {
+      "Name": "Javelin",
+      "Pointer": 20
+    },
+    "Bow": {
+      "Name": "-",
+      "Pointer": null
+    },
+    "Magic": {
+      "Name": "-",
+      "Pointer": null
+    },
+    "Staff": {
+      "Name": "-",
+      "Pointer": null
+    }
+  },
+  "Devil": {
+    "Sword": {
+      "Name": "Devil Sword",
+      "Pointer": 6
+    },
+    "Axe": {
+      "Name": "Devil Axe",
+      "Pointer": 36
+    },
+    "Lance": {
+      "Name": "-",
+      "Pointer": null
+    },
+    "Bow": {
+      "Name": " -",
+      "Pointer": null
+    },
+    "Magic": {
+      "Name": "-",
+      "Pointer": null
+    },
+    "Staff": {
+      "Name": "-",
+      "Pointer": null
+    }
+  }
+}

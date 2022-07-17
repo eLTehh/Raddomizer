@@ -1,0 +1,403 @@
+Marth
+Avatar
+Luke
+Rody
+Cecil
+Gordin
+Ryan
+Draug
+Arran
+Malliesia
+Catria
+Warren
+Cord
+Linde
+Palla
+Bord
+Julian
+Matthis
+Wrys
+Ogma
+Yumina
+Yubello
+Sirius
+Castor
+Caeda
+Barst
+Rickard
+Frey
+Norne
+Samto
+Wendell
+Caesar
+Radd
+Navarre
+Feena
+Cain
+Bantu
+Roger
+Jeorge
+Minerva
+Etzel
+Merric
+Elrean
+Dice
+Malice
+Horace
+Jake
+Daross
+Robert
+Belf
+Leiden
+Beck
+Athena
+Xane
+Tiki
+Est
+Dolph
+Abel
+Macellan
+Astram
+Katarina
+Tomas
+Sheena
+Samson
+Frost
+Roshea
+Vyland
+Sedgar
+Wolf
+Midia
+Ymir
+Michalis
+Nagi
+Lena
+Maria
+Nyna
+Elice
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+P1 Jagen
+P2 Luke
+P2 Rody
+P3 Shiida
+Gordin, don't know where
+P4 Jeorge
+P4 Athena
+P5 Boss
+P6 Ogma
+P6 Draug
+P7 Est
+P7 Cain
+P8 Katarina
+Gotoh
+Lorenz (C1 Boss)
+Rumel (C2 Boss)
+Ryuke (C3 Boss)
+Guile (C4 Boss)
+Toras (C5 Boss)
+Lang (C6 Boss)
+Dahl (C7 Boss)
+Yodel (C9 Boss)
+C11 Boss (Probably)
+C12 Boss (Probably)
+C13 Boss (Probably)
+Eibel (C15 Boss)
+Willow (C16 Boss)
+Nerring (C19 Boss)
+Hardin (C20 Boss)
+C21 Boss (Probably)
+C22 Boss (Probably)
+Gharnef (C23 Boss)
+Medeus (C24 Boss)
+Roro(C6x Boss)
+Stronger Roro
+Stronger Roro 2
+Roro 2
+Roro 3
+Roro 4
+Roro 5
+Roro 6
+Kleine (C13x Boss)
+Eremiah (C2 Boss
+P1 Soldier
+P3 Fighters
+P3 Mercs
+P4 Fighters
+P4 Mercs (Jeorge)
+P4 Archer (Jeorge)
+P4 Mercs (Athena)
+P4 Myrms
+P4 Soldiers
+P4 Archer (Athena)
+P5 Barbarians
+P5 Thief
+P5 Hunter
+P5 Barbarian
+P6 Fighter
+P6 Cav
+P6 Archer (Ogma)
+P6 Soldier
+P6 Archer (Draug)
+P6 Mage
+-
+P7 Cav (Est)
+P7 Fighter
+P7 Merc 
+P7 Archer (Est)
+P7 Pegasus
+P7 Cav (Cain)
+P7 Knight
+P7 Myrm
+P7 Archer (Cain)
+P8 Thief
+P8 Barbarian
+P8 Hunter
+P8 Mage
+C1 Thief
+C1 Hunter
+C1 Barbarian
+C2 Draco
+C2 Cav
+C2 Soldier
+C2 Thief
+C2 Hunter
+C3 Draco
+C3 Draco
+C3 Cav
+C3 Thief
+C3 Ballistician
+C4 Barbarian
+C4 Pirate
+C4 Hunter
+C4 Thief
+C5 Draco
+C5 Cav
+C5 Knight
+C5 Thief
+C5 Mage
+C5 Bishop
+C5 Ballistician
+C5 Sniper
+C6 Knight
+C6 Mage
+C6 Bishop
+C6 Soldier
+C6 Archer
+C6 Hero
+C6 Sniper
+C7 Thief
+C7 Hunter
+C7 Knight
+C7 Cav
+C7 Mage
+C7 Fire Dragon
+C7/8/9 Hero
+C8 Paladin
+C8 General
+C8 Thief
+C8 Sniper
+-
+-
+C8 Mage
+C9 Draco
+C9 Thief
+C9 Mage
+C9 Bishop
+C10 Merc
+C10 Sniper
+C10 Mage
+C10 Cleric
+C10 Bishop
+C11 Barbarian
+C11 Hunter
+C11 Swordmaster
+C11 Wyvern
+C12 Barbarian
+C12 Swordmaster
+C12 Fire Dragon
+C12 Fire Dragon
+C12 Wyvern
+C13 Barbarian
+C13 Thief
+C13 Dark Mage
+C13 Ice Dragon
+C13 Wyvern
+C14 Thief
+C14 Thief (Levin)
+C14 Dark Mage
+C14 Ice Dragon
+C15 Paladin
+C15 Horseman
+C15 General
+C15 Sniper
+C15 Bishop
+C15 Cav
+C15 Fighter
+C15 Knight
+C15 Mage
+C15 Thief
+C15 Ballistician
+C16 Hero
+C16 Sniper
+C16 General
+C16 Warrior
+C16 Bishop
+C16 Soldier
+C16 Mage
+C16 Thief
+C16 Thief (Levin)
+C17 Draco
+C17 Warrior
+C17 Sniper
+C17 Thief
+C17 Gra units
+C18 Paladin (Wolfguard)
+C18 Paladin (Archanea)
+C18 Horseman
+C18 General
+C18 General
+C18 Draco
+C18 Bishop
+C18 Ballistician
+C18 Thief
+C19 Paladin
+C19 Horseman
+C19 Warrior
+C19 General
+C19 Draco
+C19 Sage
+C19 Bishop
+C19 Ballistician
+C19 Thief
+C20 Paladin
+C20 Hero
+C20 Warrior
+C20 General
+C20 Sniper
+C20 Sage
+C20 Bishop
+C20 Sorcerer
+C20 Thief (Levin)
+C20 Earth Dragon
+C21 Berserker
+C21 Swordmaster
+C21 Sorcerer
+C21 Wyvern
+C21 Thief
+C22 Berserker
+C22 Swordmaster
+C22 Swordmaster (Levin)
+C22 Sorcerer
+C22 Sorcerer
+C22 Sorcerer 
+C22 Fire Dragon
+C22 Mage Dragon
+C22 Mage Dragon
+C23 Sorcerer
+C23 Fire Dragon
+C23 Mage Dragon
+C24 Fire Dragon
+C24 Wyvern
+C24 Ice Dragon
+C24 Mage Dragon
+C24 Earth Dragon
+C3x Knight
+C3x Archer
+C6x Knight
+C6x Fighter
+C6x Archer
+C13x Ballistician
+C13x Barbarian
+C13x Myrmidon
+C16x Swordmaster
+C16x Berserker
+C16x Sniper
+C20x General
+C20x Berserker
+C20x Sniper
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+Cutscene unit
+Cutscene unit
+Cutscene unit
+Cutscene unit
+Cutscene unit
+Cutscene unit
+BSFE1 Nyna
+BSFE Boah
+BSFE Midia
+BSFE Dolph
+BSFE Macellan
+BSFE Tomas
+Gouber
+-
+-
+-
+-
+BSFE Minerva
+BSFE Catria
+BSFE Est
+BSFE Hardin
+BSFE Wolf
+BSFE Roshea
+Ruben
+BSFE Frost
+-
+-
+-
+-
+-
+-
+-
+BSFE Rickard
+BSFE Navarre
+BSFE Lena
+BSFE Castor
+BSFE Dice
+BSFE Malice
+Vaam
+-
+-
+BSFE Camus
+BSFE4 Nyna
+BSFE Robert
+BSFE Belf
+BSFE Leiden
+Bulzark
+-
+-
+-
+-
+-
+-

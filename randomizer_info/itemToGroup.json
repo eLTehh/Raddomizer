@@ -1,0 +1,114 @@
+{
+  "1": {
+    "Group": "Iron",
+    "Name": "Iron Sword"
+  },
+  "2": {
+    "Group": "Steel",
+    "Name": "Steel Sword"
+  },
+  "3": {
+    "Group": "Silver",
+    "Name": "Silver Sword"
+  },
+  "4": {
+    "Group": "Killer",
+    "Name": "Killing Edge"
+  },
+  "6": {
+    "Group": "Devil",
+    "Name": "Devil Sword"
+  },
+  "17": {
+    "Group": "Iron",
+    "Name": "Iron Lance"
+  },
+  "18": {
+    "Group": "Steel",
+    "Name": "Steel Lance"
+  },
+  "19": {
+    "Group": "Silver",
+    "Name": "Silver Lance"
+  },
+  "20": {
+    "Group": "Ranged",
+    "Name": "Javelin"
+  },
+  "22": {
+    "Group": "Killer",
+    "Name": "Killer Lance"
+  },
+  "28": {
+    "Group": "Iron",
+    "Name": "Iron Axe"
+  },
+  "29": {
+    "Group": "Steel",
+    "Name": "Steel Axe"
+  },
+  "30": {
+    "Group": "Silver",
+    "Name": "Silver Axe"
+  },
+  "31": {
+    "Group": "Ranged",
+    "Name": "Hand Axe"
+  },
+  "33": {
+    "Group": "Killer",
+    "Name": "Killer Axe"
+  },
+  "36": {
+    "Group": "Devil",
+    "Name": "Devil Axe"
+  },
+  "39": {
+    "Group": "Iron",
+    "Name": "Iron Bow"
+  },
+  "40": {
+    "Group": "Steel",
+    "Name": "Steel Bow"
+  },
+  "41": {
+    "Group": "Silver",
+    "Name": "Silver Bow"
+  },
+  "42": {
+    "Group": "Killer",
+    "Name": "Killer Bow"
+  },
+  "46": {
+    "Group": "Iron",
+    "Name": "Fire"
+  },
+  "49": {
+    "Group": "Killer",
+    "Name": "Shaver"
+  },
+  "50": {
+    "Group": "Steel",
+    "Name": "Elfire"
+  },
+  "53": {
+    "Group": "Silver",
+    "Name": "Thoron"
+  },
+  "78": {
+    "Group": "Iron",
+    "Name": "Heal"
+  },
+  "79": {
+    "Group": "Killer",
+    "Name": "Mend"
+  },
+  "81": {
+    "Group": "Silver",
+    "Name": "Physic"
+  },
+  "null": {
+    "Group": "Devil",
+    "Name": "-"
+  }
+}
