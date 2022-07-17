@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtTest import *
+from click import File
 from fe12dataReader import dataEditor
 from superqt import QRangeSlider, QLabeledRangeSlider
 import math
@@ -13,7 +14,63 @@ import json
 from functools import partial 
 from threading import Thread 
 
-'''Icons by svgrepo.com'''
+
+class bigRaddomizer(QMainWindow): #I goofed by following a tutorial that started with qwidget...
+    def __init__(self, parent = None):
+        super(bigRaddomizer, self).__init__(parent)
+        self.directory = os.getcwd()
+
+        self.raddomizer = Raddomizer()
+        self.setCentralWidget(self.raddomizer)
+
+        self.resize(760, 770)
+        self.setWindowTitle("FE12 Randomizer")
+        self.setWindowIcon(QIcon(self.directory+"\\randomizer_assets\\marthicon.png"))
+        self.windows = []
+
+
+        menuBar = QMenuBar()
+        fileMenu = menuBar.addMenu("File")
+        importAction = fileMenu.addAction("Import Randomizer Settings")
+        importAction.triggered.connect(self.importSettings)
+        exportAction = fileMenu.addAction("Export Randomizer Settings")
+        exportAction.triggered.connect(self.exportSettings)
+        aboutAction = menuBar.addAction("About")
+        aboutAction.triggered.connect(self.displayAbout)
+
+        self.setMenuBar(menuBar)
+
+    def importSettings(self):
+        filePath = QFileDialog.getOpenFileName(self, "Load Exported Settings", filter = "JSON (*.json)")
+        if filePath[0] != "":
+            self.raddomizer.loadJson(filePath[0])
+
+
+    def exportSettings(self):
+        filePath = QFileDialog.getSaveFileName(self, "Save Exported Settings", filter = "JSON (*.json)")
+        if filePath[0] != "":
+            newFile = open(filePath[0], "w")
+            json.dump(self.raddomizer.settingsDict, newFile)
+            newFile.close()
+
+
+    def displayAbout(self):
+        newWin = aboutWindow(self.raddomizer.font)
+        self.windows.append(newWin)
+        newWin.show()
+
+
+    def closeEvent(self, ev):
+        self.raddomizer.getSettings()
+
+        jsonFile = open(self.directory + "//randomizer_info//recentSettings.json", "w")
+        json.dump(self.raddomizer.settingsDict, jsonFile)
+        jsonFile.close()
+
+
+        ev.accept()
+
+
 
 class Raddomizer(QWidget):
     def __init__(self, parent = None):
@@ -30,19 +87,8 @@ class Raddomizer(QWidget):
         self.initUI()
         self.initWindows()
 
-        self.loadJson()
+        self.loadJson(self.directory + "//randomizer_info//recentSettings.json")
 
-
-
-    def closeEvent(self, ev):
-        self.getSettings()
-
-        jsonFile = open(self.directory + "//randomizer_info//recentSettings.json", "w")
-        json.dump(self.settingsDict, jsonFile)
-        jsonFile.close()
-
-
-        ev.accept()
 
 
     def getSettings(self):
@@ -61,9 +107,9 @@ class Raddomizer(QWidget):
 
         self.settingsDict["Seed"] = self.advancedDict["Seed"].getSeed()
 
-    def loadJson(self):
-        if os.path.exists(self.directory + "//randomizer_info//recentSettings.json"):
-            self.settingsDict  = json.load(open(self.directory + "//randomizer_info//recentSettings.json", "r"))
+    def loadJson(self, jsonDir):
+        if os.path.exists(jsonDir) and jsonDir.endswith(".json"):
+            self.settingsDict  = json.load(open(jsonDir, "r"))
             self.loadSettings()
 
     def loadSettings(self):
@@ -94,6 +140,8 @@ class Raddomizer(QWidget):
 
 
         #self.miniWindow("Test", ("#392918","#392918","#100808", "#FFDCDC"), (20, 10), (30, 20))
+
+
         info = infoWindow(self.directory, self.font)
         self.grid.addWidget(info, 10, 20, 20, 30)
 
@@ -106,6 +154,7 @@ class Raddomizer(QWidget):
 
         spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
         genWin.grid.addItem(spacer, 0, 0)
+
 
         #genWin.grid.setColumnStretch(1, 2)
 
@@ -205,13 +254,7 @@ class Raddomizer(QWidget):
             loadScreen.randomize()
 
     def initUI(self):
-        self.resize(760, 760)
-        
-        self.setWindowTitle("FE12 Randomizer")
 
-        self.setWindowIcon(QIcon(self.directory+"\\randomizer_assets\\marthicon.png"))
-
-        
 
         self.grid = QGridLayout()
         self.setLayout(self.grid)
@@ -1331,6 +1374,78 @@ class customStepSlider(QWidget):
             pass
         return super().event(event)
 
+class aboutWindow(QWidget):
+    def __init__(self, font, parent = None):
+        super(aboutWindow, self).__init__(parent)
+        self.grid = QGridLayout()
+        self.setLayout(self.grid)
+
+        self.font = font 
+
+        palette = QPalette()
+        palette.setColor(QPalette.Text, Qt.white)
+
+        textLabel = self.customTextLabel('''
+        <div style = "text-align: center">
+        <i style = "font-size:30px">About</i>
+        <div style = "font-size: 20px">
+        &nbsp;&nbsp;This randomizer is a joint effort by LT and Radd.&nbsp;&nbsp;<br><br>
+        &nbsp;For more information (and error reports), <br>
+        please visit the <a href = https://github.com/eLTehh/Raddomizer 
+        style = "color: #f7f3b9;">Github link here.</a>&nbsp;
+        </div>
+        <br>
+        <br>
+
+        <i style = "font-size:30px">Special Thanks</i>
+        <div style = "font-size: 20px">
+        <li><a href = https://feuniverse.us/t/fe12-nightmare-modules/9525 
+        style = "color: #f7f3b9;">FE12 Nightmare Modules</a></li>
+        <li><a href = https://feuniverse.us/t/fe12-growth-cyphers/6380 
+        style = "color: #f7f3b9;">FE12 Growth Cyphers</a></li>
+        <li><a href = https://github.com/magical/nlzss/blob/master/lzss3.py 
+        style = "color: #f7f3b9;"> Nintendo LZ compression</a></li>
+        <li>Icons by svgrepo.com</li>
+        </div>
+        <br>
+        <br>
+        <i style = "font-size:17px">Current version: v0.9</i>
+        </div>
+        ''')
+
+
+        self.grid.addWidget(textLabel, 0,0, Qt.AlignCenter)
+
+
+    def paintEvent(self, ev):
+        painter = QPainter(self)
+
+
+        painter.setBrush(QColor("#2d637b"))
+        painter.drawRect(self.rect())
+
+    def customTextLabel(self, text):
+        textLabel = QLabel()
+        textLabel.setText(text)
+        textLabel.setFont(self.font)
+        textLabel.setStyleSheet("color: white;")
+        textLabel.setOpenExternalLinks(True)
+
+        self.initBG(textLabel)
+
+        return textLabel
+
+    def initBG(self, widget):
+        
+        dColor = QColor("#182039")
+        dColor.setAlphaF(0.70)
+
+
+        widget.setAutoFillBackground(True)
+
+        palette = widget.palette()
+        palette.setColor(widget.backgroundRole(), dColor)
+        widget.setPalette(palette)
 
 
 
@@ -1339,7 +1454,7 @@ class customStepSlider(QWidget):
 
 def main():
    app = QApplication(sys.argv)
-   ex = Raddomizer()
+   ex = bigRaddomizer()
    ex.show()
    sys.exit(app.exec_())
 

@@ -233,7 +233,10 @@ class dataEditor:
 
             if self.randomCharacters:
                 if cName != "Avatar": #repoint pid to someone else's
-                    randomizedChar = random.choice(characterList)
+                    if cName == "Marth" and "play ghost trick" in seed.lower():
+                        randomizedChar = "Radd"
+                    else:
+                        randomizedChar = random.choice(characterList)
                     characterList.remove(randomizedChar)
 
                     #logData += "Replaced with: " + randomizedChar + '\n' 
@@ -887,11 +890,3 @@ class dataEditor:
         
 
 
-
-
-#testInput = "C:\\Users\\lt123\\stoof\\coding\\fe12 randomizer\\ignore\\NDS_UNPACK"
-#testOutput = "C:\\Users\\lt123\\stoof\\coding\\fe12 randomizer\\output"
-
-#fe12Editor = dataEditor(os.getcwd())
-
-#fe12Editor.randomize(testInput, testOutput, "Ares")#, -208751328)
