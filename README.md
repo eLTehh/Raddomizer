@@ -81,9 +81,13 @@ To attach files on Github, you can drag it inside the comment box.
 - Randomizer version *(found under About)*
 
 *If the randomizer straight up doesn't run*
-- The OS you're running it on
+- Send the error.log file
 - Anything else you think is relevant
-- Hopefully this doesn't happen
+- (Hopefully this doesn't happen)
+
+## Regarding MacOS support
+At the time, MacOS does not support any tools that can unpack/pack DS ROMs. Unarchiver has been tested, and .nds file formats do not seem to be supported anymore. Thus, since you might as well run DSLazy on a Windows virtual machine, there isn't much point in deploying a Mac version of Raddomizer.
+The issue is being looked into, but not a primary concern right now. Raddomizer will try to support MacOS when it becomes viable.
 
 ## Requests for new features
 In order to keep myself from being overwhelmed, I will not be taking major requests for the time being! 
@@ -100,6 +104,8 @@ A bunch of code/decompression algorithms have been written for Awakening, though
 
 
 ## Special Thanks
+
+Testers: Xylon73, Gammer, Harb1ng3r
 
 [FE12 Nightmare Modules](https://feuniverse.us/t/fe12-nightmare-modules/9525) by a variety of FEU users
 
