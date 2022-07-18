@@ -217,6 +217,8 @@ class Raddomizer(QWidget):
 
         if not os.path.exists(outputPath):
             outputPath = self.directory +"\\output\\data"
+        else:
+            outputPath += "\\output\\data"
 
         self.randomizer.randomGrowths = self.generalDict["Growths"].getState()
         self.randomizer.randomBases = self.generalDict["Bases"].getState()
@@ -484,12 +486,15 @@ class romInfoWindow(QWidget):
 
         text2 = self.customTextLabel("  You can use a tool like DSLazy to unpack your ROM.  ")
 
+        text3 = self.customTextLabel("  For more detailed instructions, you can check the \n  readme bundled with the program.  ")
+
 
         self.grid.addWidget(text1, 0, 0, 3, 5)
 
         self.grid.addWidget(text2, 42, 0, 3, 5)
         self.grid.addWidget(infoImage1, 3, 0, 40,5)
         self.grid.addWidget(infoImage2, 45, 0, 20, 5)
+        self.grid.addWidget(text3, 69, 0, 6, 5)
 
 
         button = QPushButton(self)
@@ -498,7 +503,7 @@ class romInfoWindow(QWidget):
         button.setStyleSheet("color: white;background-color: #182039;")
         button.clicked.connect(self.close)
 
-        self.grid.addWidget(button, 65, 0, 1, 5)
+        self.grid.addWidget(button, 80, 0, 1, 5)
 
 
     def initBG(self, widget):
@@ -514,9 +519,11 @@ class romInfoWindow(QWidget):
         widget.setPalette(palette)
 
     def customTextLabel(self, text):
-        textLabel = dynamicLabel()
+        textLabel = QLabel()
         textLabel.setText(text)
         textLabel.setFont(self.font)
+        textLabel.setFixedWidth(520)
+        textLabel.setStyleSheet("color:white; font-size: 19px;")
 
         self.initBG(textLabel)
 
@@ -714,13 +721,20 @@ class randomLoadScreen(QWidget):
             QTest.qWait(10)
             self.loadLabel.setText(self.randomizer.status)
 
-            if self.randomizer.status == "Randomization success!":
+            if "Randomization success!" in self.randomizer.status:
                 self.infoLabel.changeText("That's Radd")
+                self.infoLabel.setFixedSize(30, 30)
+                tutorial = resizeImageLabel(self.directory + "\\randomizer_assets\\outputtuto.png")
+                self.grid.addWidget(tutorial, 0, 0, 3, 1)
+                self.resize(600, 600)
+                self.setWindowTitle("Success!")
                 break 
 
             if self.randomizer.status == "Error":
                 self.infoLabel.changeText("Oof")
                 self.loadLabel.setText("The randomizer has run into an error. \nPlease report the error by sending error.log, \nas well as your randomizer settings.")
+                self.setWindowTitle("Error")
+
                 break
         button = QPushButton(self)
         button.setText("OK")
@@ -728,7 +742,7 @@ class randomLoadScreen(QWidget):
         button.setStyleSheet("color: white;background-color: #182039;")
         button.clicked.connect(self.close)
 
-        self.grid.addWidget(button, 5, 0, 1, 1)
+        self.grid.addWidget(button, 20, 0, 1, 1)
 
 
     def initBG(self, widget):
@@ -1415,7 +1429,7 @@ class aboutWindow(QWidget):
         </div>
         <br>
         <br>
-        <i style = "font-size:17px">Current version: v0.9</i>
+        <i style = "font-size:17px">Current version: v0.9.2</i>
         </div>
         ''')
 
