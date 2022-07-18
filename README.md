@@ -50,6 +50,8 @@ A tool you can use to unpack your ROM is [DSLazy](https://www.romhacking.net/uti
 
 ## Putting the randomized files back into the game
 
+<img src = "randomizer_assets/outputtuto.png" width = 50% height = 50%>
+
 Once you've specified your output directory (or if not, Raddomizer will output the files in its own installed directory) and clicked Randomize, your files should be ready.
 
 Make a copy of your unpacked ROM folder, drag the data folder (once again, this is the FIRST data folder, not the second!) inside, and allow it to replace existing files.
