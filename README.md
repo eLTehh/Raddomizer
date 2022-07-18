@@ -15,7 +15,7 @@ Simply grab the latest release from here: https://github.com/eLTehh/Raddomizer/r
 
 ## Input Format
 
-<img src = "randomizer_assets/rodyfiles.png" width = 25% height = 25%>
+<img src = "randomizer_assets/rodyfiles.png" width = 50% height = 50%>
 
 You'll want an unpacked New Mystery ROM for this one. Patched ROMs with the English translation should work fine, as well. (Not sure about any gameplay mods; if pointers are switched around, Raddomizer might not randomize the classes properly.)
 
