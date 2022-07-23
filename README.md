@@ -105,10 +105,9 @@ Thus, any .nds unpackers would have to be run on a Windows VM, so there isn't mu
 The issue is being looked into, but not a primary concern right now. Raddomizer will try to support MacOS when it becomes viable.
 
 ## Requests for new features
-In order to keep myself from being overwhelmed, I will not be taking major requests for the time being! 
-Feel free to drop them under Issues, but there's no deadline or guarantee they'll be implemented.
+Sure, I'd appreciate your input. However, to set expectations, Raddomizer is something developed in my spare time, so there's no deadline or guarantee they'll be implemented.
 
-The priority right now is to have a functional randomizer. I may revisit things in the future.
+In order to prevent myself from getting overwhelmed, my priority is a functional and easy to use randomizer. So bugs will be prioritized over new features.
 
 ## How did you do all that? Did you document the information somewhere?
 Documentation for FE12 can be found in the [Wiki](https://github.com/eLTehh/Raddomizer/wiki), as well as a few Action Replay codes to help improve the gameplay experience. Once again, special thanks to Radd for documenting FE12's data structure!
