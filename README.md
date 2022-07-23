@@ -77,7 +77,7 @@ If any known issues are found, please send your log alongside the error report!
 
 ## Reporting Errors
 <img src = "randomizer_assets/error.png" width = 25% height = 25%>
-You can use Github's Issues page, or any of the threads the randomizer is posted in (FEU, Serenes Forest). 
+You can use Github's Issues page, or the FEU thread. 
 To attach files on Github, you can drag it inside the comment box.
 
 ### **Please include the following while submitting your report:**
@@ -89,7 +89,7 @@ To attach files on Github, you can drag it inside the comment box.
 
 *If the error is found during gameplay:*
 - Your randomizerLog.txt file
-- The chapter the error occurred in
+- Your save file (or, at the very least, the chapter the error occurred in)
 - Screenshots of the error
 - If it's particularly game-breaking, any steps to replicate the error?
 - Randomizer version *(found under About)*
