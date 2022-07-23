@@ -76,7 +76,8 @@ class dataEditor:
             "Absolute Bases": self.absoluteBases,
             "Absolute Growths": self.absoluteGrowths,
 
-            "Max Dancer Count": self.maxDancerCount
+            "Max Dancer Count": self.maxDancerCount,
+            "Max Freelancer Count": self.maxFreelanceCount
         }
 
         return settingsDict 
@@ -181,9 +182,9 @@ class dataEditor:
 
             self.randomizeScript(input_path+"\\m", seed, output_path + '\\m')
 
-            self.status = "Randomization success!"
+            self.status = " Randomization success! \n Please drag the data folder from the output back into  \n your unpacked directory and re-pack your ROM. \n\n (Make a copy for backup, just in case.)"
 
-            self.writeLog(seed)
+            self.writeLog(seed, output_path)
 
 
             return "helyea"
@@ -555,7 +556,6 @@ class dataEditor:
         #generate dict of characters and their respective randomized classes
         #write this to log as well
 
-        #TO DO: MODIFY CLASS SLOTS
 
         mapList = "202 203 204 205 206 207 208 103 106 110 113 116 001 002 003 004 005 006 007 008 009 010 011 012 013 014 015 016 017 019 020 021 022 024".split()
         mapList = ["bmap"+ i for i in mapList]
@@ -599,11 +599,16 @@ class dataEditor:
 
                         #Check weapon rank of new class...
 
-                        self.logDict[cName]["Inventory"] = {}
+                        if "Inventory" in self.logDict[cName] and cName != "Cecil":
+                            self.logDict[cName]["Inventory2"] = {}
+
+                        else:
+                            self.logDict[cName]["Inventory"] = {}
 
                         
 
                         for i in range(4):
+
                             wPointer =  [17, 21, 25, 29][i]
                             oldWep = input[pointer+wPointer]
                             maxWepRank = max(self.logDict[cName]["Weapon Ranks"].values())
@@ -719,8 +724,10 @@ class dataEditor:
                                 195 - A lv2
                                 '''
 
-
-                            self.logDict[cName]["Inventory"][i] = self.itemDict[str(input[pointer+wPointer])]
+                            if "Inventory2" in self.logDict[cName]:
+                                self.logDict[cName]["Inventory2"][i] = self.itemDict[str(input[pointer+wPointer])]
+                            else:
+                                self.logDict[cName]["Inventory"][i] = self.itemDict[str(input[pointer+wPointer])]
 
 
 
@@ -791,7 +798,7 @@ class dataEditor:
         os.remove(output_directory+"\\001.decmp")
         '''
 
-    def writeLog(self, seed):
+    def writeLog(self, seed, output_path):
         logData = "Seed: " + str(seed) 
 
         for setting in self.getSettings():
@@ -800,6 +807,13 @@ class dataEditor:
 
             else:
                 logData += "\n" + setting + ": " + str(self.getSettings()[setting])
+
+        if self.randomBases or self.randomGrowths:
+            logData+="\n\nAll bases/growths shown below are BEFORE class bonuses."
+            logData+="\nYou may find a list of class bonuses here:"
+            logData+="\nhttps://serenesforest.net/light-and-shadow/classes/base-stats/"
+            logData+="\nhttps://serenesforest.net/light-and-shadow/classes/growth-rates/player/"
+
 
         if self.randomCharacters:
             logData += "\n\nRecruitments:"
@@ -840,8 +854,10 @@ class dataEditor:
 
         for character in self.logDict:
             logData+= "\n\n" + character 
+
             for value in self.logDict[character]:
                 toWrite = self.logDict[character][value]
+
                 if type(toWrite) == list:
                     logData+="\n" + value + ": "
                     stats = "HP STR MAG SKL SPD LCK DEF RES".split()
@@ -850,8 +866,15 @@ class dataEditor:
                         if value == "Growths":
                             logData += "%"
                         logData+= " "
+
                 else:
-                    logData+="\n" + value + ": " + str(self.logDict[character][value])
+                    name = value 
+                    if "Inventory2" in self.logDict[character] and value == "Inventory":
+                        name = "Prologue Inventory"
+                    if value == "Inventory2":
+                        name = "Inventory"
+
+                    logData+="\n" + name + ": " + str(self.logDict[character][value])
 
         logData += "\n\nClass Slots:"
         for chapter in self.chapterLogDict:
@@ -878,7 +901,9 @@ class dataEditor:
         for oldName in nameReplacements:
             logData = nameReplacements[oldName].join(logData.split(oldName))
             
-        log = open(self.directory+"\\randomizerLog.txt", "w")
+        log = open(self.directory+"\\randomizerLogRecent.txt", "w")
+        log = open(output_path.split("\\output")[0]+"\\randomizerLog.txt", "w")
+
         log.write(logData)
         log.close()
 

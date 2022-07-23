@@ -55,7 +55,7 @@ class bigRaddomizer(QMainWindow): #I goofed by following a tutorial that started
 
 
     def displayAbout(self):
-        newWin = aboutWindow(self.raddomizer.font)
+        newWin = aboutWindow(self.raddomizer.font, self.raddomizer.directory)
         self.windows.append(newWin)
         newWin.show()
 
@@ -69,7 +69,6 @@ class bigRaddomizer(QMainWindow): #I goofed by following a tutorial that started
 
 
         ev.accept()
-
 
 
 class Raddomizer(QWidget):
@@ -139,7 +138,7 @@ class Raddomizer(QWidget):
         #X = center, Y = 0, columnspan = 5, rowspan = 2
 
 
-        #self.miniWindow("Test", ("#392918","#392918","#100808", "#FFDCDC"), (20, 10), (30, 20))
+        #self.miniGroup("Test", ("#392918","#392918","#100808", "#FFDCDC"), (20, 10), (30, 20))
 
 
         info = infoWindow(self.directory, self.font)
@@ -150,7 +149,7 @@ class Raddomizer(QWidget):
 
         #Gen window:
         #X = 0, Y = 1, columnspan = 2, rowspan = 2
-        genWin = self.miniWindow("General", ("#392918","#392918","#100808", "#FFDCDC"), info, (0,10), (20,20))
+        genWin = self.miniGroup("General", ("#392918","#392918","#100808", "#FFDCDC"), info, (0,10), (20,20))
 
         spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
         genWin.grid.addItem(spacer, 0, 0)
@@ -175,7 +174,7 @@ class Raddomizer(QWidget):
 
         #Advanced:
         #X = center, Y = 2, columnspan = 5, rowspan = 3
-        advancedWin = self.miniWindow("Advanced", ("#182039","#2d637b","#081018", "#ffffff"),info, (0,30), (50,30))
+        advancedWin = self.miniGroup("Advanced", ("#182039","#2d637b","#081018", "#ffffff"),info, (0,30), (50,30))
         
 
 
@@ -247,7 +246,9 @@ class Raddomizer(QWidget):
             error = errorWindow(self.font, self.directory, '''
             <div style = "text-align:center">
             &nbsp;&nbsp;Make sure your input directory&nbsp;&nbsp;<br>
-            &nbsp;&nbsp;contains an unpacked FE12 ROM.&nbsp;&nbsp;
+            &nbsp;&nbsp;contains an <b><i>unpacked</i></b> FE12 ROM folder.&nbsp;&nbsp;
+            <br><br>
+            &nbsp;&nbsp;Please click "Help" for more information.&nbsp;&nbsp;
             </div>
             ''')
             self.windows.append(error)
@@ -377,14 +378,14 @@ class Raddomizer(QWidget):
         return minGrowthSlider
 
 
-    def miniWindow(self, title, colors, info, position = (0,0), spanpos = (1,1)):
+    def miniGroup(self, title, colors, info, position = (0,0), spanpos = (1,1)):
         col = position[0]
         row = position[1]
 
         colspan = spanpos[0]
         rowspan = spanpos[1]
 
-        rect = miniWindow(colors[0], colors[1], colors[2], colors[3], self.font, info)
+        rect = miniGroup(colors[0], colors[1], colors[2], colors[3], self.font, info)
         label = windowLabel(title, "#182039","#2d637b","#081018", self.font)
 
 
@@ -465,6 +466,8 @@ class Raddomizer(QWidget):
         painter.setBrush(gradient)
         painter.drawRect(self.rect())
 
+
+#Windows
 class romInfoWindow(QWidget):
     def __init__(self, font, directory, parent = None):
         super(romInfoWindow, self).__init__(parent) 
@@ -566,7 +569,7 @@ class errorWindow(QWidget):
 
         self.grid.addWidget(text1, 0, 0, 3, 5, Qt.AlignCenter)
 
-        self.grid.addWidget(text2, 42, 0, 5, 5, Qt.AlignCenter)
+        self.grid.addWidget(text2, 43, 0, 5, 5, Qt.AlignCenter)
 
         self.grid.addWidget(errorImage, 3, 0, 40,5)
 
@@ -782,7 +785,39 @@ class randomLoadScreen(QWidget):
         painter.setBrush(gradient)
         painter.drawRect(self.rect())  
 
+class directoryWindow(QWidget):
+    def __init__(self, info, parent = None):
+        super(directoryWindow, self).__init__(parent)   
+        self.grid = QGridLayout()
+        self.setLayout(self.grid)
+        self.setAttribute(Qt.WA_Hover)
+        self.infoConnection = info 
 
+
+
+        dColor = QColor("#182039")
+        dColor.setAlphaF(0.70)
+
+
+        self.setAutoFillBackground(True)
+
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), dColor)
+        self.setPalette(palette)
+
+    def event(self, event):
+        if event.type() == QEvent.HoverEnter:
+            self.infoConnection.changeText("The input directory should contain \nan unpacked FE12 ROM.")
+            pass
+        elif event.type() == QEvent.HoverLeave:
+            #print("leave")
+            #Halt signal
+            self.infoConnection.changeDefault()
+            
+            pass
+        return super().event(event)     
+
+#Widgets/Groups
 class randomizeButton(QPushButton):
     def __init__(self, font, parent = None):
         super(randomizeButton, self).__init__(parent)
@@ -826,42 +861,6 @@ class randomizeButton(QPushButton):
         #painter.setBrush(Qt.white)
 
         painter.fillPath(text, Qt.white)
-
-
-
-class directoryWindow(QWidget):
-    def __init__(self, info, parent = None):
-        super(directoryWindow, self).__init__(parent)   
-        self.grid = QGridLayout()
-        self.setLayout(self.grid)
-        self.setAttribute(Qt.WA_Hover)
-        self.infoConnection = info 
-
-
-
-        dColor = QColor("#182039")
-        dColor.setAlphaF(0.70)
-
-
-        self.setAutoFillBackground(True)
-
-        palette = self.palette()
-        palette.setColor(self.backgroundRole(), dColor)
-        self.setPalette(palette)
-
-    def event(self, event):
-        if event.type() == QEvent.HoverEnter:
-            self.infoConnection.changeText("The input directory should contain \nan unpacked FE12 ROM.")
-            pass
-        elif event.type() == QEvent.HoverLeave:
-            #print("leave")
-            #Halt signal
-            self.infoConnection.changeDefault()
-            
-            pass
-        return super().event(event)     
-
-
 
 class windowLabel(QWidget):
     def __init__(self, title, baseColor, embossColor, shadowColor, font, parent = None):
@@ -913,7 +912,6 @@ class windowLabel(QWidget):
         painter.setPen(QPen(Qt.white, 5, Qt.SolidLine,
                                  Qt.RoundCap, Qt.RoundJoin))
         painter.drawPath(rectPath)
-
 
 class intInputLabel(QWidget):
     def __init__(self, text, font, info, parent = None):
@@ -970,7 +968,6 @@ class intInputLabel(QWidget):
             pass
         return super().event(event)
 
-
 class seedLabel(QWidget):
     def __init__(self, font, info, parent = None):
         super(seedLabel, self).__init__(parent)
@@ -1025,11 +1022,9 @@ class seedLabel(QWidget):
             pass
         return super().event(event)
 
-
-
-class miniWindow(QWidget):
+class miniGroup(QWidget):
     def __init__(self, baseColor, embossColor, shadowColor, strokeColor, font, info, parent = None):
-        super(miniWindow, self).__init__(parent)
+        super(miniGroup, self).__init__(parent)
 
         self.setAttribute(Qt.WA_Hover)
         self.infoConnection = info 
@@ -1130,7 +1125,7 @@ class randomizerCheckbox(QWidget):
             "Growths":"Randomizes growth rates of \nall playable characters.",
             "Bases": "Randomizes bases of all \nplayable characters.",
             "Classes":"Randomizes classes of all \nplayable characters (except Kris).",
-            "Portraits":"Randomizes portraits and names \nof all playable characters (except Kris).",
+            "Portraits":"Randomizes identities (e.g. Marth -> Radd) \nof all playable characters (except Kris).",
             "Absolute Bases": "Ignores whether bases add \nup to the original base stat total.",
             "Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
             "Enable Manaketes": "Adds non-divine Manaketes \ninto the class pool.",
@@ -1395,10 +1390,13 @@ class customStepSlider(QWidget):
         return super().event(event)
 
 class aboutWindow(QWidget):
-    def __init__(self, font, parent = None):
+    def __init__(self, font, directory, parent = None):
         super(aboutWindow, self).__init__(parent)
         self.grid = QGridLayout()
         self.setLayout(self.grid)
+
+        self.setWindowTitle("About")
+        self.setWindowIcon(QIcon(directory+"\\randomizer_assets\\infocircle.svg"))
 
         self.font = font 
 
@@ -1418,19 +1416,27 @@ class aboutWindow(QWidget):
         <br>
 
         <i style = "font-size:30px">Special Thanks</i>
+        </div>
         <div style = "font-size: 20px">
-        <li><a href = https://feuniverse.us/t/fe12-nightmare-modules/9525 
+        <ul style = "display:-moz-inline-stack; display: inline-block;
+        zoom:1; *display:inline;">
+        <li>  &nbsp;Testers: Xylon73, Gammer, Harb1ng3r</li>
+        <li> &nbsp;GUI feedback: <a href = https://virize.carrd.co/
+        style = "color: #f7f3b9;">Virize</a></li>
+        <li>&nbsp;<a href = https://feuniverse.us/t/fe12-nightmare-modules/9525 
         style = "color: #f7f3b9;">FE12 Nightmare Modules</a></li>
-        <li><a href = https://feuniverse.us/t/fe12-growth-cyphers/6380 
+        <li>&nbsp;<a href = https://feuniverse.us/t/fe12-growth-cyphers/6380 
         style = "color: #f7f3b9;">FE12 Growth Cyphers</a></li>
-        <li><a href = https://github.com/magical/nlzss/blob/master/lzss3.py 
-        style = "color: #f7f3b9;"> Nintendo LZ compression</a></li>
-        <li>Icons by svgrepo.com</li>
+        <li>&nbsp;<a href = https://github.com/magical/nlzss/blob/master/lzss3.py 
+        style = "color: #f7f3b9;">Nintendo LZ compression</a></li>
+        <li>&nbsp;Icons by <a href = https://www.svgrepo.com 
+        style = "color: #f7f3b9;">svgrepo.com</a></li>
+        </ul>
         </div>
-        <br>
-        <br>
-        <i style = "font-size:17px">Current version: v0.9.2</i>
+        <div style = "text-align: center">
+        <i style = "font-size:17px">Current version: v0.9.4</i>
         </div>
+
         ''')
 
 
