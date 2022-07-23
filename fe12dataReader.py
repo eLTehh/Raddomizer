@@ -317,8 +317,9 @@ class dataEditor:
                     if growthsRange[0] > growthsTotal:
                         growthsRange[0] = 0
                 
-                #print(cName)
-                #print(growthsRange)
+
+
+                count = 0
                 while True:
                     #print(cName)
                     newGrowths = []
@@ -328,6 +329,11 @@ class dataEditor:
                         if growth > 80:
                             growth = growth - growth%10
                         newGrowths.append(growth)
+                    if growthsTotal < maxGrowthsTotal:
+                        count +=1 
+                    
+                    if count == 100:
+                        break
                     if (sum(newGrowths) == min(maxGrowthsTotal, growthsTotal)) and not self.absoluteGrowths:
                         break
                     if self.absoluteGrowths or growthsRange[1] < 0:
@@ -901,8 +907,9 @@ class dataEditor:
         for oldName in nameReplacements:
             logData = nameReplacements[oldName].join(logData.split(oldName))
             
-        log = open(self.directory+"\\randomizerLogRecent.txt", "w")
-        log = open(output_path.split("\\output")[0]+"\\randomizerLog.txt", "w")
+        outputFileName = "\\randomizerLog" + seed + ".txt"
+        log = open(self.directory+outputFileName, "w")
+        log = open(output_path.split("\\output")[0]+outputFileName, "w")
 
         log.write(logData)
         log.close()

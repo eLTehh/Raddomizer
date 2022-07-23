@@ -715,9 +715,10 @@ class randomLoadScreen(QWidget):
         self.outputPath = outputPath 
         self.seed = seed
 
+
     def randomize(self):
         rThread = Thread(target = self.randomizer.randomize, args = (self.inputPath, self.outputPath, self.seed))
-
+        
         rThread.start() 
 
         while rThread.is_alive:
