@@ -100,7 +100,8 @@ To attach files on Github, you can drag it inside the comment box.
 - (Hopefully this doesn't happen)
 
 ## Regarding MacOS support
-At the time, MacOS does not support any tools that can unpack/pack DS ROMs. Unarchiver has been tested, and .nds file formats do not seem to be supported anymore. Thus, since you might as well run DSLazy on a Windows virtual machine, there isn't much point in deploying a Mac version of Raddomizer.
+At the time, MacOS does not support any tools that can unpack/pack DS ROMs. Unarchiver has been tested, and .nds file formats do not seem to be supported anymore. 
+Thus, any .nds unpackers would have to be run on a Windows VM, so there isn't much point in deploying a Mac version of Raddomizer.
 The issue is being looked into, but not a primary concern right now. Raddomizer will try to support MacOS when it becomes viable.
 
 ## Requests for new features
