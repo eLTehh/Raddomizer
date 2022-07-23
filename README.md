@@ -107,6 +107,8 @@ A bunch of code/decompression algorithms have been written for Awakening, though
 
 Testers: Xylon73, Gammer, Harb1ng3r
 
+GUI feedback/advice: [Virize](https://virize.carrd.co/)
+
 [FE12 Nightmare Modules](https://feuniverse.us/t/fe12-nightmare-modules/9525) by a variety of FEU users
 
 [FE12 Growth Cyphers](https://feuniverse.us/t/fe12-growth-cyphers/6380) by Mrkisuke, and the [original documentation](https://forums.serenesforest.net/index.php?/topic/70880-fe12-growth-rate-cipher-documentation/) by SciresM
