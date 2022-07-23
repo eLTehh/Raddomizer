@@ -59,7 +59,16 @@ Make a copy of your unpacked ROM folder, drag the data folder (once again, this 
 Then, pack the folder back into a ROM, and enjoy your randomized New Mystery!
 
 ## Sample Screenshots
-(TO BE ADDED)
+
+<img src = "https://media.discordapp.net/attachments/355914063852863489/997082658972631050/unknown.png">
+
+<img src = "https://media.discordapp.net/attachments/822408378130235424/1000330719568085062/unknown.png?width=459&height=669">
+
+<img src = "https://media.discordapp.net/attachments/355914063852863489/997120803164389416/unknown.png">
+
+<img src = "https://media.discordapp.net/attachments/355914063852863489/997122676227321926/unknown.png?width=505&height=669">
+
+<img src = "https://media.discordapp.net/attachments/355914063852863489/997163971683553300/unknown.png">
 
 ## Reporting Errors
 <img src = "randomizer_assets/error.png" width = 25% height = 25%>
