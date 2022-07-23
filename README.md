@@ -70,6 +70,11 @@ Then, pack the folder back into a ROM, and enjoy your randomized New Mystery!
 
 <img src = "https://media.discordapp.net/attachments/355914063852863489/997163971683553300/unknown.png">
 
+## Known Issues
+Class slots (in the Reclass window) seem to fit randomization results, but fliers have been shown to exceed the amount of class slots. Need more testing, unsure if this is the result of changing ROMs in the middle of a run.
+
+If any known issues are found, please send your log alongside the error report!
+
 ## Reporting Errors
 <img src = "randomizer_assets/error.png" width = 25% height = 25%>
 You can use Github's Issues page, or any of the threads the randomizer is posted in (FEU, Serenes Forest). 
