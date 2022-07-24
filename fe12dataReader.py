@@ -332,7 +332,7 @@ class dataEditor:
                     if growthsTotal < maxGrowthsTotal:
                         count +=1 
                     
-                    if count == 100:
+                    if count == 10000:
                         break
                     if (sum(newGrowths) == min(maxGrowthsTotal, growthsTotal)) and not self.absoluteGrowths:
                         break
