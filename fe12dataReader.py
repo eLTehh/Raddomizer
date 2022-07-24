@@ -310,6 +310,8 @@ class dataEditor:
                         growthsRange[0] = -20
                     if cName == "Arran" and growthsRange[1] > 10:
                         growthsRange[1] = 10
+                        if growthsRange[0] == 10:
+                            growthsRange[0] = 0
 
                     #edge case: min growths > character bst 
                     #like...arran...
@@ -325,6 +327,7 @@ class dataEditor:
                     newGrowths = []
                     #print(newGrowths)
                     for i in range(8):
+
                         growth = random.randrange(growthsRange[0], growthsRange[1], 5)
                         if growth > 80:
                             growth = growth - growth%10
@@ -593,8 +596,10 @@ class dataEditor:
             #iterate through each character
             for cName in mapData:
                 if cName not in ["Bantu", "Est", "Midia"] or self.logDict[cName]["Class"] != "Chameleon":
+                    inventoryIterated = False 
                     for pointer in mapData[cName]: #Thanks cecil now I have to iterate through pointers :/
                         #pointer = mapData[cName]
+
 
                         newClass = self.logDict[cName]["Class"]
                         #class pointer at input[pointer+3]
@@ -605,11 +610,14 @@ class dataEditor:
 
                         #Check weapon rank of new class...
 
-                        if "Inventory" in self.logDict[cName] and cName != "Cecil":
+                        if "Inventory" in self.logDict[cName] and not inventoryIterated and cName != "Rickard":
                             self.logDict[cName]["Inventory2"] = {}
 
                         else:
                             self.logDict[cName]["Inventory"] = {}
+
+                        inventoryIterated = True 
+
 
                         
 
