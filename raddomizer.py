@@ -1435,7 +1435,7 @@ class aboutWindow(QWidget):
         </ul>
         </div>
         <div style = "text-align: center">
-        <i style = "font-size:17px">Current version: v0.9.4</i>
+        <i style = "font-size:17px">Current version: v0.9.5</i>
         </div>
 
         ''')
