@@ -484,7 +484,7 @@ class dataEditor:
             
 
         if self.removeWepLocks:
-            #Remove weapon locks for Falchion, Ladyblade, Wing Spear, and Rapier
+            #Remove weapon locks for Falchion, Wing Spear, Rapier, hammerne and Aum
             #items start at 0xA308, 60 bytes long 
 
             #Naming these nicely so I can keep track of what the heck's going on
@@ -503,6 +503,10 @@ class dataEditor:
             #Wing Spear 0x17, Ability 7
             wspearPointer = startingPointer + 60*23 + 42
             input[wspearPointer] = 0
+
+            #Hammerne 0x47, Ability 7
+            hammPointer = startingPointer + 60*87 + 42
+            input[hammPointer] = 0
 
             #Aum 0x5A, Ability 7
             aumPointer = startingPointer + 60*90 + 42
