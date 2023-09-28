@@ -1,0 +1,193 @@
+Iron Sword
+Steel Sword
+Silver Sword
+Killing Edge
+Levin Sword
+Devil Sword
+Wyrmslayer
+Armorslayer
+Swordslayer
+Master Sword
+Mercurius
+Rapier
+Wo Dao
+Brave Sword
+Falchion
+Lady Sword
+Iron Lance
+Steel Lance
+Silver Lance
+Javelin
+Spear
+Killer Lance
+Ridersbane
+Wing Spear
+Dragonpike
+Brave Lance
+Gradivus
+Iron Axe
+Steel Axe
+Silver Axe
+Hand Axe
+Tomahawk
+Killer Axe
+Hammer
+Poleaxe
+Devil Axe
+Brave Axe
+Hauteclere
+Iron Bow
+Steel Bow
+Silver Bow
+Killer Bow
+Longbow
+Brave Bow
+Parthia
+Fire
+Thunder
+Blizzard
+Shaver
+Elfire
+Nosferatu
+Bolganone
+Thoron
+Swarm
+Meteor
+Glower
+Aura
+Excalibur
+Imhullu
+Starlight
+Arrowspate
+Stonehoist
+Hoistflamme
+Thunderbolt
+Pachyderm
+Firestone
+Icestone
+Wyvernstone
+Magestone
+Divinestone
+Fire Breath
+Fire Breath (2)
+Ice Breath
+Ice Breath (2)
+Magic Breath
+Magic Breath (2)
+Dark Breath
+Heal
+Mend
+Recover
+Physic
+Fortify
+Warp
+Rescue
+Barrier
+Thief
+Unlock
+Hammerne
+Silence
+Again
+Aum
+Door Key
+Chest Key
+Bridge Key
+Master Key
+Vulnerary
+Pure Water
+Energy Drop
+Spirit Dust
+Secret Book
+Speedwings
+Goddess Icon
+Dracoshield
+Talisman
+Seraph Robe
+Boots
+Arms Scroll
+Silver Card
+Member Card
+Master Seal
+Elysian Whip
+Iote's Shield
+Lightsphere
+Starsphere
+Earthsphere
+Lifesphere
+Darksphere
+Aquarius
+Pisces
+Aries
+Taurus
+Gemini
+Cancer
+Leo
+Virgo
+Libra
+Scorpio
+Sagittarius
+Capricorn
+Fire Emblem
+Binding Shield
+Bullion
+Bullion (L) 
+Blunt Sword
+Bamboo Sword
+Glass Sword
+Pure Sword
+Quick Sword
+Luke's Sword
+Cecil's Sword
+Ogma's Blade
+Laundry Pole
+Flycatcher
+Glass Lance
+Quick Lance
+Rody's Lance
+Draug's Lance
+Camus's Pike
+Frying Pan
+Immortal Axe
+Hit Axe
+Glass Axe
+Quick Axe
+Bordcord Axe
+Barst's Axe
+Roro's Axe
+Toy Bow
+Cleave Bow
+Glass Bow
+Quick Bow
+Gordin's Bow
+Ryan's Bow
+Clarisse's Bow
+Ember
+Sleet
+Razor
+Hellfire
+Mediocre
+Glass
+Strength
+Speed
+Defence
+Wrys
+Used Potion
+Energy Drink
+Elixir
+Strength Potion
+Magic Potion
+Skill Potion
+Speed Potion
+Luck Potion
+Defence Potion
+Resistance Potion
+Strength Bond
+Magic Bond
+Skill Bond
+Speed Bond
+Luck Bond
+Defence Bond
+Resistance Bond
+Growth Drop
+Bond Drop
+Rainbow Potion
