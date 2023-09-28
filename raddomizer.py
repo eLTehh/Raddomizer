@@ -1131,7 +1131,7 @@ class randomizerCheckbox(QWidget):
             "Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
             "Enable Manaketes": "Adds non-divine Manaketes \ninto the class pool.",
             "Enable Ballisticians": "Adds Ballisticians into \nthe class pool.",
-            "No Weapon Locks": "Makes Falchion, Rapier, \nWing Spear and Aum available to all.",
+            "No Weapon Locks": "Makes Falchion, Rapier, Hammerne, \nWing Spear and Aum available to all.",
             "No Gender Locks":"Removes gender lock for weapons.\nUseful if randomizing classes/portraits."
         }
         
