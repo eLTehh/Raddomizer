@@ -16,7 +16,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 0,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Pegasus Knight": {
     "Pointer": [
@@ -795,7 +795,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 41,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Manakete": {
     "Pointer": [
@@ -852,7 +852,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 44,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Chameleon": {
     "Pointer": [
@@ -871,7 +871,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 45,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Dancer": {
     "Pointer": [
@@ -909,7 +909,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 47,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Emperor": {
     "Pointer": [
