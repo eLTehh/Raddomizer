@@ -26,6 +26,8 @@ class dataEditor:
         self.randomGrowths = True 
         self.randomBases = True 
         self.randomClasses = True 
+        self.randomItems = True
+        self.randomEnemies = True
 
         self.removeWepLocks = True 
         self.abolishGender = True 
@@ -37,6 +39,11 @@ class dataEditor:
         self.absoluteGrowths = False 
 
         self.growthsRange = [0, 100]
+
+        self.itemPowerRange = 4
+        self.itemHitRange = 20
+        self.itemCritChance = 5
+        self.itemCritRange = [10,40]
 
         self.replacementDict = {}
         self.maxDancerCount = 1  
@@ -56,7 +63,8 @@ class dataEditor:
 
         self.slotList = open(self.directory + "\\randomizer_info\\internalChapterList.txt").read().split('\n')
         self.chapterDict = json.load(open(self.directory+"\\randomizer_info\\chaptersInOrder.json"))
-        
+
+        self.itemList = open(self.directory + "\\randomizer_info\\Item List.txt", 'r').read().split('\n')
         self.itemDict = json.load(open(self.directory+ "\\randomizer_info\\fe12items.json"))
         self.itemToGroup = json.load(open(self.directory + "\\randomizer_info\\itemToGroup.json"))
         self.groupToItem = json.load(open(self.directory + "\\randomizer_info\\groupToItem.json"))
@@ -67,11 +75,13 @@ class dataEditor:
             "Random Bases": self.randomBases,
             "Random Classes": self.randomClasses,
             "Random Portraits": self.randomCharacters,
+            "Random Items": self.randomItems,
+            "Random Enemies": self.randomEnemies,
 
             "Growths Range": self.growthsRange,
 
             "Enable Manaketes": self.enableManaketes,
-            "Enable Ballisticians": self.enableBallistas ,
+            "Enable Ballisticians": self.enableBallistas,
 
             "Absolute Bases": self.absoluteBases,
             "Absolute Growths": self.absoluteGrowths,
@@ -138,6 +148,27 @@ class dataEditor:
                             break
         
 
+    def randomEnemyHelper(self,seed,oldClass):
+        random.seed(seed)
+        flyingClasses = ["Falcon Knight", "Dracoknight", "Wyvern"]#Pegasus Knight for now left out
+        forbiddenClasses = ["Lord", "Knight F", "Emperor", "Dark Dragon"]
+        oldTier = self.classDict[oldClass]["Tier"]
+        if oldTier == "-":
+            return oldClass
+        newClass = None
+        forbiddenClasses.extend(flyingClasses)
+        classList = [i for i in list(self.classDict) \
+                    if i not in forbiddenClasses]
+        if oldClass in flyingClasses:
+            newClass = random.choice(flyingClasses)
+            return newClass
+        else:
+            while True:
+                newClass = random.choice(classList)
+                newTier = self.classDict[newClass]["Tier"]
+                if oldTier == newTier or newTier == "-":
+                            break
+                return newClass
 
 
     def randomize(self, input_path, output_path, seed = None):
@@ -169,7 +200,7 @@ class dataEditor:
 
             #print(self.logDict)
             #print(self.rClassDict)
-            if self.randomGrowths or self.randomBases or self.randomClasses or self.randomCharacters:
+            if self.randomGrowths or self.randomBases or self.randomClasses or self.randomCharacters or self.randomItems:
                 self.randomizeGameData(input_path+'\\data', seed, output_path +'\\data')
 
             #GDoutput.write(GDinput)
@@ -402,8 +433,6 @@ class dataEditor:
 
                             self.logDict[cName]["Weapon Ranks"][wRankTypes[i]] = newWrank
 
-
-
                             wrPointer = wRankPointers[wRankTypes[i]]
 
                             input[startingPointer + wrPointer] = newWrank #updating weapon ranks in game
@@ -481,7 +510,17 @@ class dataEditor:
                        
                 
 
-            
+        if self.randomItems:
+            self.state = "Randomizing weapons..."
+            startingPointer = 41736
+            for itemIndex in range(167):
+                itemPointer = startingPointer + 60*itemIndex
+                newPower = input[itemPointer+21] + random.randint(-self.itemPowerRange,self.itemPowerRange)
+                input[itemPointer+21] = newPower
+                newHit = input[itemPointer+22] + random.randint(-self.itemHitRange,self.itemHitRange)
+                input[itemPointer+22] = newHit
+                if (random.randint(0,100) < self.itemCritChance) and int(input[itemPointer+23]) < 11:
+                    newCrit = random.randint(self.itemCritRange[0],self.itemCritRange[1])
 
         if self.removeWepLocks:
             #Remove weapon locks for Falchion, Wing Spear, Rapier, hammerne and Aum
