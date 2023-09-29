@@ -53,6 +53,7 @@ class dataEditor:
 
         self.logDict = {}
         self.chapterLogDict = {}
+        self.itemLogDict = {}
 
         self.growthToHexDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphers.json","r"))
         self.hexToGrowthDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphersR.json","r"))
@@ -514,13 +515,24 @@ class dataEditor:
             self.state = "Randomizing weapons..."
             startingPointer = 41736
             for itemIndex in range(167):
+                iName=  self.itemList[i]
                 itemPointer = startingPointer + 60*itemIndex
+                itemType = int(input[itemPointer+16])
+                if itemType == 4 or itemType > 7: continue
+                itemLogDict[iName] = {}
                 newPower = input[itemPointer+21] + random.randint(-self.itemPowerRange,self.itemPowerRange)
+                itemLogDict[iName]["Power"] = newPower
                 input[itemPointer+21] = newPower
                 newHit = input[itemPointer+22] + random.randint(-self.itemHitRange,self.itemHitRange)
+                itemLogDict[iName]["Hit"] = newHit
                 input[itemPointer+22] = newHit
-                if (random.randint(0,100) < self.itemCritChance) and int(input[itemPointer+23]) < 11:
-                    newCrit = random.randint(self.itemCritRange[0],self.itemCritRange[1])
+                oldCrit = int(input[itemPointer+23])
+                if (random.randint(0,100) < self.itemCritChance) and oldCrit < 11:
+                    newCrit = random.randrange(self.itemCritRange[0],self.itemCritRange[1]+1,5)
+                    itemLogDict[iName]["Crit"] = newCrit
+                    input[itemPointer+23] = newCrit
+                else:
+                    itemLogDict[iName]["Crit"] = oldCrit
 
         if self.removeWepLocks:
             #Remove weapon locks for Falchion, Wing Spear, Rapier, hammerne and Aum
@@ -939,6 +951,16 @@ class dataEditor:
 
             for slot in self.chapterLogDict[chapter]:
                 logData+="\n"+slot+ ": " + str(self.chapterLogDict[chapter][slot])
+
+        if self.randomItems:
+            logData += "\n\nItem Data:"
+            for item in self.itemLogDict:
+                logData+= "\n\n" + item + "\n"
+                stats = "Might Hit Crit".split()
+                for value in self.itemLogDict[item]:
+                    logData += stats.pop(-1) + " " + str(self.itemLogDict[item][value])
+                    logData += " "
+                
 
         
         #localize names from internal code
