@@ -37,7 +37,7 @@
     "Dispos Pointer": 1,
     "Tier": "U"
   },
-  "Pegasus Knight F": {
+  "Pegasus Knight (F)": {
     "Pointer": [
       44,
       12,
@@ -208,7 +208,7 @@
     "Dispos Pointer": 10,
     "Tier": "U"
   },
-  "Knight F": {
+  "Knight (F)": {
     "Pointer": [
       91,
       10,
@@ -246,7 +246,7 @@
     "Dispos Pointer": 12,
     "Tier": "P"
   },
-  "General F": {
+  "General (F)": {
     "Pointer": [
       90,
       11,
@@ -512,7 +512,7 @@
     "Dispos Pointer": 26,
     "Tier": "U"
   },
-  "Horsemen": {
+  "Horseman": {
     "Pointer": [
       133,
       11,
@@ -814,7 +814,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 42,
-    "Tier": "U"
+    "Tier": "P"
   },
   "Manakete (F)": {
     "Pointer": [
@@ -930,7 +930,7 @@
     "Dispos Pointer": 48,
     "Tier": "-"
   },
-  "Magic Dragon": {
+  "Mage Dragon": {
     "Pointer": [
       200,
       11,
@@ -1044,7 +1044,7 @@
     "Dispos Pointer": 54,
     "Tier": "-"
   },
-  "Dark Dragon": {
+  "Shadow Dragon": {
     "Pointer": [
       186,
       10,
