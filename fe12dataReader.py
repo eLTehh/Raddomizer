@@ -1,13 +1,14 @@
-from binascii import hexlify, unhexlify
+#from binascii import hexlify, unhexlify
 import random
 import json
+import comp
 from distutils.dir_util import copy_tree
 
 #from this import s 
 from fe12LZ77 import fe12_compress, fe12_decompress
 import os 
 
-import logging 
+import logging
 
 class dataEditor:
 
@@ -36,7 +37,10 @@ class dataEditor:
         self.enableBallistas = True 
 
         self.absoluteBases = False 
-        self.absoluteGrowths = False 
+        self.absoluteGrowths = False
+        
+        self.mixLandFlying = False
+        self.mixHumanDragon = True
 
         self.growthsRange = [0, 100]
 
@@ -59,16 +63,23 @@ class dataEditor:
         self.hexToGrowthDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphersR.json","r"))
         self.ogDataDict = json.load(open(self.directory + "\\randomizer_info\\fe12ogData.json"))
         self.nameList = open(self.directory + "\\randomizer_info\\Character List.txt", 'r').read().split('\n')
+        self.classList = open(self.directory + "\\randomizer_info\\Class List.txt", 'r').read().split('\n')
         self.classDict = json.load(open(self.directory + "\\randomizer_info\\fe12classes.json"))
         self.disposDict = json.load(open(self.directory + "\\randomizer_info\\disposPointers.json"))
+        self.enemyDict = json.load(open(self.directory + "\\randomizer_info\\disposList.json"))
+        self.enemyGrowthDict = json.load(open(self.directory + "\\randomizer_info\\newEnemyClassGrowths.json"))
 
         self.slotList = open(self.directory + "\\randomizer_info\\internalChapterList.txt").read().split('\n')
         self.chapterDict = json.load(open(self.directory+"\\randomizer_info\\chaptersInOrder.json"))
 
-        self.itemList = open(self.directory + "\\randomizer_info\\Item List.txt", 'r').read().split('\n')
+        
         self.itemDict = json.load(open(self.directory+ "\\randomizer_info\\fe12items.json"))
         self.itemToGroup = json.load(open(self.directory + "\\randomizer_info\\itemToGroup.json"))
         self.groupToItem = json.load(open(self.directory + "\\randomizer_info\\groupToItem.json"))
+        self.naturalWeaponsDict = json.load(open(self.directory + "\\randomizer_info\\fe12naturalWeapons.json"))
+        
+        self.itemToRank = json.load(open(self.directory + "\\randomizer_info\\itemToRank.json"))
+        self.rankToItem = json.load(open(self.directory + "\\randomizer_info\\rankToItem.json"))
 
     def getSettings(self):
         settingsDict = {
@@ -88,7 +99,15 @@ class dataEditor:
             "Absolute Growths": self.absoluteGrowths,
 
             "Max Dancer Count": self.maxDancerCount,
-            "Max Freelancer Count": self.maxFreelanceCount
+            "Max Freelancer Count": self.maxFreelanceCount,
+            
+            "Mix Land and Flying Enemies": self.mixLandFlying,
+            "Mix Human and Dragon Enemies": self.mixHumanDragon,
+            
+            "Might Variance": self.itemPowerRange,
+            "Hit Variance": self.itemHitRange,
+            "Crit Ratio": self.itemCritChance,
+            "Crit Range": self.itemCritRange
         }
 
         return settingsDict 
@@ -105,9 +124,9 @@ class dataEditor:
         random.seed(seed)
         self.currentDancerCount = 0
 
-        classBlacklist = ["Soldier", "Barbarian", "Pegasus Knight", "Emperor", "Magic Dragon",
-                        "Earth Dragon", "Fire Dragon", "Ice Dragon", "Knight F",
-                        "Wyvern", "Divine Dragon", "Dark Dragon"]
+        classBlacklist = ["Soldier", "Barbarian", "Pegasus Knight", "Emperor", "Mage Dragon",
+                        "Earth Dragon", "Fire Dragon", "Ice Dragon", "Knight (F)",
+                        "Wyvern", "Divine Dragon", "Shadow Dragon"]
 
         if not self.enableManaketes:
             classBlacklist.append("Manakete")
@@ -124,11 +143,11 @@ class dataEditor:
                     ogTier = self.ogDataDict[cName]["Tier"]
                     newTier = None
 
-                    classList = [i for i in list(self.classDict) \
+                    classSet = [i for i in list(self.classDict) \
                         if i not in classBlacklist]
 
                     while True:
-                        self.logDict[cName]["Class"] =  random.choice(classList)
+                        self.logDict[cName]["Class"] =  random.choice(classSet)
                         newTier = self.classDict[self.logDict[cName]["Class"]]["Tier"]
 
                         if self.logDict[cName]["Class"] == "Dancer" and self.maxDancerCount!= -1:
@@ -149,27 +168,98 @@ class dataEditor:
                             break
         
 
-    def randomEnemyHelper(self,seed,oldClass):
-        random.seed(seed)
-        flyingClasses = ["Falcon Knight", "Dracoknight", "Wyvern"]#Pegasus Knight for now left out
-        forbiddenClasses = ["Lord", "Knight F", "Emperor", "Dark Dragon"]
-        oldTier = self.classDict[oldClass]["Tier"]
-        if oldTier == "-":
-            return oldClass
+    def getNewEnemyClass(self,oldClassID,unitFlag="Normal"):
+        
+        flyingClasses = ["Pegasus Knight", "Falcon Knight", "Dracoknight", "Wyvern"]
+        dragonClasses = ["Fire Dragon", "Wyvern", "Ice Dragon", "Mage Dragon"]
+        #until AI changing is practical, healer classes are a no-go
+        #Lord has no enemy growths
+        #Chameleon has no AI behaviour
+        #Female variants are accounted for later
+        #Ballistician for now excluded from general pool
+        forbiddenClasses = ["Lord", "Curate", "Cleric", "Pegasus Knight (F)", "Dracoknight (F)",
+                            "Cavalier (F)", "Paladin (F)", "General (F)", "Archer (F)",
+                            "Sniper (F)", "Myrmidon (F)", "Swordmaster (F)", "Mage (F)",
+                            "Sage (F)", "Bishop (F)", "Manakete (F)","Knight (F)", "Emperor",
+                            "Shadow Dragon", "Chameleon","Ballistician"]
+        siegeUsers = [["Sage", "Bishop", "Sorcerer"], ["Ballistician"]]
+        hasFemaleVariant = ["Dracoknight", "Cavalier", "Paladin", "General", "Archer", "Sniper",
+                            "Myrmidon", "Swordmaster", "Mage", "Sage", "Bishop", "Manakete"]
         newClass = None
-        forbiddenClasses.extend(flyingClasses)
-        classList = [i for i in list(self.classDict) \
-                    if i not in forbiddenClasses]
-        if oldClass in flyingClasses:
-            newClass = random.choice(flyingClasses)
-            return newClass
+        oldClass = self.classList[oldClassID]
+        if " (F)" in oldClass:
+            oldClass = oldClass.replace(" (F)","")
+        #print("Old Class: " + oldClass)
+        if unitFlag == "Sieger":
+            newClass = random.choice(random.choice(siegeUsers))
         else:
-            while True:
-                newClass = random.choice(classList)
-                newTier = self.classDict[newClass]["Tier"]
-                if oldTier == newTier or newTier == "-":
-                            break
-                return newClass
+            oldTier = self.classDict[oldClass]["Tier"]
+            if oldTier == "-" or unitFlag == "Keeper":
+                return oldClass#for Emperor, Earth/Divine/Shadow Dragon
+            if not self.mixLandFlying and oldClass not in flyingClasses:
+                forbiddenClasses.extend(flyingClasses)
+            if not self.enableManaketes:
+                forbiddenClasses.append("Manakete")
+            newClass = None
+            tempList = [i for i in list(self.classDict) \
+                        if i not in forbiddenClasses]
+            if not self.mixLandFlying and oldClass in flyingClasses:
+                tempList = flyingClasses
+            elif unitFlag == "FliersOnly":
+                tempList = flyingClasses
+            elif unitFlag == "WaterOnly":
+                tempList = flyingClasses
+                tempList.extend(("Pirate", "Berserker", "Ice Dragon"))
+
+            classSet = [i for i in tempList if self.classDict[i]["Tier"] == oldTier]
+            if not self.mixHumanDragon:
+                if oldClass in dragonClasses:
+                    classSet = [i for i in classSet \
+                                if i in dragonClasses]
+                    #print(str(classSet))
+                else:
+                    classSet = [i for i in classSet \
+                                if i not in dragonClasses]
+            #print("New class set: " + str(classSet))
+            newClass = random.choice(classSet)
+
+        if newClass in hasFemaleVariant and random.randint(0,1) == 1:
+            newClass = newClass + " (F)"
+        return newClass
+        
+    def decryptCharacterGrowths(self,charIndex,growthList):
+        newGrowths = []
+        for g in range(8):
+            cypherIndex = (growthList[g] - (0x57 * ((charIndex ^ 0x3E) - 3*g) ^ 0xF5)) & 0xFF
+            actual = comp.twosComplement8(comp.cypherTable[cypherIndex])#convert unsigned to signed
+            newGrowths.append(actual)
+        return newGrowths
+        
+    def decryptClassGrowths(self,classIndex,growthList):
+        newGrowths = []
+        for g in range(8):
+            cypherIndex = (growthList[g] - (0xB3 * ((classIndex ^ 0x9D) - 7*g) ^ 0xDB)) & 0xFF
+            actual = comp.twosComplement8(comp.cypherTable[cypherIndex])
+            newGrowths.append(actual)
+        return newGrowths
+        
+    def encryptCharacterGrowths(self,charIndex,growthList):
+        for g in range(8):
+            actual = growthList[g]
+            if actual < 0: actual = 256 + actual#converting signed to unsigned
+            cypherIndex = comp.cypherTable.index(actual)
+            encrypted = (cypherIndex + (0x57 * ((charIndex ^ 0x3E) - 3*g) ^ 0xF5)) & 0xFF
+            growthList[g] = encrypted
+        return growthList
+        
+    def encryptClassGrowths(self,classIndex,growthList):
+        for g in range(8):
+            actual = growthList[g]
+            if actual < 0: actual = 256 + actual
+            cypherIndex = comp.cypherTable.index(actual)
+            encrypted = (cypherIndex + (0xB3 * ((classIndex ^ 0x9D) - 7*g) ^ 0xDB)) & 0xFF
+            growthList[g] = encrypted
+        return growthList
 
 
     def randomize(self, input_path, output_path, seed = None):
@@ -201,13 +291,13 @@ class dataEditor:
 
             #print(self.logDict)
             #print(self.rClassDict)
-            if self.randomGrowths or self.randomBases or self.randomClasses or self.randomCharacters or self.randomItems:
+            if self.randomGrowths or self.randomBases or self.randomClasses or self.randomCharacters or self.randomEnemies or self.randomItems:
                 self.randomizeGameData(input_path+'\\data', seed, output_path +'\\data')
 
             #GDoutput.write(GDinput)
             #GDoutput.close() #merge output writing into gamedata function
 
-            if self.randomClasses:
+            if self.randomClasses or self.randomEnemies:
                 self.randomizeDispos(input_path+"\\dispos", seed, output_path+'\\dispos')
 
             self.addMiscGraphics(output_path)
@@ -278,6 +368,7 @@ class dataEditor:
                     newPID = self.ogDataDict[randomizedChar]["FID"]
                     for i in range(4):
                         input[startingPointer+ 4 + i] = newPID[i]
+                    input[startingPointer + 42] = self.ogDataDict[randomizedChar]["Hair"]
 
                     self.replacementDict[cName] = randomizedChar
                 
@@ -310,7 +401,8 @@ class dataEditor:
                     "Bantu": [0, 8, 0, 4, 4, 0, 9, 4]
                 }
 
-                if (cName == "Tiki" or cName == "Bantu") \
+                if self.randomClasses \
+                    and (cName == "Tiki" or cName == "Bantu")  \
                     and (self.logDict[cName]["Class"] != "Manakete" or\
                         self.logDict[cName]["Class"]!= "Manakete (F)"):
                     for i in range(8):
@@ -443,6 +535,64 @@ class dataEditor:
                     #update weapon rank according to class wrank prioriity
                 
         
+        
+        #Random Enemies
+        #For full random enemies (only choice rn), set Str and Mag to equal values
+        #When we get around to having all enemies of the same character ID use the same
+        #class, we could add more intelligent handling in that case.
+        
+        #We also negate most personal growths; generics have very significant personal growths
+        #depending on their class, and we need to normalize class growths so that enemies
+        #randomizing into or out of some classes don't end up with weird stats.
+        
+        #Make Prologue and Chapter 1 enemies weaker
+        if self.randomEnemies:
+            prologueList = list(range(97,110))
+            prologueList.extend(list(range(140,177)))
+            for enemyIndex in prologueList:
+                startingPointer = enemyIndex*92 + 32
+                growths = input[startingPointer+28:startingPointer+36]
+                newGrowths = self.decryptCharacterGrowths(enemyIndex,growths)
+                for i in range(8):
+                    if i == 4: newGrowths[i] -= 10#Speed and HP especially
+                    elif i == 0: newGrowths[i] -= 10
+                    else: newGrowths[i] -= 5
+                    if enemyIndex in [97,98,99]: newGrowths[i] -= 10#Jagen/Luke/Rody especially
+                growths = self.encryptCharacterGrowths(enemyIndex,newGrowths)
+                input[startingPointer+28:startingPointer+36] = growths
+            for enemyIndex in range(111,337):
+                if 139 < enemyIndex < 177: continue
+                startingPointer = enemyIndex*92 + 32
+                oldStrBase = int(input[startingPointer + 13])
+                #oldStrBase = comp.twosComplement8(oldStrBase)
+                
+                oldMagBase = int(input[startingPointer + 14])
+                #oldMagBase = comp.twosComplement8(oldMagBase)
+                
+                #If we have a negative base str/mag, it's probably for a reason!
+                
+                newBase = max(oldStrBase,oldMagBase)
+                
+                input[startingPointer + 13] = newBase
+                input[startingPointer + 14] = newBase
+                if enemyIndex not in [125,129]:
+                    growths = [0,0,0,0,0,0,0,0]
+                    if 299 < enemyIndex < 322:#Chapter 21+ enemies stronger
+                        growths = [0,5,5,5,5,0,0,0]
+                    elif enemyIndex in [178,182,183,191,198,204,205,213,214,216]:
+                        growths = [0,-5,-5,-5,-5,0,0,0]#C2-C8 prepromotes weaker
+                    growths = self.encryptCharacterGrowths(enemyIndex,growths)
+                    input[startingPointer+28:startingPointer+36] = growths
+                if 110 < enemyIndex < 140 or 246 < enemyIndex < 322:
+                    for w in range(36,42):
+                        input[startingPointer+w] = 0xC3
+            for classIndex in range(56):
+                startingPointer = classIndex*80 + 0x90F8
+                adjustedGrowths = self.enemyGrowthDict[str(classIndex)]
+                adjustedGrowths = self.encryptClassGrowths(classIndex,adjustedGrowths)
+                input[startingPointer+24:startingPointer+32] = adjustedGrowths
+        
+        
         #Class Slots
         #Keep Class slot dict of class slot additions
         if self.randomClasses:
@@ -515,27 +665,30 @@ class dataEditor:
             self.state = "Randomizing weapons..."
             startingPointer = 41736
             for itemIndex in range(167):
-                iName=  self.itemList[i]
+                iName = self.itemDict[str(itemIndex)]
                 itemPointer = startingPointer + 60*itemIndex
                 itemType = int(input[itemPointer+16])
-                if itemType == 4 or itemType > 7: continue
-                itemLogDict[iName] = {}
+                if itemType == 5 or itemType > 7: continue
+                self.itemLogDict[iName] = {}
                 newPower = input[itemPointer+21] + random.randint(-self.itemPowerRange,self.itemPowerRange)
-                itemLogDict[iName]["Power"] = newPower
+                newPower = max(0,newPower)
+                #print(iName + " " + str(newPower))
+                self.itemLogDict[iName]["Power"] = newPower
                 input[itemPointer+21] = newPower
-                newHit = input[itemPointer+22] + random.randint(-self.itemHitRange,self.itemHitRange)
-                itemLogDict[iName]["Hit"] = newHit
+                newHit = input[itemPointer+22] + random.randrange(-self.itemHitRange,self.itemHitRange+1,5)
+                newHit = max(0,min(newHit,255))
+                self.itemLogDict[iName]["Hit"] = newHit
                 input[itemPointer+22] = newHit
                 oldCrit = int(input[itemPointer+23])
-                if (random.randint(0,100) < self.itemCritChance) and oldCrit < 11:
+                if (random.randint(0,99) < self.itemCritChance) and oldCrit < 11 and iName not in ["Glower","Dark Breath"]:
                     newCrit = random.randrange(self.itemCritRange[0],self.itemCritRange[1]+1,5)
-                    itemLogDict[iName]["Crit"] = newCrit
+                    self.itemLogDict[iName]["Crit"] = newCrit
                     input[itemPointer+23] = newCrit
                 else:
-                    itemLogDict[iName]["Crit"] = oldCrit
+                    self.itemLogDict[iName]["Crit"] = oldCrit
 
         if self.removeWepLocks:
-            #Remove weapon locks for Falchion, Wing Spear, Rapier, hammerne and Aum
+            #Remove weapon locks for Falchion, Wing Spear, Rapier, Hammerne and Aum
             #items start at 0xA308, 60 bytes long 
 
             #Naming these nicely so I can keep track of what the heck's going on
@@ -564,6 +717,8 @@ class dataEditor:
             input[aumPointer] = 0
 
         if self.abolishGender: #NON-SEXIST WEAPONS GO
+            startingPointer = 41736
+            
             #Ladyblade 0x0F, Ability 8
             lbladePointer = startingPointer + 60*15 + 43
             input[lbladePointer] = 0
@@ -579,6 +734,12 @@ class dataEditor:
             #Divinestone 0x45, Ability 8
             dstonePointer = startingPointer + 60*69 + 43
             input[dstonePointer] = 64 #0x40 cannot be forged
+            
+        if self.enableBallistas:
+            startingPointer = 41736
+            for i in range(60,65):
+                balPointer = startingPointer + 60*i + 43
+                input[balPointer] = 0 #Remove no forging/enemy only flags
 
 
 
@@ -613,15 +774,12 @@ class dataEditor:
         print("Randomizing Dispos...")
         self.status = "Randomizing Dispos..."
         random.seed(seed)
-        #Add join maps + hex positions to character dictionary
-
-        #Call it in this function!
 
         #generate dict of characters and their respective randomized classes
         #write this to log as well
 
 
-        mapList = "202 203 204 205 206 207 208 103 106 110 113 116 001 002 003 004 005 006 007 008 009 010 011 012 013 014 015 016 017 019 020 021 022 024".split()
+        mapList = "202 203 204 205 206 207 208 103 106 110 113 116 120 001 002 003 004 005 006 007 008 009 010 011 012 013 014 015 016 017 018 019 020 021 022 023 024".split()
         mapList = ["bmap"+ i for i in mapList]
 
         for map in mapList:
@@ -633,171 +791,14 @@ class dataEditor:
             mapPath = input_path + "\\" + map 
             fe12_decompress(mapPath, mapPath+'.decmp')
             input = bytearray(open(mapPath+'.decmp', 'rb').read())
-
-
-
-
-            mapData = self.disposDict[map]
-
-            groupWepRanks = {
-                "Iron": 0,
-                "Ranged": 30,
-                "Devil": 30,
-                "Steel": 30,
-                "Killer": 75,
-                "Silver": 105,
-            }
-
-            #iterate through each character
-            for cName in mapData:
-                if cName not in ["Bantu", "Est", "Midia"] or self.logDict[cName]["Class"] != "Chameleon":
-                    inventoryIterated = False 
-                    for pointer in mapData[cName]: #Thanks cecil now I have to iterate through pointers :/
-                        #pointer = mapData[cName]
-
-
-                        newClass = self.logDict[cName]["Class"]
-                        #class pointer at input[pointer+3]
-                        #Change class
-                        input[pointer+3] = self.classDict[newClass]["Dispos Pointer"]
-
-                        weaponChanged = False 
-
-                        #Check weapon rank of new class...
-
-                        if "Inventory" in self.logDict[cName] and not inventoryIterated and cName != "Rickard":
-                            self.logDict[cName]["Inventory2"] = {}
-
-                        else:
-                            self.logDict[cName]["Inventory"] = {}
-
-                        inventoryIterated = True 
-
-
-                        
-
-                        for i in range(4):
-
-                            wPointer =  [17, 21, 25, 29][i]
-                            oldWep = input[pointer+wPointer]
-                            maxWepRank = max(self.logDict[cName]["Weapon Ranks"].values())
-                            #print(cName)
-                            #print(pointer)
-                            #print(maxWepRank)
-
-                            if str(oldWep) in self.itemToGroup:
-                                #print("Changing...")
-                                #print(cName)
-                                weaponChanged = True 
-                                #print(cName + "Yes")
-                                if self.logDict[cName]["Class"]  == "Manakete":
-                                    input[pointer + wPointer] = random.randint(66,69)
-
-                                elif self.logDict[cName]["Class"] == "Manakete (F)":
-                                    input[pointer + wPointer] = 70
-                                    
-                                elif self.logDict[cName]["Class"] == "Ballistician":
-                                    input[pointer + wPointer] = random.randint(61, 65)
-
-                                else:
-
-                                    wGroup = self.itemToGroup[str(oldWep)]["Group"]
-                                    
-                                    #print(wGroup)
-
-                                    if wGroup in ["Devil", "Ranged"] and \
-                                    self.logDict[cName]["Weapon Ranks"]["Sword"] < 30\
-                                    and self.logDict[cName]["Weapon Ranks"]["Axe"]<30:
-                                        #If not enough weapon rank
-                                        if maxWepRank == 30:
-                                            wGroup = "Steel"
-                                        else:
-                                            wGroup = "Iron"
-                                        
-
-
-                                    #Get new weapon
-                                    minWrank = groupWepRanks[wGroup]
-
-                                    newWep = ""
-
-                                    for wep in self.logDict[cName]["Weapon Ranks"]:
-                                        #IF weapon rank > min weapon rank
-                                        if self.logDict[cName]["Weapon Ranks"][wep] >= minWrank:
-                                            newWep = self.groupToItem[wGroup][wep]["Pointer"]
-                                            #Get new weapon
-                                            break
-                                    #print(newWep)
-                                    #Write new weapon into game 
-                                    if newWep != "" and newWep!=None:
-                                        
-                                        input[pointer+ wPointer] = newWep
-                                    else:
-                                        weaponChanged = False 
-
-                            #if no weapons have been changed
-                            if (weaponChanged == False and oldWep == 0) or\
-                                (weaponChanged == False and i == 3): #Last one is to account for Athena...
-
-                                if cName == "Est" or cName == "Bantu" or cName == "Midia":
-                                    #Ignore these, they don't have inventories
-                                    pass 
-
-                                elif self.logDict[cName]["Class"] == "Manakete":
-                                    input[pointer + wPointer] = random.randint(66,69)
-                                    weaponChanged = True 
-
-                                elif self.logDict[cName]["Class"] == "Manakete (F)":
-                                    input[pointer + wPointer] = 70
-                                    weaponChanged = True    
-
-                                elif self.logDict[cName]["Class"] == "Ballistician":
-                                    input[pointer + wPointer] = random.randint(61, 65)
-                                    weaponChanged = True
-                                #add one that fits the wep rank
-
-                                else:
-                                    #print(cName)
-                                    wGroup = None
-                                    for group in groupWepRanks:
-                                        if groupWepRanks[group] <= maxWepRank:
-                                            wGroup = group
-
-                                    minWrank = groupWepRanks[wGroup]
-
-                                    newWep = ""
-
-                                    for wep in self.logDict[cName]["Weapon Ranks"]:
-                                        #IF weapon rank > min weapon rank
-                                        if self.logDict[cName]["Weapon Ranks"][wep] >= minWrank:
-                                            newWep = self.groupToItem[wGroup][wep]["Pointer"]
-                                            #Get new weapon
-                                            break
-
-                                    if newWep != "":
-                                        input[pointer+ wPointer] = newWep
-                                        weaponChanged = True 
-
-                                
-
-                                #Weapon rank documentation:
-                                '''
-                                0 - E
-                                30 - D
-                                40 - D lv2
-                                45 - D lv3
-                                75 - C
-                                105 - B
-                                135 - B lv2
-                                165 - A
-                                195 - A lv2
-                                '''
-
-                            if "Inventory2" in self.logDict[cName]:
-                                self.logDict[cName]["Inventory2"][i] = self.itemDict[str(input[pointer+wPointer])]
-                            else:
-                                self.logDict[cName]["Inventory"][i] = self.itemDict[str(input[pointer+wPointer])]
-
+            
+            if self.randomClasses and map in self.disposDict.keys():#Chapters 18 and 23 have no recruitables
+                mapPlayerData = self.disposDict[map]
+                input = self.updatePlayerClasses(input,mapPlayerData)
+                
+            if self.randomEnemies and map in self.enemyDict.keys():#We don't randomize prologue enemies, at least for now
+                mapEnemyData = self.enemyDict[map]
+                input = self.updateEnemyClasses(input,mapEnemyData)
 
 
             #write map, compress again
@@ -820,6 +821,241 @@ class dataEditor:
         self.status = "Dispos randomized!"
 
         return input_path
+        
+    def updateEnemyClasses(self,input,mapData):
+        baseOffset = mapData["Start"]
+        limit = mapData["Count"]
+        for unitIndex in range(limit):
+            unitOffs = baseOffset + unitIndex*88
+            charID = input[unitOffs] | (input[unitOffs+1] << 8)
+            if charID < 78: continue#don't randomize player units here
+            classID = input[unitOffs+2]
+            unitFlag = "Normal"
+            for flag in ["Sieger", "Keeper", "FliersOnly", "WaterOnly", "NeedsKey"]:
+                if flag in mapData.keys() and unitIndex in mapData[flag]:
+                    unitFlag = flag
+                    break
+            newClass = self.getNewEnemyClass(classID,unitFlag)#String
+            newClassID = self.classDict[newClass]["Dispos Pointer"]
+            if newClassID != classID:
+                #Reassign weapons here
+                #enemies with droppables turning into dragons need them moved, or inventory deleted?
+                #siege enemies randomizing need some logic for Swarm-Meteor vs various ballistae
+                #siege enemies who also have a melee tome - ??
+                #weaponsChanged = 0
+                classRanks = []
+                if newClass == "Ballistician": classRanks = ["Ballista"]
+                elif "Manakete" in newClass: classRanks = ["Dragonstone"]
+                else:
+                    for wepType,wepRank in self.classDict[newClass]["Weapon Ranks"].items():
+                        if wepRank > 0 and wepType != "Staff": classRanks.append(wepType)
+                for inv in [16,20,24,28]:
+                    itemID = input[unitOffs+inv]
+                    itemName = self.itemDict[str(itemID)]
+                    
+                    newItemID = 0
+                    newItemType = None
+                    itemRank,itemType = self.itemToRank[str(itemID)][0],self.itemToRank[str(itemID)][1]
+                    noChange = ["None","Booster","Extra","DLC"]#Could differentiate further
+                    if itemRank in noChange: continue#Special items (PRFs, starshards, etc) are left alone
+                    if unitFlag == "Sieger" and newClass != "Ballistician":
+                        if itemRank == "B": input[unitOffs+inv] = 55#Pachyderm becomes Meteor
+                        else: input[unitOffs+inv] = 54#Others become Swarm
+                        #weaponsChanged += 1
+                        continue
+                    
+                    #Dragons shouldn't drop their breath weapons
+                    if newClass in self.naturalWeaponsDict.keys():
+                        newItemID = self.naturalWeaponsDict[newClass]
+                        if input[unitOffs+2] & 0x01 != 0:#If dragon now and first weapon was droppable, shift two slots down
+                            input[min(28,inv+12)] = input[unitOffs+inv]
+                            input[min(30,inv+14)] = input[unitOffs+inv+2]
+                            input[min(31,inv+15)] = input[unitOffs+inv+3]
+                        input[unitOffs+inv] = newItemID
+                        input[unitOffs+inv+2] = input[unitOffs+inv+2] & 0xFE
+                        continue
+
+                    #Determine weapon types from class's weapon ranks
+                    #print(newClass + " " + str(classRanks) + " " + itemName)
+                    newItemType = random.choice(classRanks)
+                    newItemID = random.choice(self.rankToItem[itemRank][newItemType])
+                    if newItemID == 70 and newClass != "Manakete (F)" and not self.abolishGender:
+                        newItemID = random.choice([66,67,68,69])
+                    #Longbow check
+                    if newItemID == 43 and newClass not in ["Archer", "Sniper", "Archer (F)", "Sniper (F)"]:
+                        newItemID = 40
+                    if newItemID > 255: print(newItemID)
+                    input[unitOffs+inv] = newItemID
+                        
+                        
+                
+            input[unitOffs+2] = newClassID
+            
+            
+            
+            if unitFlag == "NeedsKey":
+                input[unitOffs+24] = 0x5D#inventory slot 3
+            
+        return input
+        
+    def updatePlayerClasses(self,input,mapData):
+    #Updates classes and inventory for all player units in a single map
+        groupWepRanks = {
+                "Iron": 0,
+                "Ranged": 30,
+                "Devil": 30,
+                "Steel": 30,
+                "Killer": 75,
+                "Silver": 105,
+            }
+
+        #iterate through each character
+        for cName in mapData:
+            if cName not in ["Bantu", "Est", "Midia"] or self.logDict[cName]["Class"] != "Chameleon":
+                inventoryIterated = False 
+                for pointer in mapData[cName]: #Thanks cecil now I have to iterate through pointers :/
+                    #pointer = mapData[cName]
+
+
+                    newClass = self.logDict[cName]["Class"]
+                    #class pointer at input[pointer+3]
+                    #Change class
+                    input[pointer+3] = self.classDict[newClass]["Dispos Pointer"]
+                    if cName == "Ryan":
+                        input[pointer+25] = 96#Extra vuln
+
+                    weaponChanged = False 
+
+                    #Check weapon rank of new class...
+
+                    if "Inventory" in self.logDict[cName] and not inventoryIterated and cName != "Rickard":
+                        self.logDict[cName]["Inventory2"] = {}
+
+                    else:
+                        self.logDict[cName]["Inventory"] = {}
+
+                    inventoryIterated = True 
+
+                    for i in range(4):
+
+                        wPointer =  [17, 21, 25, 29][i]
+                        oldWep = input[pointer+wPointer]
+                        maxWepRank = max(self.logDict[cName]["Weapon Ranks"].values())
+                        #print(cName)
+                        #print(pointer)
+                        #print(maxWepRank)
+
+                        if str(oldWep) in self.itemToGroup:
+                            #print("Changing...")
+                            #print(cName)
+                            weaponChanged = True 
+                            #print(cName + "Yes")
+                            if self.logDict[cName]["Class"]  == "Manakete":
+                                input[pointer + wPointer] = random.randint(66,69)
+
+                            elif self.logDict[cName]["Class"] == "Manakete (F)":
+                                input[pointer + wPointer] = 70
+                                
+                            elif self.logDict[cName]["Class"] == "Ballistician":
+                                input[pointer + wPointer] = random.randint(61, 65)
+
+                            else:
+
+                                wGroup = self.itemToGroup[str(oldWep)]["Group"]
+                                
+                                #print(wGroup)
+
+                                if wGroup in ["Devil", "Ranged"] and \
+                                self.logDict[cName]["Weapon Ranks"]["Sword"] < 30\
+                                and self.logDict[cName]["Weapon Ranks"]["Axe"]<30:
+                                    #If not enough weapon rank
+                                    if maxWepRank == 30:
+                                        wGroup = "Steel"
+                                    else:
+                                        wGroup = "Iron"
+                                    
+                                #Get new weapon
+                                minWrank = groupWepRanks[wGroup]
+
+                                newWep = ""
+
+                                for wep in self.logDict[cName]["Weapon Ranks"]:
+                                    #IF weapon rank > min weapon rank
+                                    if self.logDict[cName]["Weapon Ranks"][wep] >= minWrank:
+                                        newWep = self.groupToItem[wGroup][wep]["Pointer"]
+                                        #Get new weapon
+                                        break
+                                #print(newWep)
+                                #Write new weapon into game 
+                                if newWep != "" and newWep!=None:
+                                    
+                                    input[pointer+ wPointer] = newWep
+                                else:
+                                    weaponChanged = False 
+
+                        #if no weapons have been changed
+                        if (weaponChanged == False and oldWep == 0) or\
+                            (weaponChanged == False and i == 3): #Last one is to account for Athena...
+
+                            if cName == "Est" or cName == "Bantu" or cName == "Midia":
+                                #Ignore these, they don't have inventories
+                                pass 
+
+                            elif self.logDict[cName]["Class"] == "Manakete":
+                                input[pointer + wPointer] = random.randint(66,69)
+                                weaponChanged = True 
+
+                            elif self.logDict[cName]["Class"] == "Manakete (F)":
+                                input[pointer + wPointer] = 70
+                                weaponChanged = True    
+
+                            elif self.logDict[cName]["Class"] == "Ballistician":
+                                input[pointer + wPointer] = random.randint(61, 65)
+                                weaponChanged = True
+                            #add one that fits the wep rank
+
+                            else:
+                                #print(cName)
+                                wGroup = None
+                                for group in groupWepRanks:
+                                    if groupWepRanks[group] <= maxWepRank:
+                                        wGroup = group
+
+                                minWrank = groupWepRanks[wGroup]
+
+                                newWep = ""
+
+                                for wep in self.logDict[cName]["Weapon Ranks"]:
+                                    #IF weapon rank > min weapon rank
+                                    if self.logDict[cName]["Weapon Ranks"][wep] >= minWrank:
+                                        newWep = self.groupToItem[wGroup][wep]["Pointer"]
+                                        #Get new weapon
+                                        break
+
+                                if newWep != "":
+                                    input[pointer+ wPointer] = newWep
+                                    weaponChanged = True 
+
+                            
+                            #Weapon rank documentation:
+                            '''
+                            0 - E
+                            30 - D
+                            40 - D lv2
+                            45 - D lv3
+                            75 - C
+                            105 - B
+                            135 - B lv2
+                            165 - A
+                            195 - A lv2
+                            '''
+
+                        if "Inventory2" in self.logDict[cName]:
+                            self.logDict[cName]["Inventory2"][i] = self.itemDict[str(input[pointer+wPointer])]
+                        else:
+                            self.logDict[cName]["Inventory"][i] = self.itemDict[str(input[pointer+wPointer])]
+        return input
+
     
     def randomizeScript(self, input_directory, seed, output_directory):
         #add pointers later
@@ -871,7 +1107,7 @@ class dataEditor:
         logData = "Seed: " + str(seed) 
 
         for setting in self.getSettings():
-            if setting == "Growths Range":
+            if setting == "Growths Range" or setting == "Crit Range":
                 logData += "\n" + setting + ": " + str(self.getSettings()[setting][0]) + "% - " + str(self.getSettings()[setting][1]) + "%"
 
             else:
@@ -944,6 +1180,15 @@ class dataEditor:
                         name = "Inventory"
 
                     logData+="\n" + name + ": " + str(self.logDict[character][value])
+                    
+        if self.randomItems:
+            logData += "\n\nItem Data:"
+            for item in self.itemLogDict:
+                logData+= "\n\n" + item + "\n"
+                stats = "Might Hit Crit".split()
+                for value in self.itemLogDict[item]:
+                    logData += stats.pop(0) + " " + str(self.itemLogDict[item][value])
+                    logData += " "
 
         logData += "\n\nClass Slots:"
         for chapter in self.chapterLogDict:
@@ -952,14 +1197,7 @@ class dataEditor:
             for slot in self.chapterLogDict[chapter]:
                 logData+="\n"+slot+ ": " + str(self.chapterLogDict[chapter][slot])
 
-        if self.randomItems:
-            logData += "\n\nItem Data:"
-            for item in self.itemLogDict:
-                logData+= "\n\n" + item + "\n"
-                stats = "Might Hit Crit".split()
-                for value in self.itemLogDict[item]:
-                    logData += stats.pop(-1) + " " + str(self.itemLogDict[item][value])
-                    logData += " "
+
                 
 
         
@@ -988,10 +1226,5 @@ class dataEditor:
         log.close()
 
 
-
-
-
-        
-        
 
 

@@ -95,13 +95,13 @@ class Raddomizer(QWidget):
         self.settingsDict["Input"] = self.inOutDirectory[0].text()
         self.settingsDict["Output"] = self.inOutDirectory[1].text()
 
-        for i in "Growths Bases Classes Portraits".split():
+        for i in "Growths Bases Classes Portraits Items".split():
             self.settingsDict[i] = self.generalDict[i].getState()
 
         for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks".split():
             self.settingsDict[j] = self.advancedDict[j].getState()
 
-        for k in "DancerCount FreelanceCount GrowthRange".split():
+        for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemCritChance ItemCritRange".split():
             self.settingsDict[k] = self.advancedDict[k].getValue()
 
         self.settingsDict["Seed"] = self.advancedDict["Seed"].getSeed()
@@ -118,13 +118,13 @@ class Raddomizer(QWidget):
             self.inOutDirectory[0].setText(self.settingsDict["Input"])
             self.inOutDirectory[1].setText(self.settingsDict["Output"])
 
-            for i in "Growths Bases Classes Portraits".split():
+            for i in "Growths Bases Classes Portraits Items".split():
                 self.generalDict[i].setState(self.settingsDict[i])
 
             for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks".split():
                 self.advancedDict[j].setState(self.settingsDict[j])
 
-            for k in "DancerCount FreelanceCount GrowthRange".split():
+            for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemCritChance ItemCritRange".split():
                 self.advancedDict[k].setValue(self.settingsDict[k])   
 
             self.advancedDict["Seed"].setSeed(self.settingsDict["Seed"]) 
@@ -142,16 +142,16 @@ class Raddomizer(QWidget):
 
 
         info = infoWindow(self.directory, self.font)
-        self.grid.addWidget(info, 10, 20, 20, 30)
+        self.grid.addWidget(info, 10, 20, 30, 30)#rows, cols
 
         self.inOutDirectory = self.directoryWindow(info, (0, 0), (50, 10))
 
 
         #Gen window:
         #X = 0, Y = 1, columnspan = 2, rowspan = 2
-        genWin = self.miniGroup("General", ("#392918","#392918","#100808", "#FFDCDC"), info, (0,10), (20,20))
+        genWin = self.miniGroup("General", ("#392918","#392918","#100808", "#FFDCDC"), info, (0,10), (20,30))#cols, rows
 
-        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
         genWin.grid.addItem(spacer, 0, 0)
 
 
@@ -163,7 +163,8 @@ class Raddomizer(QWidget):
             "Growths": self.addCheckBox(genWin, "Growths", info, 25, (1,1)),
             "Bases": self.addCheckBox(genWin, "Bases", info, 25, (1,2)),
             "Classes": self.addCheckBox(genWin, "Classes", info, 25, (1,3)), 
-            "Portraits": self.addCheckBox(genWin, "Portraits", info, 25, (1,4))
+            "Portraits": self.addCheckBox(genWin, "Portraits", info, 25, (1,4)),
+            "Items": self.addCheckBox(genWin, "Items", info, 25, (1,5))
             }
 
 
@@ -174,7 +175,7 @@ class Raddomizer(QWidget):
 
         #Advanced:
         #X = center, Y = 2, columnspan = 5, rowspan = 3
-        advancedWin = self.miniGroup("Advanced", ("#182039","#2d637b","#081018", "#ffffff"),info, (0,30), (50,30))
+        advancedWin = self.miniGroup("Advanced", ("#182039","#2d637b","#081018", "#ffffff"),info, (0,40), (50,40))
         
 
 
@@ -192,17 +193,24 @@ class Raddomizer(QWidget):
         advancedWin.grid.addWidget(importButton, 5, 3, 1, 1, Qt.AlignCenter)
 
         self.advancedDict = {
-        "GrowthRange": self.addSlider(advancedWin, info, (1,2), (3,1)),
+        "GrowthRange": self.addSlider(advancedWin, info, (1,2), (3,1), True),
         "AbsBases": self.addCheckBox(advancedWin, "Absolute Bases", info, 15, (1,3)),
         "AbsGrowths": self.addCheckBox(advancedWin, "Absolute Growths", info, 15, (2,3)),
         "ManaketeFlag": self.addCheckBox(advancedWin, "Enable Manaketes", info, 15, (1,4)),
         "BallistaFlag": self.addCheckBox(advancedWin, "Enable Ballisticians", info, 15, (2,4)),
-        "DancerCount": self.addIntInput(advancedWin, "Max Dancers", info, -1, (1, 6)),
-        "FreelanceCount": self.addIntInput(advancedWin, "Max Freelancers", info, -1, (2,6)),
+        "DancerCount": self.addIntInput(advancedWin, "Max Dancers", info, -1, None, (1, 6)),
+        "FreelanceCount": self.addIntInput(advancedWin, "Max Freelancers", info, -1, None, (2,6)),
+        "ItemMtDelta": self.addIntInput(advancedWin, "Mt Variance", info, 0, 15, (1, 7)),
+        "ItemHitDelta": self.addIntInput(advancedWin, "Hit Variance", info, 0, 50, (2, 7)),
         "WepLocks": self.addCheckBox(advancedWin, "No Weapon Locks", info, -1, (1,5)),
         "GenLocks": self.addCheckBox(advancedWin, "No Gender Locks", info, -1, (2,5)),
-        "Seed": self.addSeedInput(advancedWin, info, (3,3), (1, 2)),
+        "ItemCritRange": self.addSlider(advancedWin, info, (2,8), (2,1), False),
+        "ItemCritChance": self.addIntInput(advancedWin, "Crit Chance", info, 0, 100, (1,8)),
+        "Seed": self.addSeedInput(advancedWin, info, (3,3), (1, 2))
         }
+        
+        self.advancedDict["ItemHitDelta"].setStep(5)
+        self.advancedDict["ItemCritChance"].setStep(5)
 
         randomize = randomizeButton(self.font)
         randomize.clicked.connect(self.initRandomizer)
@@ -223,6 +231,7 @@ class Raddomizer(QWidget):
         self.randomizer.randomBases = self.generalDict["Bases"].getState()
         self.randomizer.randomClasses = self.generalDict["Classes"].getState()
         self.randomizer.randomCharacters = self.generalDict["Portraits"].getState()
+        self.randomizer.randomItems = self.generalDict["Items"].getState()
 
         self.randomizer.enableManaketes = self.advancedDict["ManaketeFlag"].getState()
         self.randomizer.enableBallistas = self.advancedDict["BallistaFlag"].getState()
@@ -237,6 +246,11 @@ class Raddomizer(QWidget):
         self.randomizer.maxFreelanceCount = self.advancedDict["FreelanceCount"].getValue()
 
         self.randomizer.growthsRange = self.advancedDict["GrowthRange"].getValues()
+        
+        self.randomizer.itemPowerRange = self.advancedDict["ItemMtDelta"].getValue()
+        self.randomizer.itemHitRange = self.advancedDict["ItemHitDelta"].getValue()
+        self.randomizer.itemCritChance = self.advancedDict["ItemCritChance"].getValue()
+        self.randomizer.itemCritRange = self.advancedDict["ItemCritRange"].getValues()
 
 
 
@@ -320,7 +334,7 @@ class Raddomizer(QWidget):
 
         return label 
 
-    def addIntInput(self, widget, text, info, min = None, position = (0,0), spanpos = (1, 1)):
+    def addIntInput(self, widget, text, info, min = None, max = None, position = (0,0), spanpos = (1, 1)):
         col = position[0]
         row = position[1]
 
@@ -331,6 +345,9 @@ class Raddomizer(QWidget):
 
         if min is not None:
             label.setMinimum(min)
+            
+        if max is not None:
+            label.setMaximum(max)
 
         widget.grid.addWidget(label, row, col, rowspan, colspan)
 
@@ -363,19 +380,22 @@ class Raddomizer(QWidget):
 
         return checkBox 
 
-    def addSlider(self, widget, info, position = (0,0), spanpos = (1,1)):
+    def addSlider(self, widget, info, position = (0,0), spanpos = (1,1), growth = True):
 
         col = position[0]
         row = position[1]
 
         colspan = spanpos[0]
         rowspan = spanpos[1]
-
-        minGrowthSlider = customStepSlider(self.font, info)
-    
-        widget.grid.addWidget(minGrowthSlider, row, col, rowspan, colspan )
-
-        return minGrowthSlider
+        newSlider = None
+        
+        if growth == True:
+            newSlider = customStepSlider(self.font, info)
+        else:
+            newSlider = critStepSlider(self.font, info)
+        widget.grid.addWidget(newSlider, row, col, rowspan, colspan )
+        return newSlider
+        
 
 
     def miniGroup(self, title, colors, info, position = (0,0), spanpos = (1,1)):
@@ -629,7 +649,7 @@ class infoWindow(QWidget):
         self.defaultText = "Welcome to the Raddomizer!\nHover over the settings for more information."
 
 
-        self.directory = directory    
+        self.directory = directory
 
         self.raddLabel = resizeImageLabel(self.directory + "\\randomizer_assets\\raddsprite.png")
         self.backgroundLabel = resizeImageLabel(self.directory + "\\randomizer_assets\\bg1.png")
@@ -943,7 +963,10 @@ class intInputLabel(QWidget):
 
         self.dialogueDict = {
             "Max Dancers": "Max amount of Dancers to \nbe randomized. -1 means unlimited.",
-            "Max Freelancers": "Max amount of Freelancers \nto be randomized. -1 means unlimited."
+            "Max Freelancers": "Max amount of Freelancers \nto be randomized. -1 means unlimited.",
+            "Mt Variance": "Max amount to add or subtract\n from each weapon's Mt.",
+            "Hit Variance": "Max amount to add or subtract\n from each weapon's Hit.",
+            "Crit Chance": "Chance for each weapon\n to gain crit if it had none."
         }
          
     def getValue(self):
@@ -955,6 +978,12 @@ class intInputLabel(QWidget):
 
     def setMinimum(self, min):
         self.inputField.setMinimum(min)
+        
+    def setMaximum(self,max):
+        self.inputField.setMaximum(max)
+        
+    def setStep(self,step):
+        self.inputField.setSingleStep(step)
     
     def event(self, event):
         if event.type() == QEvent.HoverEnter:
@@ -1127,6 +1156,7 @@ class randomizerCheckbox(QWidget):
             "Bases": "Randomizes bases of all \nplayable characters.",
             "Classes":"Randomizes classes of all \nplayable characters (except Kris).",
             "Portraits":"Randomizes identities (e.g. Marth -> Radd) \nof all playable characters (except Kris).",
+            "Items": "Randomizes weapon stats \n(Mt, Hit and Crit).",
             "Absolute Bases": "Ignores whether bases add \nup to the original base stat total.",
             "Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
             "Enable Manaketes": "Adds non-divine Manaketes \ninto the class pool.",
@@ -1381,7 +1411,80 @@ class customStepSlider(QWidget):
         if event.type() == QEvent.HoverEnter:
             #Send signal
             #print("enter")
-            self.infoConnection.changeText("Sets range of possible growths to \nbe generated while randomizing.")
+            self.infoConnection.changeText("Sets range of growths to \nbe generated while randomizing.")
+
+        elif event.type() == QEvent.HoverLeave:
+            #print("leave")
+            #Halt signal
+            
+            pass
+        return super().event(event)
+        
+class critStepSlider(QWidget):
+    def __init__(self, font, info, parent = None):
+        super(critStepSlider, self).__init__(parent)
+
+        self.setAttribute(Qt.WA_Hover)
+        self.infoConnection = info
+
+        self.grid = QGridLayout()
+        self.setLayout(self.grid)
+
+
+        self.slider = QRangeSlider(Qt.Orientation.Horizontal)
+        self.slider.setTickInterval(1)
+        self.slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        self.slider.setMinimum(2)
+        self.slider.setMaximum(20)
+        self.slider.setValue((2, 8))
+        self.slider.valueChanged.connect(self.updateLabels)
+
+        self.minLabel = QLabel()
+        self.minLabel.setText("   5")
+        self.minLabel.setFont(font)
+        self.maxLabel = QLabel()
+        self.maxLabel.setText("40")
+        self.maxLabel.setFont(font)
+
+        self.titleLabel = dynamicLabel()
+        self.titleLabel.setText("Crit Range")
+        self.titleLabel.setFont(font)   
+        self.titleLabel.setMinSize(20)
+
+        spacer = QSpacerItem(20, 60)
+
+        self.grid.addItem(spacer, 0, 0)
+
+        self.grid.addWidget(self.minLabel, 0, 1, 1, 1)
+        self.grid.addWidget(self.slider, 0, 2, 1, 20)
+        self.grid.addWidget(self.maxLabel,0 , 23, 1, 1)
+        self.grid.addWidget(self.titleLabel, 1, 2, 3, 20, Qt.AlignCenter)
+
+
+    def setValue(self, value):
+        self.slider.setValue((value[0], value[-1]))
+
+    def getValue(self): #this one gets the TRUE value 
+        return self.slider.value()  
+
+    def getValues(self):
+        return [self.slider.value()[0]*5, self.slider.value()[-1]*5]
+
+    def updateLabels(self):
+        minLabel = str(self.slider.value()[0]*5)
+        maxLabel = str(self.slider.value()[-1]*5)
+
+        minLabel = "  "*(2-len(minLabel)) + minLabel 
+        maxLabel = "  "*(2-len(maxLabel)) + maxLabel 
+
+        self.minLabel.setText(minLabel)
+        self.maxLabel.setText(maxLabel)
+
+    def event(self, event):
+        if event.type() == QEvent.HoverEnter:
+            #Send signal
+            #print("enter")
+            self.infoConnection.changeText("Sets range of crit values \nfor weapons with added crit.")
 
         elif event.type() == QEvent.HoverLeave:
             #print("leave")
