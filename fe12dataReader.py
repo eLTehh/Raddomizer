@@ -157,6 +157,9 @@ class dataEditor:
                     while True:
                         self.logDict[cName]["Class"] =  random.choice(classSet)
                         newTier = self.classDict[self.logDict[cName]["Class"]]["Tier"]
+                        
+                        if ogTier != newTier or newTier == "-":
+                            continue
 
                         if self.logDict[cName]["Class"] == "Dancer" and self.maxDancerCount!= -1:
                             if self.currentDancerCount == self.maxDancerCount:
@@ -165,15 +168,12 @@ class dataEditor:
                                 self.currentDancerCount+=1
                                 break
 
-                        if self.logDict[cName]["Class"] == "Chameleon" and self.maxFreelanceCount != -1:
+                        if self.logDict[cName]["Class"] == "Chameleon" and self.maxFreelanceCount != -1 and cName != "Arran":
                             if self.currentFreelanceCount == self.maxFreelanceCount:
                                 continue 
                             else:
                                 self.currentFreelanceCount+=1
                                 break
-
-                        if ogTier == newTier or newTier == "-":
-                            break
         
 
     def getNewEnemyClass(self,oldClassID,unitFlag="Normal"):
