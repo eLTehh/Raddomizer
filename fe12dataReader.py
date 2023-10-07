@@ -174,6 +174,7 @@ class dataEditor:
                             else:
                                 self.currentFreelanceCount+=1
                                 break
+                        break
         
 
     def getNewEnemyClass(self,oldClassID,unitFlag="Normal"):
