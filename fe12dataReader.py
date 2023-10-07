@@ -716,7 +716,7 @@ class dataEditor:
                 if itemType == 5 or itemType > 7: continue
                 self.itemLogDict[iName] = {}
                 uses = int(input[itemPointer+20])
-                if uses != 0:
+                if uses != 0:#Infinite-use weapons shouldn't have random uses
                     newMin = max(3,uses-self.itemUsesRange)
                     newMax = min(60,uses+self.itemUsesRange)
                     uses = random.randint(newMin,newMax)
@@ -920,7 +920,8 @@ class dataEditor:
                     #Dragons shouldn't drop their breath weapons
                     if newClass in self.naturalWeaponsDict.keys():
                         newItemID = self.naturalWeaponsDict[newClass]
-                        if input[unitOffs+inv+2] & 0x01 != 0:#If dragon now and first weapon was droppable, shift two slots down
+                        if input[unitOffs+inv+2] & 0x01 != 0:
+                            #If dragon now and first weapon was droppable, shift three slots down
                             input[min(28,inv+12)] = input[unitOffs+inv]
                             input[min(30,inv+14)] = input[unitOffs+inv+2]
                             input[min(31,inv+15)] = input[unitOffs+inv+3]
@@ -939,7 +940,7 @@ class dataEditor:
                         newItemID = 40
                     if newItemID > 255: print(newItemID)
                     input[unitOffs+inv] = newItemID
-                    if newItemID == 59:#imhullu shouldn't drop
+                    if newItemID in [55,59]:#imhullu and Meteor shouldn't drop
                         input[unitOffs+inv+2] = input[unitOffs+inv+2] & 0xFE
                         
                         
@@ -981,8 +982,11 @@ class dataEditor:
                     #class pointer at input[pointer+3]
                     #Change class
                     input[pointer+3] = self.classDict[newClass]["Dispos Pointer"]
-                    if cName == "Ryan":
+                    if cName == "Ryan" and not self.noPrologue:
                         input[pointer+25] = 96#Extra vuln
+                        
+                    if self.noPrologue and cName == "Marth":
+                        input[pointer+29] = 133#compensate for no Prologue gold
 
                     weaponChanged = False 
 
