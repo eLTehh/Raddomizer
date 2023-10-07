@@ -1,0 +1,691 @@
+{
+  "Marth": {
+    "FID": [
+      222,
+      248,
+      0,
+      0
+    ],
+	"Level": 7,
+    "Bases": {
+      "HP": 9,
+      "Str": 3,
+      "Mag": 0,
+      "Skl": 8,
+      "Spd": 4,
+      "Lck": 10,
+      "Def": 1,
+      "Res": 0,
+      "Total": 35,
+      "Range": [
+        0,
+        9
+      ]
+    },
+    "Growths": {
+      "HP": 50,
+      "Str": 45,
+      "Mag": 5,
+      "Skl": 45,
+      "Spd": 45,
+      "Lck": 80,
+      "Def": 25,
+      "Total": 295
+    },
+    "Weapon Ranks": {
+      "Sword": 38,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "MARS",
+    "Tier": "U",
+	"Hair": 0
+  },
+  
+  "Avatar": {
+    "FID": [
+      113,
+      249,
+      0,
+      0
+    ],
+	"Level": 1,
+    "Bases": {
+      "HP": 3,
+      "Str": 3,
+      "Mag": 2,
+      "Skl": 3,
+      "Spd": 2,
+      "Lck": 4,
+      "Def": 0,
+      "Res": 0,
+      "Total": 17,
+      "Range": [
+        0,
+        4
+      ]
+    },
+    "Growths": {
+      "HP": 30,
+      "Str": 25,
+      "Mag": 15,
+      "Skl": 30,
+      "Spd": 30,
+      "Lck": 60,
+      "Def": 20,
+      "Total": 210
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "PLAYER",
+    "Tier": "U",
+	"Hair": 0
+  },
+  
+  "Luke": {
+    "FID": [
+      0,
+      252,
+      0,
+      0
+    ],
+	"Level": 5,
+    "Bases": {
+      "HP": 5,
+      "Str": 5,
+      "Mag": 0,
+      "Skl": 5,
+      "Spd": 3,
+      "Lck": 5,
+      "Def": 2,
+      "Res": 0,
+      "Total": 25,
+      "Range": [
+        0,
+        5
+      ]
+    },
+    "Growths": {
+      "HP": 50,
+      "Str": 45,
+      "Mag": 0,
+      "Skl": 25,
+      "Spd": 40,
+      "Lck": 40,
+      "Def": 25,
+      "Total": 225
+    },
+    "Weapon Ranks": {
+      "Sword": 50,
+      "Lance": 16,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "ROOK",
+    "Tier": "U",
+	"Hair": 1
+  },
+  
+  "Rody": {
+    "FID": [
+      225,
+      251,
+      0,
+      0
+    ],
+	"Level": 5,
+    "Bases": {
+      "HP": 5,
+      "Str": 3,
+      "Mag": 0,
+      "Skl": 6,
+      "Spd": 3,
+      "Lck": 8,
+      "Def": 1,
+      "Res": 0,
+      "Total": 26,
+      "Range": [
+        0,
+        8
+      ]
+    },
+    "Growths": {
+      "HP": 40,
+      "Str": 35,
+      "Mag": 0,
+      "Skl": 35,
+      "Spd": 55,
+      "Lck": 60,
+      "Def": 25,
+      "Total": 250
+    },
+    "Weapon Ranks": {
+      "Sword": 16,
+      "Lance": 50,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "RODY",
+    "Tier": "U",
+	"Hair": 6
+  },
+  
+  "Cecil": {
+    "FID": [
+      47,
+      247,
+      0,
+      0
+    ],
+	"Level": 5,
+    "Bases": {
+      "HP": 2,
+      "Str": 2,
+      "Mag": 0,
+      "Skl": 8,
+      "Spd": 5,
+      "Lck": 7,
+      "Def": -2,
+      "Res": 0,
+      "Total": 22,
+      "Range": [
+        -2,
+        8
+      ]
+    },
+    "Growths": {
+      "HP": 30,
+      "Str": 30,
+      "Mag": 20,
+      "Skl": 45,
+      "Spd": 65,
+      "Lck": 50,
+      "Def": 15,
+      "Total": 255
+    },
+    "Weapon Ranks": {
+      "Sword": 40,
+      "Lance": 30,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "CECIL",
+    "Tier": "U",
+	"Hair": 2
+  },
+  
+  "Gordin": {
+    "FID": [
+      235,
+      247,
+      0,
+      0
+    ],
+	"Level": 7,
+    "Bases": {
+      "HP": 7,
+      "Str": 5,
+      "Mag": 0,
+      "Skl": 6,
+      "Spd": 2,
+      "Lck": 6,
+      "Def": 2,
+      "Res": 0,
+      "Total": 28,
+      "Range": [
+        0,
+        7
+      ]
+    },
+    "Growths": {
+      "HP": 30,
+      "Str": 30,
+      "Mag": 0,
+      "Skl": 20,
+      "Spd": 10,
+      "Lck": 50,
+      "Def": 20,
+      "Total": 160
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 50,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "GOHDON",
+    "Tier": "U",
+	"Hair": 1
+  },
+  
+  "Ryan": {
+    "FID": [
+      151,
+      248,
+      0,
+      0
+    ],
+	"Level": 5,
+    "Bases": {
+      "HP": 5,
+      "Str": 4,
+      "Mag": 0,
+      "Skl": 4,
+      "Spd": 2,
+      "Lck": 4,
+      "Def": 2,
+      "Res": 0,
+      "Total": 21,
+      "Range": [
+        0,
+        5
+      ]
+    },
+    "Growths": {
+      "HP": 40,
+      "Str": 40,
+      "Mag": 0,
+      "Skl": 60,
+      "Spd": 20,
+      "Lck": 40,
+      "Def": 25,
+      "Total": 225
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 50,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "LIAN",
+    "Tier": "U",
+	"Hair": 1
+  },
+  
+  "Draug": {
+    "FID": [
+      97,
+      247,
+      0,
+      0
+    ],
+	"Level": 8,
+    "Bases": {
+      "HP": 6,
+      "Str": 4,
+      "Mag": 0,
+      "Skl": 4,
+      "Spd": 6,
+      "Lck": 3,
+      "Def": 1,
+      "Res": 0,
+      "Total": 24,
+      "Range": [
+        0,
+        6
+      ]
+    },
+    "Growths": {
+      "HP": 20,
+      "Str": 25,
+      "Mag": 0,
+      "Skl": 30,
+      "Spd": 50,
+      "Lck": 40,
+      "Def": 25,
+      "Total": 190
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 46,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "DOHGA",
+    "Tier": "U",
+	"Hair": 1
+  },
+  
+  "Wrys": {
+    "FID": [
+      194,
+      251,
+      0,
+      0
+    ],
+	"Level": 5,
+    "Bases": {
+      "HP": 0,
+      "Str": 0,
+      "Mag": 3,
+      "Skl": 5,
+      "Spd": 3,
+      "Lck": 4,
+      "Def": 0,
+      "Res": 2,
+      "Total": 17,
+      "Range": [
+        0,
+        5
+      ]
+    },
+    "Growths": {
+      "HP": 10,
+      "Str": 0,
+      "Mag": 20,
+      "Skl": 15,
+      "Spd": 10,
+      "Lck": 50,
+      "Def": 15,
+      "Total": 120
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 30
+    },
+    "Script ID": "RIFF",
+    "Tier": "U",
+	"Hair": 10
+  },
+  
+  "Ogma": {
+    "FID": [
+      93,
+      249,
+      0,
+      0
+    ],
+	"Level": 9,
+    "Bases": {
+      "HP": 11,
+      "Str": 5,
+      "Mag": 0,
+      "Skl": 7,
+      "Spd": 5,
+      "Lck": 6,
+      "Def": 3,
+      "Res": 0,
+      "Total": 37,
+      "Range": [
+        0,
+        11
+      ]
+    },
+    "Growths": {
+      "HP": 50,
+      "Str": 40,
+      "Mag": 0,
+      "Skl": 30,
+      "Spd": 30,
+      "Lck": 60,
+      "Def": 15,
+      "Total": 225
+    },
+    "Weapon Ranks": {
+      "Sword": 100,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "OGUMA",
+    "Tier": "U",
+	"Hair": 7
+  },
+  
+  "Caeda": {
+    "FID": [
+      89,
+      252,
+      0,
+      0
+    ],
+	"Level": 7,
+    "Bases": {
+      "HP": 5,
+      "Str": 3,
+      "Mag": 0,
+      "Skl": 4,
+      "Spd": 11,
+      "Lck": 16,
+      "Def": 2,
+      "Res": 0,
+      "Total": 41,
+      "Range": [
+        0,
+        16
+      ]
+    },
+    "Growths": {
+      "HP": 30,
+      "Str": 20,
+      "Mag": 10,
+      "Skl": 60,
+      "Spd": 70,
+      "Lck": 80,
+      "Def": 15,
+      "Total": 285
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 60,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "SHEEDA",
+    "Tier": "U",
+	"Hair": 0
+  },
+  
+  "Cain": {
+    "FID": [
+      86,
+      248,
+      0,
+      0
+    ],
+	"Level": 10,
+    "Bases": {
+      "HP": 10,
+      "Str": 6,
+      "Mag": 0,
+      "Skl": 8,
+      "Spd": 5,
+      "Lck": 5,
+      "Def": 4,
+      "Res": 0,
+      "Total": 38,
+      "Range": [
+        0,
+        10
+      ]
+    },
+    "Growths": {
+      "HP": 50,
+      "Str": 25,
+      "Mag": 0,
+      "Skl": 45,
+      "Spd": 60,
+      "Lck": 70,
+      "Def": 20,
+      "Total": 270
+    },
+    "Weapon Ranks": {
+      "Sword": 80,
+      "Lance": 38,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "KAIN",
+    "Tier": "U",
+	"Hair": 4
+  },
+  
+  "Merric": {
+    "FID": [
+      189,
+      248,
+      0,
+      0
+    ],
+	"Level": 12,
+    "Bases": {
+      "HP": 9,
+      "Str": 0,
+      "Mag": 5,
+      "Skl": 6,
+      "Spd": 8,
+      "Lck": 7,
+      "Def": 5,
+      "Res": 2,
+      "Total": 42,
+      "Range": [
+        0,
+        9
+      ]
+    },
+    "Growths": {
+      "HP": 50,
+      "Str": 0,
+      "Mag": 10,
+      "Skl": 45,
+      "Spd": 50,
+      "Lck": 70,
+      "Def": 30,
+      "Total": 255
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 50,
+      "Staff": 0
+    },
+    "Script ID": "MARICH",
+    "Tier": "U",
+	"Hair": 1
+  },
+  
+  "Athena": {
+    "FID": [
+      213,
+      246,
+      0,
+      0
+    ],
+	"Level": 18,
+    "Bases": {
+      "HP": 15,
+      "Str": 9,
+      "Mag": 0,
+      "Skl": 8,
+      "Spd": 7,
+      "Lck": 11,
+      "Def": 5,
+      "Res": 1,
+      "Total": 56,
+      "Range": [
+        0,
+        15
+      ]
+    },
+    "Growths": {
+      "HP": 35,
+      "Str": 30,
+      "Mag": 5,
+      "Skl": 40,
+      "Spd": 40,
+      "Lck": 65,
+      "Def": 20,
+      "Total": 235
+    },
+    "Weapon Ranks": {
+      "Sword": 135,
+      "Lance": 0,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "ATHENA",
+    "Tier": "U",
+	"Hair": 6
+  },
+  
+  "Est": {
+    "FID": [
+      160,
+      247,
+      0,
+      0
+    ],
+	"Level": 6,
+    "Bases": {
+      "HP": 4,
+      "Str": 3,
+      "Mag": 0,
+      "Skl": 3,
+      "Spd": 7,
+      "Lck": 12,
+      "Def": 3,
+      "Res": 0,
+      "Total": 32,
+      "Range": [
+        0,
+        12
+      ]
+    },
+    "Growths": {
+      "HP": 30,
+      "Str": 70,
+      "Mag": 10,
+      "Skl": 60,
+      "Spd": 55,
+      "Lck": 70,
+      "Def": 20,
+      "Total": 315
+    },
+    "Weapon Ranks": {
+      "Sword": 0,
+      "Lance": 90,
+      "Axe": 0,
+      "Bow": 0,
+      "Magic": 0,
+      "Staff": 0
+    },
+    "Script ID": "EST",
+    "Tier": "U",
+	"Hair": 2
+  }
+}
