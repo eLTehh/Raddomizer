@@ -175,6 +175,7 @@ class dataEditor:
                                 self.currentFreelanceCount+=1
                                 break
                         break
+
         
 
     def getNewEnemyClass(self,oldClassID,unitFlag="Normal"):
@@ -846,6 +847,9 @@ class dataEditor:
             fe12_decompress(mapPath, mapPath+'.decmp')
             input = bytearray(open(mapPath+'.decmp', 'rb').read())
             
+            if self.noPrologue and map == "001":
+                        input[140+28] = 133#Large Bullion to compensate for no Prologue gold
+            
             if (self.randomClasses or self.noPrologue) and map in self.disposDict.keys():#Chapters 18 and 23 have no recruitables
                 mapPlayerData = self.disposDict[map]
                 input = self.updatePlayerClasses(input,mapPlayerData)
@@ -985,9 +989,7 @@ class dataEditor:
                     input[pointer+3] = self.classDict[newClass]["Dispos Pointer"]
                     if cName == "Ryan" and not self.noPrologue:
                         input[pointer+25] = 96#Extra vuln
-                        
-                    if self.noPrologue and cName == "Marth":
-                        input[pointer+29] = 133#compensate for no Prologue gold
+                    
 
                     weaponChanged = False 
 
@@ -1222,29 +1224,30 @@ class dataEditor:
                 else:
                     logData += "\nTalk to " + self.logDict[key]["Replacement"] + " with " + self.logDict[recruitPairs[key]]["Replacement"]
 
-        for character in self.logDict:
-            logData+= "\n\n" + character 
-
-            for value in self.logDict[character]:
-                toWrite = self.logDict[character][value]
-
-                if type(toWrite) == list:
-                    logData+="\n" + value + ": "
-                    stats = "HP STR MAG SKL SPD LCK DEF RES".split()
-                    for index in range(len(toWrite)):
-                        logData += stats[index] + " " + str(toWrite[index])
-                        if value == "Growths":
-                            logData += "%"
-                        logData+= " "
-
-                else:
-                    name = value 
-                    if "Inventory2" in self.logDict[character] and value == "Inventory":
-                        name = "Prologue Inventory"
-                    if value == "Inventory2":
-                        name = "Inventory"
-
-                    logData+="\n" + name + ": " + str(self.logDict[character][value])
+        if self.randomBases or self.randomGrowths or self.randomClasses:
+            for character in self.logDict:
+                logData+= "\n\n" + character 
+            
+                for value in self.logDict[character]:
+                    toWrite = self.logDict[character][value]
+            
+                    if type(toWrite) == list:
+                        logData+="\n" + value + ": "
+                        stats = "HP STR MAG SKL SPD LCK DEF RES".split()
+                        for index in range(len(toWrite)):
+                            logData += stats[index] + " " + str(toWrite[index])
+                            if value == "Growths":
+                                logData += "%"
+                            logData+= " "
+            
+                    else:
+                        name = value 
+                        if "Inventory2" in self.logDict[character] and value == "Inventory":
+                            name = "Prologue Inventory"
+                        if value == "Inventory2":
+                            name = "Inventory"
+            
+                        logData+="\n" + name + ": " + str(self.logDict[character][value])
                     
         if self.randomItems:
             logData += "\n\nItem Data:"
@@ -1255,12 +1258,13 @@ class dataEditor:
                     logData += stats.pop(0) + " " + str(self.itemLogDict[item][value])
                     logData += " "
 
-        logData += "\n\nClass Slots:"
-        for chapter in self.chapterLogDict:
-            logData+= "\n\n"+chapter +"---"
-
-            for slot in self.chapterLogDict[chapter]:
-                logData+="\n"+slot+ ": " + str(self.chapterLogDict[chapter][slot])
+        if self.randomClasses:
+            logData += "\n\nClass Slots:"
+            for chapter in self.chapterLogDict:
+                logData+= "\n\n"+chapter +"---"
+            
+                for slot in self.chapterLogDict[chapter]:
+                    logData+="\n"+slot+ ": " + str(self.chapterLogDict[chapter][slot])
 
 
                 
