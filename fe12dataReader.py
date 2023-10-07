@@ -62,8 +62,8 @@ class dataEditor:
         self.chapterLogDict = {}
         self.itemLogDict = {}
 
-        self.growthToHexDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphers.json","r"))
-        self.hexToGrowthDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphersR.json","r"))
+        #self.growthToHexDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphers.json","r"))
+        #self.hexToGrowthDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphersR.json","r"))
         self.ogDataDict = json.load(open(self.directory + "\\randomizer_info\\fe12ogData.json"))
         self.buffDataDict = json.load(open(self.directory + "\\randomizer_info\\prologueSkipUnits.json"))
         self.nameList = open(self.directory + "\\randomizer_info\\Character List.txt", 'r').read().split('\n')
@@ -515,10 +515,9 @@ class dataEditor:
 
                 #write random base stats
                 statsName = 'HP Str Mag Skl Spd Lck Def Res'.split()
+                actualGrowths = self.encryptCharacterGrowths(charIndex,newGrowths)
+                input[startingPointer+20:startingPointer+28] = actualGrowths
 
-                for i in range(8):
-                    actualGrowth = int(self.growthToHexDict[cName][statsName[i]][str(newGrowths[i])], 16)
-                    input[startingPointer + 20 + i] = actualGrowth
 
             #logData+= "\n"
             if self.randomClasses:
@@ -849,6 +848,8 @@ class dataEditor:
             
             if self.noPrologue and map == "bmap001":
                         input[140+28] = 133#Large Bullion to compensate for no Prologue gold
+                        input[668+28] = 17
+                        input[756+28] = 1#Extra weapons on Luke and Rody
             
             if (self.randomClasses or self.noPrologue) and map in self.disposDict.keys():#Chapters 18 and 23 have no recruitables
                 mapPlayerData = self.disposDict[map]
