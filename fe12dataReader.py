@@ -920,7 +920,7 @@ class dataEditor:
                     #Dragons shouldn't drop their breath weapons
                     if newClass in self.naturalWeaponsDict.keys():
                         newItemID = self.naturalWeaponsDict[newClass]
-                        if input[unitOffs+2] & 0x01 != 0:#If dragon now and first weapon was droppable, shift two slots down
+                        if input[unitOffs+inv+2] & 0x01 != 0:#If dragon now and first weapon was droppable, shift two slots down
                             input[min(28,inv+12)] = input[unitOffs+inv]
                             input[min(30,inv+14)] = input[unitOffs+inv+2]
                             input[min(31,inv+15)] = input[unitOffs+inv+3]
