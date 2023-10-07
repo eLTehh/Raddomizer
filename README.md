@@ -6,7 +6,7 @@
 
 Raddomizer is a randomizer for New Mystery of the Emblem. The features are lightweight, and easy to understand. No command line stuff or manual decompression — just pop the unpacked ROM folder into the program and it'll randomize things for you.
 
-This randomizer is a joint effort by LT (me) and [Radd](https://twitter.com/Nuthingdude). Coding by LT, documentation by Radd (more info further down in the readme)
+This randomizer is a joint effort by LT (me), [Radd](https://twitter.com/Nuthingdude) and Vennobennu. Coding by LT and Vennobennu, documentation by Radd (more info further down in the readme)
 
 It includes a few additional features for an improved gameplay experience, such as removing Prf weapon locks, as well as gendered weapon locks. Also, playable Ballisticians, with their sprites ported over from Shadow Dragon! 
 
@@ -69,6 +69,8 @@ Then, pack the folder back into a ROM, and enjoy your randomized New Mystery!
 <img src = "https://media.discordapp.net/attachments/355914063852863489/997122676227321926/unknown.png?width=505&height=669">
 
 <img src = "https://media.discordapp.net/attachments/355914063852863489/997163971683553300/unknown.png">
+
+<img src = "randomizer_assets/EnemyRando.png" width = 50% height = 50%>
 
 ## Known Issues
 Class slots (in the Reclass window) seem to fit randomization results, but fliers have been shown to exceed the amount of class slots. Need more testing, unsure if this is the result of changing ROMs in the middle of a run.
