@@ -41,11 +41,14 @@ class dataEditor:
         
         self.mixLandFlying = False
         self.mixHumanDragon = True
+        
+        self.noPrologue = False
 
         self.growthsRange = [0, 100]
 
         self.itemPowerRange = 4
         self.itemHitRange = 20
+        self.itemUsesRange = 15
         self.itemCritChance = 5
         self.itemCritRange = [10,40]
 
@@ -62,10 +65,12 @@ class dataEditor:
         self.growthToHexDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphers.json","r"))
         self.hexToGrowthDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphersR.json","r"))
         self.ogDataDict = json.load(open(self.directory + "\\randomizer_info\\fe12ogData.json"))
+        self.buffDataDict = json.load(open(self.directory + "\\randomizer_info\\prologueSkipUnits.json"))
         self.nameList = open(self.directory + "\\randomizer_info\\Character List.txt", 'r').read().split('\n')
         self.classList = open(self.directory + "\\randomizer_info\\Class List.txt", 'r').read().split('\n')
         self.classDict = json.load(open(self.directory + "\\randomizer_info\\fe12classes.json"))
         self.disposDict = json.load(open(self.directory + "\\randomizer_info\\disposPointers.json"))
+        self.proSkipDisposDict = json.load(open(self.directory + "\\randomizer_info\\skipDisposPointers.json"))
         self.enemyDict = json.load(open(self.directory + "\\randomizer_info\\disposList.json"))
         self.enemyGrowthDict = json.load(open(self.directory + "\\randomizer_info\\newEnemyClassGrowths.json"))
 
@@ -104,10 +109,13 @@ class dataEditor:
             "Mix Land and Flying Enemies": self.mixLandFlying,
             "Mix Human and Dragon Enemies": self.mixHumanDragon,
             
+            "Uses Variance": self.itemUsesRange,
             "Might Variance": self.itemPowerRange,
             "Hit Variance": self.itemHitRange,
             "Crit Ratio": self.itemCritChance,
-            "Crit Range": self.itemCritRange
+            "Crit Range": self.itemCritRange,
+            
+            "Truncate Prologue": self.noPrologue
         }
 
         return settingsDict 
@@ -270,6 +278,9 @@ class dataEditor:
 
             if not os.path.exists(output_path+'\\dispos'):
                 os.makedirs(output_path+'\\dispos')
+                
+            if not os.path.exists(output_path+'\\script'):
+                os.makedirs(output_path+'\\script')
 
             if os.path.exists(input_path+"\\data\\data"):
                 input_path+= "\\data"
@@ -286,19 +297,31 @@ class dataEditor:
 
             #GDinput = bytearray(open(input_path+'\\data\\data\\FE12data.bin.rdcmp', 'rb').read())    
             #GDoutput = open(output_path+'\\data\\FE12data.bin.rdcmp', 'wb')
+            
+            #If we skip prologue, prologue units become stronger
+            if self.noPrologue:
+                self.ogDataDict.update(self.buffDataDict)
+                self.disposDict.update(self.proSkipDisposDict)
+                
+             
+            #Do things if we have skip prologue but no randomization of player units
 
             self.randomClassHelper(seed)
 
             #print(self.logDict)
             #print(self.rClassDict)
-            if self.randomGrowths or self.randomBases or self.randomClasses or self.randomCharacters or self.randomEnemies or self.randomItems:
+            if self.randomGrowths or self.randomBases or self.randomClasses or self.randomCharacters \
+            or self.randomEnemies or self.randomItems or self.noPrologue:
                 self.randomizeGameData(input_path+'\\data', seed, output_path +'\\data')
 
             #GDoutput.write(GDinput)
             #GDoutput.close() #merge output writing into gamedata function
 
-            if self.randomClasses or self.randomEnemies:
+            if self.randomClasses or self.randomEnemies or self.noPrologue:
                 self.randomizeDispos(input_path+"\\dispos", seed, output_path+'\\dispos')
+                
+            if self.noPrologue:
+                self.removePrologue(input_path+"\\script", output_path+"\\script")
 
             self.addMiscGraphics(output_path)
 
@@ -319,7 +342,16 @@ class dataEditor:
 
 
 
-
+    def removePrologue(self, input_path, output_path):
+        print("Removing Prologue...")
+        self.status = "Editing Prologue 1 events..."
+        input = bytearray(open(input_path+'\\bmap201.cmb', 'rb').read())
+        input[0x861],input[0x862],input[0x863] = 0x30,0x30,0x31#"001"
+        
+        result = open(output_path+'\\bmap201.cmb', "wb")
+        result.write(input)
+        result.close()
+        return input
 
     
     def randomizeGameData(self, input_path, seed, output_path):
@@ -375,6 +407,16 @@ class dataEditor:
 
 
             #logData+= "Stats:\nHP/Str/Mag/Skl/Spd/Lck/Def/Res\n"
+            
+            if self.noPrologue and not self.randomBases:
+                baseNames = "HP Str Mag Skl Spd Lck Def Res".split()
+                for i in range(8):
+                    newStat = self.ogDataDict[cName]["Bases"][baseNames[i]]
+                    if newStat < 0: newStat += 256
+                    input[startingPointer + 12 + i] = newStat
+                wpnNames = "Sword Lance Axe Bow Magic Staff".split()
+                for k in range(6):
+                    input[startingPointer + 36 + k] = self.ogDataDict[cName]["Weapon Ranks"][wpnNames[k]]
 
             #print(cName + "bases")
             if self.randomBases:
@@ -535,18 +577,8 @@ class dataEditor:
                     #update weapon rank according to class wrank prioriity
                 
         
-        
-        #Random Enemies
-        #For full random enemies (only choice rn), set Str and Mag to equal values
-        #When we get around to having all enemies of the same character ID use the same
-        #class, we could add more intelligent handling in that case.
-        
-        #We also negate most personal growths; generics have very significant personal growths
-        #depending on their class, and we need to normalize class growths so that enemies
-        #randomizing into or out of some classes don't end up with weird stats.
-        
         #Make Prologue and Chapter 1 enemies weaker
-        if self.randomEnemies:
+        if not self.noPrologue:
             prologueList = list(range(97,110))
             prologueList.extend(list(range(140,177)))
             for enemyIndex in prologueList:
@@ -560,6 +592,18 @@ class dataEditor:
                     if enemyIndex in [97,98,99]: newGrowths[i] -= 10#Jagen/Luke/Rody especially
                 growths = self.encryptCharacterGrowths(enemyIndex,newGrowths)
                 input[startingPointer+28:startingPointer+36] = growths
+        
+        #Random Enemies
+        #For full random enemies (only choice rn), set Str and Mag to equal values
+        #When we get around to having all enemies of the same character ID use the same
+        #class, we could add more intelligent handling in that case.
+        
+        #We also negate most personal growths; generics have very significant personal growths
+        #depending on their class, and we need to normalize class growths so that enemies
+        #randomizing into or out of some classes don't end up with weird stats.
+        
+        
+        if self.randomEnemies:
             for enemyIndex in range(111,337):
                 if 139 < enemyIndex < 177: continue
                 startingPointer = enemyIndex*92 + 32
@@ -665,11 +709,20 @@ class dataEditor:
             self.state = "Randomizing weapons..."
             startingPointer = 41736
             for itemIndex in range(167):
-                iName = self.itemDict[str(itemIndex)]
+                iName = self.itemDict[str(itemIndex+1)]
+                if "Iron" in iName or iName == "Fire": continue#Make this an option
                 itemPointer = startingPointer + 60*itemIndex
                 itemType = int(input[itemPointer+16])
                 if itemType == 5 or itemType > 7: continue
                 self.itemLogDict[iName] = {}
+                uses = int(input[itemPointer+20])
+                if uses != 0:
+                    newMin = max(3,uses-self.itemUsesRange)
+                    newMax = min(60,uses+self.itemUsesRange)
+                    uses = random.randint(newMin,newMax)
+                self.itemLogDict[iName]["Uses"] = uses
+                input[itemPointer+20] = uses
+                
                 newPower = input[itemPointer+21] + random.randint(-self.itemPowerRange,self.itemPowerRange)
                 newPower = max(0,newPower)
                 #print(iName + " " + str(newPower))
@@ -792,7 +845,7 @@ class dataEditor:
             fe12_decompress(mapPath, mapPath+'.decmp')
             input = bytearray(open(mapPath+'.decmp', 'rb').read())
             
-            if self.randomClasses and map in self.disposDict.keys():#Chapters 18 and 23 have no recruitables
+            if (self.randomClasses or self.noPrologue) and map in self.disposDict.keys():#Chapters 18 and 23 have no recruitables
                 mapPlayerData = self.disposDict[map]
                 input = self.updatePlayerClasses(input,mapPlayerData)
                 
@@ -886,6 +939,8 @@ class dataEditor:
                         newItemID = 40
                     if newItemID > 255: print(newItemID)
                     input[unitOffs+inv] = newItemID
+                    if newItemID == 59:#imhullu shouldn't drop
+                        input[unitOffs+inv+2] = input[unitOffs+inv+2] & 0xFE
                         
                         
                 
@@ -899,7 +954,7 @@ class dataEditor:
         return input
         
     def updatePlayerClasses(self,input,mapData):
-    #Updates classes and inventory for all player units in a single map
+    #Updates classes, levels and inventory for all player units in a single map
         groupWepRanks = {
                 "Iron": 0,
                 "Ranged": 30,
@@ -911,7 +966,12 @@ class dataEditor:
 
         #iterate through each character
         for cName in mapData:
-            if cName not in ["Bantu", "Est", "Midia"] or self.logDict[cName]["Class"] != "Chameleon":
+            if "Level" in self.ogDataDict[cName]:
+                newLev = self.ogDataDict[cName]["Level"]
+                for pointer in mapData[cName]:
+                    input[pointer+10] = newLev
+                    input[pointer+11] = newLev
+            if self.randomClasses and (cName not in ["Bantu", "Est", "Midia"] or self.logDict[cName]["Class"] != "Chameleon"):
                 inventoryIterated = False 
                 for pointer in mapData[cName]: #Thanks cecil now I have to iterate through pointers :/
                     #pointer = mapData[cName]
@@ -969,7 +1029,7 @@ class dataEditor:
                                 self.logDict[cName]["Weapon Ranks"]["Sword"] < 30\
                                 and self.logDict[cName]["Weapon Ranks"]["Axe"]<30:
                                     #If not enough weapon rank
-                                    if maxWepRank == 30:
+                                    if maxWepRank < 45:
                                         wGroup = "Steel"
                                     else:
                                         wGroup = "Iron"
@@ -1185,7 +1245,7 @@ class dataEditor:
             logData += "\n\nItem Data:"
             for item in self.itemLogDict:
                 logData+= "\n\n" + item + "\n"
-                stats = "Might Hit Crit".split()
+                stats = "Uses Might Hit Crit".split()
                 for value in self.itemLogDict[item]:
                     logData += stats.pop(0) + " " + str(self.itemLogDict[item][value])
                     logData += " "

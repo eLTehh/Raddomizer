@@ -95,13 +95,13 @@ class Raddomizer(QWidget):
         self.settingsDict["Input"] = self.inOutDirectory[0].text()
         self.settingsDict["Output"] = self.inOutDirectory[1].text()
 
-        for i in "Growths Bases Classes Portraits Items".split():
+        for i in "Growths Bases Classes Portraits Items Enemies".split():
             self.settingsDict[i] = self.generalDict[i].getState()
 
-        for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks".split():
+        for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
             self.settingsDict[j] = self.advancedDict[j].getState()
 
-        for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemCritChance ItemCritRange".split():
+        for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemUsesDelta ItemCritChance ItemCritRange".split():
             self.settingsDict[k] = self.advancedDict[k].getValue()
 
         self.settingsDict["Seed"] = self.advancedDict["Seed"].getSeed()
@@ -118,13 +118,13 @@ class Raddomizer(QWidget):
             self.inOutDirectory[0].setText(self.settingsDict["Input"])
             self.inOutDirectory[1].setText(self.settingsDict["Output"])
 
-            for i in "Growths Bases Classes Portraits Items".split():
+            for i in "Growths Bases Classes Portraits Items Enemies".split():
                 self.generalDict[i].setState(self.settingsDict[i])
 
-            for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks".split():
+            for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
                 self.advancedDict[j].setState(self.settingsDict[j])
 
-            for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemCritChance ItemCritRange".split():
+            for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemUsesDelta ItemCritChance ItemCritRange".split():
                 self.advancedDict[k].setValue(self.settingsDict[k])   
 
             self.advancedDict["Seed"].setSeed(self.settingsDict["Seed"]) 
@@ -164,7 +164,8 @@ class Raddomizer(QWidget):
             "Bases": self.addCheckBox(genWin, "Bases", info, 25, (1,2)),
             "Classes": self.addCheckBox(genWin, "Classes", info, 25, (1,3)), 
             "Portraits": self.addCheckBox(genWin, "Portraits", info, 25, (1,4)),
-            "Items": self.addCheckBox(genWin, "Items", info, 25, (1,5))
+            "Items": self.addCheckBox(genWin, "Items", info, 25, (2,2)),
+            "Enemies": self.addCheckBox(genWin, "Enemies", info, 25, (2,1))
             }
 
 
@@ -190,10 +191,10 @@ class Raddomizer(QWidget):
         importButton.clicked.connect(self.rerollSeed)
         importButton.setMaximumWidth(80)
 
-        advancedWin.grid.addWidget(importButton, 5, 3, 1, 1, Qt.AlignCenter)
+        advancedWin.grid.addWidget(importButton, 5, 4, 1, 1, Qt.AlignCenter)
 
         self.advancedDict = {
-        "GrowthRange": self.addSlider(advancedWin, info, (1,2), (3,1), True),
+        "GrowthRange": self.addSlider(advancedWin, info, (1,2), (4,1), True),
         "AbsBases": self.addCheckBox(advancedWin, "Absolute Bases", info, 15, (1,3)),
         "AbsGrowths": self.addCheckBox(advancedWin, "Absolute Growths", info, 15, (2,3)),
         "ManaketeFlag": self.addCheckBox(advancedWin, "Enable Manaketes", info, 15, (1,4)),
@@ -202,20 +203,27 @@ class Raddomizer(QWidget):
         "FreelanceCount": self.addIntInput(advancedWin, "Max Freelancers", info, -1, None, (2,6)),
         "ItemMtDelta": self.addIntInput(advancedWin, "Mt Variance", info, 0, 15, (1, 7)),
         "ItemHitDelta": self.addIntInput(advancedWin, "Hit Variance", info, 0, 50, (2, 7)),
+        "ItemUsesDelta": self.addIntInput(advancedWin, "Uses Variance", info, 0, 30, (3,7)),
         "WepLocks": self.addCheckBox(advancedWin, "No Weapon Locks", info, -1, (1,5)),
         "GenLocks": self.addCheckBox(advancedWin, "No Gender Locks", info, -1, (2,5)),
+        #Dragon
+        
+        "MixHumanDragon": self.addCheckBox(advancedWin, "Mix Human/Dragon", info, 15, (3,3)),
+        "MixLandFlying": self.addCheckBox(advancedWin, "Mix Land/Flying", info, 15, (3,4)),
+        "SkipPrologue": self.addCheckBox(advancedWin, "Skip Prologue", info, 12, (3,5)),
         "ItemCritRange": self.addSlider(advancedWin, info, (2,8), (2,1), False),
         "ItemCritChance": self.addIntInput(advancedWin, "Crit Chance", info, 0, 100, (1,8)),
-        "Seed": self.addSeedInput(advancedWin, info, (3,3), (1, 2))
+        "Seed": self.addSeedInput(advancedWin, info, (4,3), (1, 2))
         }
         
         self.advancedDict["ItemHitDelta"].setStep(5)
+        self.advancedDict["ItemUsesDelta"].setStep(2)
         self.advancedDict["ItemCritChance"].setStep(5)
 
         randomize = randomizeButton(self.font)
         randomize.clicked.connect(self.initRandomizer)
         #self.grid.addWidget(randomize, 54, 27, 5, 22)
-        advancedWin.grid.addWidget(randomize, 6,3, 1, 1, Qt.AlignCenter)
+        advancedWin.grid.addWidget(randomize, 6,4, 1, 1, Qt.AlignCenter)
 
     def initRandomizer(self):
         #print("Hi")
@@ -232,6 +240,7 @@ class Raddomizer(QWidget):
         self.randomizer.randomClasses = self.generalDict["Classes"].getState()
         self.randomizer.randomCharacters = self.generalDict["Portraits"].getState()
         self.randomizer.randomItems = self.generalDict["Items"].getState()
+        self.randomizer.randomEnemies = self.generalDict["Enemies"].getState()
 
         self.randomizer.enableManaketes = self.advancedDict["ManaketeFlag"].getState()
         self.randomizer.enableBallistas = self.advancedDict["BallistaFlag"].getState()
@@ -241,6 +250,9 @@ class Raddomizer(QWidget):
 
         self.randomizer.removeWepLocks = self.advancedDict["WepLocks"].getState()
         self.randomizer.abolishGender = self.advancedDict["GenLocks"].getState()
+        self.randomizer.mixLandFlying = self.advancedDict["MixLandFlying"].getState()
+        self.randomizer.mixHumanDragon = self.advancedDict["MixHumanDragon"].getState()
+        self.randomizer.noPrologue = self.advancedDict["SkipPrologue"].getState()
 
         self.randomizer.maxDancerCount = self.advancedDict["DancerCount"].getValue()
         self.randomizer.maxFreelanceCount = self.advancedDict["FreelanceCount"].getValue()
@@ -249,6 +261,7 @@ class Raddomizer(QWidget):
         
         self.randomizer.itemPowerRange = self.advancedDict["ItemMtDelta"].getValue()
         self.randomizer.itemHitRange = self.advancedDict["ItemHitDelta"].getValue()
+        self.randomizer.itemUsesRange = self.advancedDict["ItemUsesDelta"].getValue()
         self.randomizer.itemCritChance = self.advancedDict["ItemCritChance"].getValue()
         self.randomizer.itemCritRange = self.advancedDict["ItemCritRange"].getValues()
 
@@ -966,6 +979,7 @@ class intInputLabel(QWidget):
             "Max Freelancers": "Max amount of Freelancers \nto be randomized. -1 means unlimited.",
             "Mt Variance": "Max amount to add or subtract\n from each weapon's Mt.",
             "Hit Variance": "Max amount to add or subtract\n from each weapon's Hit.",
+            "Uses Variance": "Max amount to add or subtract\n from each weapons's durability.",
             "Crit Chance": "Chance for each weapon\n to gain crit if it had none."
         }
          
@@ -1157,12 +1171,16 @@ class randomizerCheckbox(QWidget):
             "Classes":"Randomizes classes of all \nplayable characters (except Kris).",
             "Portraits":"Randomizes identities (e.g. Marth -> Radd) \nof all playable characters (except Kris).",
             "Items": "Randomizes weapon stats \n(Mt, Hit and Crit).",
+            "Enemies": "Randomizes enemy classes\n and inventories.",
             "Absolute Bases": "Ignores whether bases add \nup to the original base stat total.",
             "Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
-            "Enable Manaketes": "Adds non-divine Manaketes \ninto the class pool.",
-            "Enable Ballisticians": "Adds Ballisticians into \nthe class pool.",
-            "No Weapon Locks": "Makes Falchion, Rapier, Hammerne, \nWing Spear and Aum available to all.",
-            "No Gender Locks":"Removes gender lock for weapons.\nUseful if randomizing classes/portraits."
+            "Enable Manaketes": "Adds non-divine Manaketes \ninto the player class pool.",
+            "Enable Ballisticians": "Adds Ballisticians into \nthe player class pool.",
+            "No Weapon Locks": "Makes Falchion, Rapier, Wing Spear, \nHammerne and Aum available to all.",
+            "No Gender Locks":"Removes gender lock for weapons.\nUseful if randomizing classes/portraits.",
+            "Mix Land/Flying":"Allows grounded enemies to become\n fliers and vice versa (where possible).",
+            "Mix Human/Dragon":"Allows enemy Dragons to become\nhuman and vice versa.",
+            "Skip Prologue":"Removes Prologues 2-8.\nPrologue units start at higher levels."
         }
         
     def setState(self, state):
