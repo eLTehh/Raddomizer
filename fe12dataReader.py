@@ -1021,7 +1021,7 @@ class dataEditor:
                                 input[pointer + wPointer] = random.randint(66,69)
 
                             elif self.logDict[cName]["Class"] == "Manakete (F)":
-                                input[pointer + wPointer] = 70
+                                input[pointer + wPointer] = random.choice([70,70,70,70,66,67,68,69])
                                 
                             elif self.logDict[cName]["Class"] == "Ballistician":
                                 input[pointer + wPointer] = random.randint(61, 65)
