@@ -847,7 +847,7 @@ class dataEditor:
             fe12_decompress(mapPath, mapPath+'.decmp')
             input = bytearray(open(mapPath+'.decmp', 'rb').read())
             
-            if self.noPrologue and map == "001":
+            if self.noPrologue and map == "bmap001":
                         input[140+28] = 133#Large Bullion to compensate for no Prologue gold
             
             if (self.randomClasses or self.noPrologue) and map in self.disposDict.keys():#Chapters 18 and 23 have no recruitables
