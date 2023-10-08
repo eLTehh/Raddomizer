@@ -625,7 +625,7 @@ class dataEditor:
                     if 299 < enemyIndex < 322:#Chapter 21+ enemies stronger
                         growths = [0,5,5,5,5,0,0,0]
                     elif enemyIndex in [178,182,183,191,198,204,205,213,214,216]:
-                        growths = [0,-5,-5,-5,-5,0,0,0]#C2-C8 prepromotes weaker
+                        growths = [0,-5,-5,-5,-10,0,0,0]#C2-C8 prepromotes weaker
                     growths = self.encryptCharacterGrowths(enemyIndex,growths)
                     input[startingPointer+28:startingPointer+36] = growths
                 if 110 < enemyIndex < 140 or 246 < enemyIndex < 322:
