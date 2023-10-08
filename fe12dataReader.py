@@ -1,7 +1,7 @@
 #from binascii import hexlify, unhexlify
 import random
 import json
-import comp
+import fe12comp
 from distutils.dir_util import copy_tree
 
 #from this import s 
@@ -26,7 +26,8 @@ class dataEditor:
         self.randomCharacters = True 
         self.randomGrowths = True 
         self.randomBases = True 
-        self.randomClasses = True 
+        self.randomClasses = True
+        self.randomReclass = True
         self.randomItems = True
         self.randomEnemies = True
 
@@ -61,6 +62,7 @@ class dataEditor:
         self.logDict = {}
         self.chapterLogDict = {}
         self.itemLogDict = {}
+        self.reclassLogDict = {}
 
         #self.growthToHexDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphers.json","r"))
         #self.hexToGrowthDict = json.load(open(self.directory + "\\randomizer_info\\fe12cyphersR.json","r"))
@@ -91,6 +93,7 @@ class dataEditor:
             "Random Growths": self.randomGrowths,
             "Random Bases": self.randomBases,
             "Random Classes": self.randomClasses,
+            "Random Reclass Sets": self.randomReclass,
             "Random Portraits": self.randomCharacters,
             "Random Items": self.randomItems,
             "Random Enemies": self.randomEnemies,
@@ -241,7 +244,7 @@ class dataEditor:
         newGrowths = []
         for g in range(8):
             cypherIndex = (growthList[g] - (0x57 * ((charIndex ^ 0x3E) - 3*g) ^ 0xF5)) & 0xFF
-            actual = comp.twosComplement8(comp.cypherTable[cypherIndex])#convert unsigned to signed
+            actual = fe12comp.twosComplement8(fe12comp.cypherTable[cypherIndex])#convert unsigned to signed
             newGrowths.append(actual)
         return newGrowths
         
@@ -249,27 +252,29 @@ class dataEditor:
         newGrowths = []
         for g in range(8):
             cypherIndex = (growthList[g] - (0xB3 * ((classIndex ^ 0x9D) - 7*g) ^ 0xDB)) & 0xFF
-            actual = comp.twosComplement8(comp.cypherTable[cypherIndex])
+            actual = fe12comp.twosComplement8(fe12comp.cypherTable[cypherIndex])
             newGrowths.append(actual)
         return newGrowths
         
     def encryptCharacterGrowths(self,charIndex,growthList):
+        newList = []
         for g in range(8):
             actual = growthList[g]
             if actual < 0: actual = 256 + actual#converting signed to unsigned
-            cypherIndex = comp.cypherTable.index(actual)
+            cypherIndex = fe12comp.cypherTable.index(actual)
             encrypted = (cypherIndex + (0x57 * ((charIndex ^ 0x3E) - 3*g) ^ 0xF5)) & 0xFF
-            growthList[g] = encrypted
-        return growthList
+            newList.append(encrypted)
+        return newList
         
     def encryptClassGrowths(self,classIndex,growthList):
+        newList = []
         for g in range(8):
             actual = growthList[g]
             if actual < 0: actual = 256 + actual
-            cypherIndex = comp.cypherTable.index(actual)
+            cypherIndex = fe12comp.cypherTable.index(actual)
             encrypted = (cypherIndex + (0xB3 * ((classIndex ^ 0x9D) - 7*g) ^ 0xDB)) & 0xFF
-            growthList[g] = encrypted
-        return growthList
+            newList.append(encrypted)
+        return newList
 
 
     def randomize(self, input_path, output_path, seed = None):
@@ -354,6 +359,35 @@ class dataEditor:
         result.write(input)
         result.close()
         return input
+        
+    def randomizeReclassSets(self, seed, input):
+        self.status = "Randomizing reclass sets..."
+        random.seed(seed)
+        #Draco (M), General (F), Falcon Knight have no unpromoted counterparts
+        
+        #each (promoted) reclass set can have up to 8 members
+        population = [1]*8 + [2]*8 + [3]*8
+        promoCount = len(fe12comp.promoPairs)
+        remSets = random.sample(population,promoCount)
+        setNames = ["Set A","Set B","Set C"]
+        
+        self.reclassLogDict["Set A"] = []
+        self.reclassLogDict["Set B"] = []
+        self.reclassLogDict["Set C"] = []
+        
+        #Makes three new reclass sets, keeping promoted/unpromoted variants in equivalent sets
+        #Exception: Falcon Knight can be in a different set than Pegasus Knight. Sounds fun!
+        for c in range(promoCount):
+            promoID = fe12comp.promoPairs[c][0]
+            unproID = fe12comp.promoPairs[c][1]
+            promoStart = promoID*80 + 0x90F8
+            unproStart = unproID*80 + 0x90F8
+            newSet = remSets[c]
+            input[promoStart+52] = newSet + 3
+            self.reclassLogDict[setNames[newSet-1]].append(self.classList[promoID])
+            if unproID != 0:
+                input[unproStart+52] = newSet
+            
 
     
     def randomizeGameData(self, input_path, seed, output_path):
@@ -609,10 +643,10 @@ class dataEditor:
                 if 139 < enemyIndex < 177: continue
                 startingPointer = enemyIndex*92 + 32
                 oldStrBase = int(input[startingPointer + 13])
-                #oldStrBase = comp.twosComplement8(oldStrBase)
+                #oldStrBase = fe12comp.twosComplement8(oldStrBase)
                 
                 oldMagBase = int(input[startingPointer + 14])
-                #oldMagBase = comp.twosComplement8(oldMagBase)
+                #oldMagBase = fe12comp.twosComplement8(oldMagBase)
                 
                 #If we have a negative base str/mag, it's probably for a reason!
                 
@@ -706,6 +740,9 @@ class dataEditor:
                        
                 
 
+        if self.randomReclass:
+            self.randomizeReclassSets(seed, input)
+        
         if self.randomItems:
             self.state = "Randomizing weapons..."
             startingPointer = 41736
@@ -1258,6 +1295,14 @@ class dataEditor:
                 for value in self.itemLogDict[item]:
                     logData += stats.pop(0) + " " + str(self.itemLogDict[item][value])
                     logData += " "
+                    
+        if self.randomReclass:
+            logData += "\n\nReclass Sets:"
+            for classSet in self.reclassLogDict:
+                logData += "\n"+classSet + ":\n"
+                for job in self.reclassLogDict[classSet]:
+                    logData += job + ", "
+                logData = logData.rstrip(", ")
 
         if self.randomClasses:
             logData += "\n\nClass Slots:"

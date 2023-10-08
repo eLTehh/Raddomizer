@@ -95,7 +95,7 @@ class Raddomizer(QWidget):
         self.settingsDict["Input"] = self.inOutDirectory[0].text()
         self.settingsDict["Output"] = self.inOutDirectory[1].text()
 
-        for i in "Growths Bases Classes Portraits Items Enemies".split():
+        for i in "Growths Bases Classes Reclassing Portraits Items Enemies".split():
             self.settingsDict[i] = self.generalDict[i].getState()
 
         for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
@@ -118,7 +118,7 @@ class Raddomizer(QWidget):
             self.inOutDirectory[0].setText(self.settingsDict["Input"])
             self.inOutDirectory[1].setText(self.settingsDict["Output"])
 
-            for i in "Growths Bases Classes Portraits Items Enemies".split():
+            for i in "Growths Bases Classes Reclassing Portraits Items Enemies".split():
                 self.generalDict[i].setState(self.settingsDict[i])
 
             for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
@@ -162,10 +162,11 @@ class Raddomizer(QWidget):
         self.generalDict = {
             "Growths": self.addCheckBox(genWin, "Growths", info, 25, (1,1)),
             "Bases": self.addCheckBox(genWin, "Bases", info, 25, (1,2)),
-            "Classes": self.addCheckBox(genWin, "Classes", info, 25, (1,3)), 
+            "Classes": self.addCheckBox(genWin, "Classes", info, 25, (1,3)),
             "Portraits": self.addCheckBox(genWin, "Portraits", info, 25, (1,4)),
+            "Enemies": self.addCheckBox(genWin, "Enemies", info, 25, (2,1)),
             "Items": self.addCheckBox(genWin, "Items", info, 25, (2,2)),
-            "Enemies": self.addCheckBox(genWin, "Enemies", info, 25, (2,1))
+            "Reclassing": self.addCheckBox(genWin, "Reclassing", info, 25, (2,3))
             }
 
 
@@ -238,6 +239,7 @@ class Raddomizer(QWidget):
         self.randomizer.randomGrowths = self.generalDict["Growths"].getState()
         self.randomizer.randomBases = self.generalDict["Bases"].getState()
         self.randomizer.randomClasses = self.generalDict["Classes"].getState()
+        self.randomizer.randomReclass = self.generalDict["Reclassing"].getState()
         self.randomizer.randomCharacters = self.generalDict["Portraits"].getState()
         self.randomizer.randomItems = self.generalDict["Items"].getState()
         self.randomizer.randomEnemies = self.generalDict["Enemies"].getState()
@@ -975,9 +977,9 @@ class intInputLabel(QWidget):
         self.grid.addWidget(self.inputField, 0, 2, 1, 1, Qt.AlignCenter)
 
         self.dialogueDict = {
-            "Max Dancers": "Max amount of Dancers to \nbe randomized. -1 means unlimited.",
-            "Max Freelancers": "Max amount of Freelancers \nto be randomized. -1 means unlimited.",
-            "Mt Variance": "Max amount to add or subtract\n from each weapon's Mt.",
+            "Max Dancers": "Max amount of player Dancers to \nbe randomized. -1 means unlimited.",
+            "Max Freelancers": "Max amount of player Freelancers \nto be randomized. -1 means unlimited.",
+            "Mt Variance": "Max amount to add or subtract\n from each weapon's Might.",
             "Hit Variance": "Max amount to add or subtract\n from each weapon's Hit.",
             "Uses Variance": "Max amount to add or subtract\n from each weapons's durability.",
             "Crit Chance": "Chance for each weapon\n to gain crit if it had none."
@@ -1169,8 +1171,9 @@ class randomizerCheckbox(QWidget):
             "Growths":"Randomizes growth rates of \nall playable characters.",
             "Bases": "Randomizes bases of all \nplayable characters.",
             "Classes":"Randomizes classes of all \nplayable characters (except Kris).",
+            "Reclassing": "Shuffles class lines between\nthe three reclass sets.",
             "Portraits":"Randomizes identities (e.g. Marth -> Radd) \nof all playable characters (except Kris).",
-            "Items": "Randomizes weapon stats \n(Mt, Hit and Crit).",
+            "Items": "Randomizes weapon stats \n(Uses, Might, Hit and Crit).",
             "Enemies": "Randomizes enemy classes\n and inventories.",
             "Absolute Bases": "Ignores whether bases add \nup to the original base stat total.",
             "Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
