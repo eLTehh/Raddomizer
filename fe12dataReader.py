@@ -637,7 +637,7 @@ class dataEditor:
         #depending on their class, and we need to normalize class growths so that enemies
         #randomizing into or out of some classes don't end up with weird stats.
 
-        #Finally, we allow Aura to be forged by enemies on Lunatic mode.
+        #Finally, we allow Aura and Thunderbolt to be forged by enemies on Lunatic mode.
         
         
         if self.randomEnemies:
@@ -675,6 +675,8 @@ class dataEditor:
 
             auraPointer = 41736 + (56*60) + 58
             input[auraPointer] = 0x7E
+            thunderboltPointer = 41736 + (63*60) + 58
+            input[thunderboltPointer] = 0x7D
         
         
         #Class Slots
