@@ -325,6 +325,8 @@ class dataEditor:
             #GDoutput.close() #merge output writing into gamedata function
 
             if self.randomClasses or self.randomEnemies or self.noPrologue:
+                if self.abolishGender:
+                    self.rankToItem["B"]["Magic"].append(57)
                 self.randomizeDispos(input_path+"\\dispos", seed, output_path+'\\dispos')
                 
             if self.noPrologue:
