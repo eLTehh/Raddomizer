@@ -1,0 +1,57 @@
+Lord
+Pegasus Knight
+Pegasus Knight (F)
+Falcon Knight
+Dracoknight
+Dracoknight (F)
+Cavalier
+Cavalier (F)
+Paladin
+Paladin (F)
+Knight
+Knight (F)
+General
+General (F)
+Archer
+Archer (F)
+Sniper
+Sniper (F)
+Mercenary
+Hero
+Myrmidon
+Myrmidon (F)
+Swordmaster
+Swordmaster (F)
+Fighter
+Warrior
+Hunter
+Horseman
+Barbarian
+Pirate
+Berserker
+Dark Mage
+Sorcerer
+Mage
+Mage (F)
+Priest
+Cleric
+Sage
+Sage (F)
+Bishop
+Bishop (F)
+Thief
+Manakete
+Manakete (F)
+Ballistician
+Chameleon
+Dancer
+Soldier
+Emperor
+Mage Dragon
+Earth Dragon
+Fire Dragon
+Ice Dragon
+Wyvern
+Divine Dragon
+Shadow Dragon
+Dummy

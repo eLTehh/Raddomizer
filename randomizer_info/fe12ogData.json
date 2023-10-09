@@ -40,7 +40,8 @@
       "Staff": 0
     },
     "Script ID": "MARS",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Avatar": {
     "FID": [
@@ -83,7 +84,8 @@
       "Staff": 0
     },
     "Script ID": "PLAYER",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Luke": {
     "FID": [
@@ -126,7 +128,8 @@
       "Staff": 0
     },
     "Script ID": "ROOK",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Rody": {
     "FID": [
@@ -169,7 +172,8 @@
       "Staff": 0
     },
     "Script ID": "RODY",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Cecil": {
     "FID": [
@@ -212,7 +216,8 @@
       "Staff": 0
     },
     "Script ID": "CECIL",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 2
   },
   "Gordin": {
     "FID": [
@@ -255,7 +260,8 @@
       "Staff": 0
     },
     "Script ID": "GOHDON",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Ryan": {
     "FID": [
@@ -298,7 +304,8 @@
       "Staff": 0
     },
     "Script ID": "LIAN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Draug": {
     "FID": [
@@ -341,7 +348,8 @@
       "Staff": 0
     },
     "Script ID": "DOHGA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Arran": {
     "FID": [
@@ -384,7 +392,8 @@
       "Staff": 0
     },
     "Script ID": "ARAN",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 7
   },
   "Malliesia": {
     "FID": [
@@ -427,7 +436,8 @@
       "Staff": 75
     },
     "Script ID": "MARICIA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Catria": {
     "FID": [
@@ -470,7 +480,8 @@
       "Staff": 0
     },
     "Script ID": "KATUA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Warren": {
     "FID": [
@@ -513,7 +524,8 @@
       "Staff": 0
     },
     "Script ID": "WOLLEN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 7
   },
   "Cord": {
     "FID": [
@@ -556,7 +568,8 @@
       "Staff": 0
     },
     "Script ID": "MAJI",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Linde": {
     "FID": [
@@ -599,7 +612,8 @@
       "Staff": 0
     },
     "Script ID": "RINDA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Palla": {
     "FID": [
@@ -642,7 +656,8 @@
       "Staff": 0
     },
     "Script ID": "PAORA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Bord": {
     "FID": [
@@ -685,7 +700,8 @@
       "Staff": 0
     },
     "Script ID": "SAJI",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Julian": {
     "FID": [
@@ -728,7 +744,8 @@
       "Staff": 0
     },
     "Script ID": "JURIAN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Matthis": {
     "FID": [
@@ -771,7 +788,8 @@
       "Staff": 0
     },
     "Script ID": "MATIS",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Wrys": {
     "FID": [
@@ -814,7 +832,8 @@
       "Staff": 0
     },
     "Script ID": "RIFF",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 10
   },
   "Ogma": {
     "FID": [
@@ -857,7 +876,8 @@
       "Staff": 0
     },
     "Script ID": "OGUMA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 7
   },
   "Yumina": {
     "FID": [
@@ -900,7 +920,8 @@
       "Staff": 75
     },
     "Script ID": "YUMINA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 7
   },
   "Yubello": {
     "FID": [
@@ -943,7 +964,8 @@
       "Staff": 0
     },
     "Script ID": "YUBELLO",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 7
   },
   "Sirius": {
     "FID": [
@@ -986,7 +1008,8 @@
       "Staff": 0
     },
     "Script ID": "SIRIUS",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 7
   },
   "Castor": {
     "FID": [
@@ -1029,7 +1052,8 @@
       "Staff": 0
     },
     "Script ID": "KASHIM",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Caeda": {
     "FID": [
@@ -1072,7 +1096,8 @@
       "Staff": 0
     },
     "Script ID": "SHEEDA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Barst": {
     "FID": [
@@ -1115,7 +1140,8 @@
       "Staff": 0
     },
     "Script ID": "BARTS",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Rickard": {
     "FID": [
@@ -1158,7 +1184,8 @@
       "Staff": 0
     },
     "Script ID": "RICARD",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Frey": {
     "FID": [
@@ -1201,7 +1228,8 @@
       "Staff": 0
     },
     "Script ID": "FREY",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 0
   },
   "Norne": {
     "FID": [
@@ -1244,7 +1272,8 @@
       "Staff": 0
     },
     "Script ID": "NORN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Samto": {
     "FID": [
@@ -1287,7 +1316,8 @@
       "Staff": 0
     },
     "Script ID": "SAMTO",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Wendell": {
     "FID": [
@@ -1330,7 +1360,8 @@
       "Staff": 30
     },
     "Script ID": "WENDEL",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 10
   },
   "Caesar": {
     "FID": [
@@ -1373,7 +1404,8 @@
       "Staff": 0
     },
     "Script ID": "SEAZER",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 7
   },
   "Radd": {
     "FID": [
@@ -1416,7 +1448,8 @@
       "Staff": 0
     },
     "Script ID": "RADEI",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Navarre": {
     "FID": [
@@ -1459,7 +1492,8 @@
       "Staff": 0
     },
     "Script ID": "NABARL",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Feena": {
     "FID": [
@@ -1502,7 +1536,8 @@
       "Staff": 0
     },
     "Script ID": "FINA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 2
   },
   "Cain": {
     "FID": [
@@ -1545,7 +1580,8 @@
       "Staff": 0
     },
     "Script ID": "KAIN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Bantu": {
     "FID": [
@@ -1588,7 +1624,8 @@
       "Staff": 0
     },
     "Script ID": "BANUTU",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 10
   },
   "Roger": {
     "FID": [
@@ -1631,7 +1668,8 @@
       "Staff": 0
     },
     "Script ID": "ROJAR",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 5
   },
   "Jeorge": {
     "FID": [
@@ -1674,7 +1712,8 @@
       "Staff": 0
     },
     "Script ID": "JORJUE",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 7
   },
   "Minerva": {
     "FID": [
@@ -1717,7 +1756,8 @@
       "Staff": 0
     },
     "Script ID": "MINERBA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 4
   },
   "Etzel": {
     "FID": [
@@ -1760,7 +1800,8 @@
       "Staff": 30
     },
     "Script ID": "ETZEL",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 4
   },
   "Merric": {
     "FID": [
@@ -1803,7 +1844,8 @@
       "Staff": 0
     },
     "Script ID": "MARICH",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Elrean": {
     "FID": [
@@ -1846,7 +1888,8 @@
       "Staff": 0
     },
     "Script ID": "ELREAN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 7
   },
   "Dice": {
     "FID": [
@@ -1889,7 +1932,8 @@
       "Staff": 0
     },
     "Script ID": "DICE",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Malice": {
     "FID": [
@@ -1932,7 +1976,8 @@
       "Staff": 0
     },
     "Script ID": "MARIS",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 5
   },
   "Horace": {
     "FID": [
@@ -1975,7 +2020,8 @@
       "Staff": 0
     },
     "Script ID": "HORUS",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 0
   },
   "Jake": {
     "FID": [
@@ -2018,7 +2064,8 @@
       "Staff": 0
     },
     "Script ID": "JEIK",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 6
   },
   "Daross": {
     "FID": [
@@ -2061,7 +2108,8 @@
       "Staff": 0
     },
     "Script ID": "DAROSS",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 10
   },
   "Robert": {
     "FID": [
@@ -2104,7 +2152,8 @@
       "Staff": 0
     },
     "Script ID": "ROBERTO",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 7
   },
   "Belf": {
     "FID": [
@@ -2147,7 +2196,8 @@
       "Staff": 0
     },
     "Script ID": "BELF",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Leiden": {
     "FID": [
@@ -2190,7 +2240,8 @@
       "Staff": 0
     },
     "Script ID": "LEIDEN",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Beck": {
     "FID": [
@@ -2233,7 +2284,8 @@
       "Staff": 0
     },
     "Script ID": "BECK",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 6
   },
   "Athena": {
     "FID": [
@@ -2276,7 +2328,8 @@
       "Staff": 0
     },
     "Script ID": "ATHENA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 6
   },
   "Xane": {
     "FID": [
@@ -2319,7 +2372,8 @@
       "Staff": 0
     },
     "Script ID": "CHEINE",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 4
   },
   "Tiki": {
     "FID": [
@@ -2362,7 +2416,8 @@
       "Staff": 0
     },
     "Script ID": "TIKI",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Est": {
     "FID": [
@@ -2405,7 +2460,8 @@
       "Staff": 0
     },
     "Script ID": "EST",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 2
   },
   "Dolph": {
     "FID": [
@@ -2448,7 +2504,8 @@
       "Staff": 0
     },
     "Script ID": "TOMTH",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 10
   },
   "Abel": {
     "FID": [
@@ -2491,7 +2548,8 @@
       "Staff": 0
     },
     "Script ID": "ABEL",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 1
   },
   "Macellan": {
     "FID": [
@@ -2534,7 +2592,8 @@
       "Staff": 0
     },
     "Script ID": "MISHRAN",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 10
   },
   "Astram": {
     "FID": [
@@ -2577,7 +2636,8 @@
       "Staff": 0
     },
     "Script ID": "ASTRIA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 7
   },
   "Katarina": {
     "FID": [
@@ -2620,7 +2680,8 @@
       "Staff": 75
     },
     "Script ID": "KATARINA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 5
   },
   "Tomas": {
     "FID": [
@@ -2663,7 +2724,8 @@
       "Staff": 0
     },
     "Script ID": "THORMAS",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 1
   },
   "Sheena": {
     "FID": [
@@ -2706,7 +2768,8 @@
       "Staff": 0
     },
     "Script ID": "SIMA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 6
   },
   "Samson": {
     "FID": [
@@ -2749,7 +2812,8 @@
       "Staff": 0
     },
     "Script ID": "SAMSON",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 0
   },
   "Frost": {
     "FID": [
@@ -2792,7 +2856,8 @@
       "Staff": 45
     },
     "Script ID": "FROST",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 3
   },
   "Roshea": {
     "FID": [
@@ -2835,7 +2900,8 @@
       "Staff": 0
     },
     "Script ID": "ROSHE",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 5
   },
   "Vyland": {
     "FID": [
@@ -2878,7 +2944,8 @@
       "Staff": 0
     },
     "Script ID": "BIRAKU",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 4
   },
   "Sedgar": {
     "FID": [
@@ -2921,7 +2988,8 @@
       "Staff": 0
     },
     "Script ID": "ZAGARO",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 1
   },
   "Wolf": {
     "FID": [
@@ -2964,7 +3032,8 @@
       "Staff": 0
     },
     "Script ID": "WOLF",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 5
   },
   "Midia": {
     "FID": [
@@ -3007,7 +3076,8 @@
       "Staff": 0
     },
     "Script ID": "MIDIA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 0
   },
   "Ymir": {
     "FID": [
@@ -3050,7 +3120,8 @@
       "Staff": 0
     },
     "Script ID": "HYMIR",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 6
   },
   "Michalis": {
     "FID": [
@@ -3093,7 +3164,8 @@
       "Staff": 0
     },
     "Script ID": "MISHEIL",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 4
   },
   "Nagi": {
     "FID": [
@@ -3136,7 +3208,8 @@
       "Staff": 0
     },
     "Script ID": "NAGA",
-    "Tier": "U"
+    "Tier": "U",
+	"Hair": 1
   },
   "Lena": {
     "FID": [
@@ -3179,7 +3252,8 @@
       "Staff": 105
     },
     "Script ID": "RENA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 4
   },
   "Maria": {
     "FID": [
@@ -3222,7 +3296,8 @@
       "Staff": 45
     },
     "Script ID": "MARIA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 4
   },
   "Nyna": {
     "FID": [
@@ -3265,7 +3340,8 @@
       "Staff": 165
     },
     "Script ID": "NIENA",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 7
   },
   "Elice": {
     "FID": [
@@ -3308,7 +3384,8 @@
       "Staff": 165
     },
     "Script ID": "ERICE",
-    "Tier": "P"
+    "Tier": "P",
+	"Hair": 0
   },
   "-": {
     "FID": [

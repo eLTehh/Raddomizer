@@ -16,7 +16,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 0,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Pegasus Knight": {
     "Pointer": [
@@ -37,7 +37,7 @@
     "Dispos Pointer": 1,
     "Tier": "U"
   },
-  "Pegasus Knight F": {
+  "Pegasus Knight (F)": {
     "Pointer": [
       44,
       12,
@@ -208,7 +208,7 @@
     "Dispos Pointer": 10,
     "Tier": "U"
   },
-  "Knight F": {
+  "Knight (F)": {
     "Pointer": [
       91,
       10,
@@ -246,7 +246,7 @@
     "Dispos Pointer": 12,
     "Tier": "P"
   },
-  "General F": {
+  "General (F)": {
     "Pointer": [
       90,
       11,
@@ -512,7 +512,7 @@
     "Dispos Pointer": 26,
     "Tier": "U"
   },
-  "Horsemen": {
+  "Horseman": {
     "Pointer": [
       133,
       11,
@@ -548,7 +548,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 28,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Pirate": {
     "Pointer": [
@@ -795,7 +795,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 41,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Manakete": {
     "Pointer": [
@@ -814,7 +814,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 42,
-    "Tier": "U"
+    "Tier": "P"
   },
   "Manakete (F)": {
     "Pointer": [
@@ -852,7 +852,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 44,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Chameleon": {
     "Pointer": [
@@ -871,7 +871,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 45,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Dancer": {
     "Pointer": [
@@ -890,7 +890,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 46,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Soldier": {
     "Pointer": [
@@ -909,7 +909,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 47,
-    "Tier": "-"
+    "Tier": "U"
   },
   "Emperor": {
     "Pointer": [
@@ -930,7 +930,7 @@
     "Dispos Pointer": 48,
     "Tier": "-"
   },
-  "Magic Dragon": {
+  "Mage Dragon": {
     "Pointer": [
       200,
       11,
@@ -947,7 +947,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 49,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Earth Dragon": {
     "Pointer": [
@@ -985,7 +985,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 51,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Ice Dragon": {
     "Pointer": [
@@ -1004,7 +1004,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 52,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Wyvern": {
     "Pointer": [
@@ -1023,7 +1023,7 @@
       "Staff": 0
     },
     "Dispos Pointer": 53,
-    "Tier": "-"
+    "Tier": "P"
   },
   "Divine Dragon": {
     "Pointer": [
@@ -1044,7 +1044,7 @@
     "Dispos Pointer": 54,
     "Tier": "-"
   },
-  "Dark Dragon": {
+  "Shadow Dragon": {
     "Pointer": [
       186,
       10,

@@ -1,0 +1,280 @@
+{
+  "bmap103": {
+	  "Start": 116,
+	  "Count": 20,
+	  "Keeper": [
+	  12,13
+	  ]
+  },
+	
+  "bmap106": {
+	  "Start": 80,
+	  "Count": 20
+  },
+  
+  "bmap110": {
+	  "Start": 248,
+	  "Count": 29
+  },
+  
+  "bmap113": {
+	  "Start": 80,
+	  "Count": 22,
+	  "Sieger": [
+	  8,9,10,11
+	  ]
+  },
+  
+  "bmap116": {
+	  "Start": 80,
+	  "Count": 18
+  },
+  
+  "bmap120": {
+	  "Start": 68,
+	  "Count": 29
+  },
+  
+  "bmap001": {
+	  "Start": 140,
+	  "Count": 36
+  },
+  
+  "bmap002": {
+	  "Start": 104,
+	  "Count": 35
+  },
+  
+  "bmap003": {
+	  "Start": 188,
+	  "Count": 50,
+	  "Sieger": [
+	  10
+	  ],
+	  "Keeper": [
+	  39
+	  ],
+	  "FliersOnly": [
+	  11,12,13,14,15,16,17,18,47,48
+	  ],
+	  "WaterOnly": [
+	  27,28,29,30,31,32,33,34,35,36,37,38
+	  ]
+  },
+  
+  "bmap004": {
+	  "Start": 128,
+	  "Count": 49
+  },
+  
+  "bmap005": {
+	  "Start": 80,
+	  "Count": 61,
+	  "Sieger": [
+	  11,12,13,14
+	  ],
+	  "Keeper": [
+	  30
+	  ],
+	  "FliersOnly": [
+	  47,48,49,50,51,52
+	  ]
+  },
+  
+  "bmap006": {
+	  "Start": 152,
+	  "Count": 60,
+	  "Sieger": [
+	  38
+	  ],
+	  "Keeper": [
+	  22,24,39,40
+	  ]
+  },
+  
+  "bmap007": {
+	  "Start": 116,
+	  "Count": 45,
+	  "Keeper": [
+	  14
+	  ]
+  },
+  
+  "bmap008": {
+	  "Start": 176,
+	  "Count": 55,
+	  "Keeper": [
+	  11
+	  ]
+  },
+  
+  "bmap009": {
+	  "Start": 116,
+	  "Count": 55,
+	  "Sieger": [
+	  13,14
+	  ],
+	  "Keeper": [
+	  38
+	  ],
+	  "NeedsKey": [
+	  39
+	  ]
+  },
+  
+  "bmap010": {
+	  "Start": 92,
+	  "Count": 49,
+	  "Sieger": [
+	  30,31
+	  ],
+	  "Keeper": [
+	  40,41,42,43,44,45
+	  ]
+  },
+  
+  "bmap011": {
+	  "Start": 68,
+	  "Count": 51
+  },
+  
+  "bmap012": {
+	  "Start": 152,
+	  "Count": 56,
+	  "FliersOnly": [
+	  18,19,20,32,33,38
+	  ]
+  },
+  
+  "bmap013": {
+	  "Start": 128,
+	  "Count": 44,
+	  "NeedsKey": [
+	  28,33
+	  ],
+	  "FliersOnly": [
+	  34,35,36,37,42,43
+	  ]
+  },
+  
+  "bmap014": {
+	  "Start": 116,
+	  "Count": 66
+  },
+  
+  "bmap015": {
+	  "Start": 140,
+	  "Count": 76,
+	  "Sieger": [
+	  25,26
+	  ],
+	  "Keeper": [
+	  21,23,43,60,62
+	  ]
+  },
+  
+  "bmap016": {
+	  "Start": 164,
+	  "Count": 59,
+	  "Sieger": [
+	  11,12,13
+	  ],
+	  "Keeper": [
+	  42,43
+	  ],
+	  "NeedsKey": [
+	  38,39,40,41
+	  ]
+  },
+  
+  "bmap017": {
+	  "Start": 140,
+	  "Count": 60,
+	  "WaterOnly": [
+	  39,40,41,42,43,44,49,50,51,52,53,54,55,56
+	  ]
+  },
+
+  "bmap018": {
+	  "Start": 104,
+	  "Count": 58,
+	  "Sieger": [
+	  42,43
+	  ],
+	  "Keeper": [
+	  44,45,46
+	  ],
+	  "FliersOnly": [
+	  47,48,49,50
+	  ]
+  },
+  
+  "bmap019": {
+	  "Start": 212,
+	  "Count": 95,
+	  "Sieger": [
+	  16,17,18,19,41
+	  ],
+	  "Keeper": [
+	  20,21
+	  ],
+	  "FliersOnly": [
+	  73,74,75,76
+	  ]
+  },
+  
+  "bmap020": {
+	  "Start": 152,
+	  "Count": 76,
+	  "Sieger": [
+	  27,39,48,59
+	  ],
+	  "Keeper": [
+	  12,25,49,57
+	  ]
+  },
+  
+  "bmap021": {
+	  "Start": 116,
+	  "Count": 45,
+	  "Sieger": [
+	  19,25,26,29
+	  ],
+	  "Keeper": [
+	  38,39,40
+	  ],
+	  "FliersOnly": [
+	  33,34,35,36,37
+	  ]
+  },
+  
+  "bmap022": {
+	  "Start": 164,
+	  "Count": 73,
+	  "Sieger": [
+	  23,24,37,50
+	  ],
+	  "Keeper": [
+	  46,48
+	  ]
+  },
+  
+  "bmap023": {
+	  "Start": 116,
+	  "Count": 67,
+	  "Sieger": [
+	  19,20,31,32,49,51
+	  ],
+	  "Keeper": [
+	  54,55,57,58
+	  ]
+  },
+  
+  "bmap024": {
+	  "Start": 428,
+	  "Count": 64,
+	  "Keeper": [
+	  12
+	  ]
+  }
+}
