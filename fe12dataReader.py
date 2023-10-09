@@ -325,8 +325,6 @@ class dataEditor:
             #GDoutput.close() #merge output writing into gamedata function
 
             if self.randomClasses or self.randomEnemies or self.noPrologue:
-                if self.abolishGender:
-                    self.rankToItem["B"]["Magic"].append(57)
                 self.randomizeDispos(input_path+"\\dispos", seed, output_path+'\\dispos')
                 
             if self.noPrologue:
@@ -977,9 +975,12 @@ class dataEditor:
                     #Determine weapon types from class's weapon ranks
                     #print(newClass + " " + str(classRanks) + " " + itemName)
                     newItemType = random.choice(classRanks)
+                    newItemPool = self.rankToItem[itemRank][newItemType].copy()
+                    womenOnlyWeps = [16,57,70]#Lady Sword, Aura, Divinestone
+                    if not self.abolishGender and "(F)" not in newClass:
+                        for g in womenOnlyWeps:
+                            if g in newItemPool: newItemPool.remove(g)
                     newItemID = random.choice(self.rankToItem[itemRank][newItemType])
-                    if newItemID == 70 and newClass != "Manakete (F)" and not self.abolishGender:
-                        newItemID = random.choice([66,67,68,69])
                     #Longbow check
                     if newItemID == 43 and newClass not in ["Archer", "Sniper", "Archer (F)", "Sniper (F)"]:
                         newItemID = 40
