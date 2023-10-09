@@ -674,7 +674,7 @@ class dataEditor:
                 input[startingPointer+24:startingPointer+32] = adjustedGrowths
 
             auraPointer = 41736 + (56*60) + 58
-            input[auraPointer] = 0x7D
+            input[auraPointer] = 0x7E
         
         
         #Class Slots
