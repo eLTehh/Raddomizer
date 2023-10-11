@@ -37,8 +37,8 @@ class dataEditor:
         self.enableManaketes = True 
         self.enableBallistas = True 
 
-        self.absoluteBases = False 
-        self.absoluteGrowths = False
+        self.basesDelta = 5 
+        self.growthsDelta = 30
         
         self.mixLandFlying = False
         self.mixHumanDragon = True
@@ -60,6 +60,7 @@ class dataEditor:
         self.currentFreelanceCount = 0
 
         self.logDict = {}
+        self.enemyLogDict = {}
         self.chapterLogDict = {}
         self.itemLogDict = {}
         self.reclassLogDict = {}
@@ -103,8 +104,8 @@ class dataEditor:
             "Enable Manaketes": self.enableManaketes,
             "Enable Ballisticians": self.enableBallistas,
 
-            "Absolute Bases": self.absoluteBases,
-            "Absolute Growths": self.absoluteGrowths,
+            "Bases Delta": self.basesDelta,
+            "Growths Delta": self.growthsDelta,
 
             "Max Dancer Count": self.maxDancerCount,
             "Max Freelancer Count": self.maxFreelanceCount,
@@ -166,7 +167,7 @@ class dataEditor:
 
                         if self.logDict[cName]["Class"] == "Dancer" and self.maxDancerCount!= -1:
                             if self.currentDancerCount == self.maxDancerCount:
-                                continue 
+                                continue
                             else:
                                 self.currentDancerCount+=1
                                 break
@@ -178,8 +179,6 @@ class dataEditor:
                                 self.currentFreelanceCount+=1
                                 break
                         break
-
-        
 
     def getNewEnemyClass(self,oldClassID,unitFlag="Normal"):
         
@@ -311,7 +310,6 @@ class dataEditor:
                 self.disposDict.update(self.proSkipDisposDict)
                 
              
-            #Do things if we have skip prologue but no randomization of player units
 
             self.randomClassHelper(seed)
 
@@ -458,33 +456,49 @@ class dataEditor:
             if self.randomBases:
                 #roll random base stats
                 basesTotal = self.ogDataDict[cName]["Bases"]["Total"]
-                newBases = []
+                if self.basesDelta > 0:
+                    basesTotal += random.randint(-self.basesDelta,self.basesDelta)
+                
                 basesRange = self.ogDataDict[cName]["Bases"]["Range"]
-
-                while True:
-                    newBases = []
-                    for i in range(8):
-                        base = random.randrange(basesRange[0], basesRange[1])
-                        if base < 0: #signed integer moment
-                            base+= 256
-                        newBases.append(base)
-                    if sum(newBases) == basesTotal and not self.absoluteBases:
-                        break
-                    if self.absoluteBases:
-                        break 
                 
                 #if tiki or bantu not manakete, add in their dragonstone bonuses
                 dstoneBonuses = {
                     "Tiki": [0, 10, 0, 7, 4, 0, 15, 11],
                     "Bantu": [0, 8, 0, 4, 4, 0, 9, 4]
                 }
-
+                
                 if self.randomClasses \
                     and (cName == "Tiki" or cName == "Bantu")  \
                     and (self.logDict[cName]["Class"] != "Manakete" or\
                         self.logDict[cName]["Class"]!= "Manakete (F)"):
-                    for i in range(8):
-                        newBases[i] += dstoneBonuses[cName][i]
+                    basesTotal += sum(dstoneBonuses[cName])
+                    
+                newBases = [0]*8
+                newBases[5] = random.randint(1,4) + random.randint(1,4) - 2
+                
+                basesTotal -= newBases[5]
+                
+                if basesTotal <= 0:
+                    basesTotal = 1
+                
+                basesChances = [0]*3 + [1,2,3,4,5,6,7]*2#HP slightly more likely
+                #discourage STR for magic classes and vice versa
+                if self.randomClasses and cName != "Avatar":
+                    clName = self.logDict[cName]["Class"]
+                    if self.classDict[clName]["Weapon Ranks"]["Magic"] > 0 \
+                        or self.classDict[clName]["Weapon Ranks"]["Staff"] > 0:
+                        basesChances.remove(1)
+                    else:
+                        basesChances.remove(2)
+                
+                while sum(newBases) < basesTotal + 6:
+                    add = basesChances[random.randrange(len(basesChances))]
+                    newBases[add] += 1
+                for h in range(6):#to allow some characters to have negative bases
+                    sub = random.randrange(8)
+                    newBases[sub] -= 1
+
+
 
 
                 self.logDict[cName]["Bases"] = newBases
@@ -493,7 +507,10 @@ class dataEditor:
 
                 #write random base stats
                 for i in range(8):
-                    input[startingPointer + 12 + i] = newBases[i]
+                    newStat = newBases[i]
+                    if newStat < 0: #convert to unsigned byte
+                        newStat += 256
+                    input[startingPointer + 12 + i] = newStat
 
             #print(cName + "growths")                
             if self.randomGrowths:
@@ -507,7 +524,7 @@ class dataEditor:
 
 
 
-                if not self.absoluteGrowths:
+                if self.growthsDelta < 30:
                     if cName == "Bantu":
                         growthsRange[0] = -20
                     if cName == "Arran" and growthsRange[1] > 10:
@@ -530,19 +547,20 @@ class dataEditor:
                     #print(newGrowths)
                     for i in range(8):
 
-                        growth = random.randrange(growthsRange[0], growthsRange[1], 5)
-                        if growth > 80:
-                            growth = growth - growth%10
+                        growth = random.randrange(growthsRange[0], growthsRange[1]+1, 5)
                         newGrowths.append(growth)
-                    if growthsTotal < maxGrowthsTotal:
+                    if growthsTotal + self.growthsDelta < maxGrowthsTotal:
                         count +=1 
                     
                     if count == 10000:
                         break
-                    if (sum(newGrowths) == min(maxGrowthsTotal, growthsTotal)) and not self.absoluteGrowths:
+                    if growthsTotal - self.growthsDelta <= sum(newGrowths) <= growthsTotal + self.growthsDelta:
                         break
-                    if self.absoluteGrowths or growthsRange[1] < 0:
+                    if growthsRange[1] < 0:
                         break 
+                if count > 100:
+                    print(count)
+                    print(cName)
                 
                 #logData+= "Growths: " + '/'.join([str(i) for i in newGrowths]) +'\n'
                 self.logDict[cName]["Growths"] = newGrowths

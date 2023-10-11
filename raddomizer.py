@@ -98,10 +98,10 @@ class Raddomizer(QWidget):
         for i in "Growths Bases Classes Reclassing Portraits Items Enemies".split():
             self.settingsDict[i] = self.generalDict[i].getState()
 
-        for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
+        for j in "ManaketeFlag BallistaFlag WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
             self.settingsDict[j] = self.advancedDict[j].getState()
 
-        for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemUsesDelta ItemCritChance ItemCritRange".split():
+        for k in "DancerCount FreelanceCount GrowthRange BasesDelta GrowthsDelta ItemMtDelta ItemHitDelta ItemUsesDelta ItemCritChance ItemCritRange".split():
             self.settingsDict[k] = self.advancedDict[k].getValue()
 
         self.settingsDict["Seed"] = self.advancedDict["Seed"].getSeed()
@@ -121,10 +121,10 @@ class Raddomizer(QWidget):
             for i in "Growths Bases Classes Reclassing Portraits Items Enemies".split():
                 self.generalDict[i].setState(self.settingsDict[i])
 
-            for j in "ManaketeFlag BallistaFlag AbsBases AbsGrowths WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
+            for j in "ManaketeFlag BallistaFlag WepLocks GenLocks MixHumanDragon MixLandFlying SkipPrologue".split():
                 self.advancedDict[j].setState(self.settingsDict[j])
 
-            for k in "DancerCount FreelanceCount GrowthRange ItemMtDelta ItemHitDelta ItemUsesDelta ItemCritChance ItemCritRange".split():
+            for k in "DancerCount FreelanceCount GrowthRange BasesDelta GrowthsDelta ItemMtDelta ItemHitDelta ItemUsesDelta ItemCritChance ItemCritRange".split():
                 self.advancedDict[k].setValue(self.settingsDict[k])   
 
             self.advancedDict["Seed"].setSeed(self.settingsDict["Seed"]) 
@@ -196,8 +196,8 @@ class Raddomizer(QWidget):
 
         self.advancedDict = {
         "GrowthRange": self.addSlider(advancedWin, info, (1,2), (4,1), True),
-        "AbsBases": self.addCheckBox(advancedWin, "Absolute Bases", info, 15, (1,3)),
-        "AbsGrowths": self.addCheckBox(advancedWin, "Absolute Growths", info, 15, (2,3)),
+        "BasesDelta": self.addIntInput(advancedWin, "Bases Delta", info, 0, 25, (1, 3)),
+        "GrowthsDelta": self.addIntInput(advancedWin, "Growths Delta", info, 0, 500, (2,3)),
         "ManaketeFlag": self.addCheckBox(advancedWin, "Enable Manaketes", info, 15, (1,4)),
         "BallistaFlag": self.addCheckBox(advancedWin, "Enable Ballisticians", info, 15, (2,4)),
         "DancerCount": self.addIntInput(advancedWin, "Max Dancers", info, -1, None, (1, 6)),
@@ -217,6 +217,7 @@ class Raddomizer(QWidget):
         "Seed": self.addSeedInput(advancedWin, info, (4,3), (1, 2))
         }
         
+        self.advancedDict["GrowthsDelta"].setStep(10)
         self.advancedDict["ItemHitDelta"].setStep(5)
         self.advancedDict["ItemUsesDelta"].setStep(2)
         self.advancedDict["ItemCritChance"].setStep(5)
@@ -247,8 +248,8 @@ class Raddomizer(QWidget):
         self.randomizer.enableManaketes = self.advancedDict["ManaketeFlag"].getState()
         self.randomizer.enableBallistas = self.advancedDict["BallistaFlag"].getState()
 
-        self.randomizer.absoluteBases = self.advancedDict["AbsBases"].getState()
-        self.randomizer.absoluteGrowths = self.advancedDict["AbsGrowths"].getState()
+        self.randomizer.basesDelta = self.advancedDict["BasesDelta"].getValue()
+        self.randomizer.growthsDelta = self.advancedDict["GrowthsDelta"].getValue()
 
         self.randomizer.removeWepLocks = self.advancedDict["WepLocks"].getState()
         self.randomizer.abolishGender = self.advancedDict["GenLocks"].getState()
@@ -977,6 +978,8 @@ class intInputLabel(QWidget):
         self.grid.addWidget(self.inputField, 0, 2, 1, 1, Qt.AlignCenter)
 
         self.dialogueDict = {
+            "Bases Delta": "How much total personal bases can\nvary from their original value.",
+            "Growths Delta": "How much total personal growths can\nvary from their original value.",
             "Max Dancers": "Max amount of player Dancers to \nbe randomized. -1 means unlimited.",
             "Max Freelancers": "Max amount of player Freelancers \nto be randomized. -1 means unlimited.",
             "Mt Variance": "Max amount to add or subtract\n from each weapon's Might.",
@@ -1175,8 +1178,8 @@ class randomizerCheckbox(QWidget):
             "Portraits":"Randomizes identities (e.g. Marth -> Radd) \nof all playable characters (except Kris).",
             "Items": "Randomizes weapon stats \n(Uses, Might, Hit and Crit).",
             "Enemies": "Randomizes enemy classes\n and inventories.",
-            "Absolute Bases": "Ignores whether bases add \nup to the original base stat total.",
-            "Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
+            #"Absolute Bases": "Ignores whether bases add \nup to the original base stat total.",
+            #"Absolute Growths": "Ignores whether growths add \nup to the original base stat total.",
             "Enable Manaketes": "Adds non-divine Manaketes \ninto the player class pool.",
             "Enable Ballisticians": "Adds Ballisticians into \nthe player class pool.",
             "No Weapon Locks": "Makes Falchion, Rapier, Wing Spear, \nHammerne and Aum available to all.",
@@ -1532,7 +1535,7 @@ class aboutWindow(QWidget):
         <div style = "text-align: center">
         <i style = "font-size:30px">About</i>
         <div style = "font-size: 20px">
-        &nbsp;&nbsp;This randomizer is a joint effort by LT, Radd, and Vennobennu.&nbsp;&nbsp;<br><br>
+        &nbsp;&nbsp;This randomizer is a joint effort by LT and Radd.&nbsp;&nbsp;<br><br>
         &nbsp;For more information (and error reports), <br>
         please visit the <a href = https://github.com/eLTehh/Raddomizer 
         style = "color: #f7f3b9;">Github link here.</a>&nbsp;
