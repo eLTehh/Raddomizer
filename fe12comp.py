@@ -1,5 +1,5 @@
-import functools
-import random
+#import functools
+#import random
 
 cypherTable = [0x3C, 0x7F, 0x83, 0x81, 0x80, 0x78, 0x6A, 0x08, 0xBC, 0xD8, 0x75, 0x89, 0x2C, 0x41, 0xBD, 0xC6,
                0x4A, 0xC7, 0xAE, 0xA0, 0x19, 0x72, 0x28, 0x03, 0x40, 0x99, 0x43, 0x42, 0x07, 0xA5, 0x74, 0xB4,
@@ -27,6 +27,7 @@ promoPairs = [(3,0),(4,0),(5,2),(8,6),(9,7),(12,10),(13,0),(16,14),(17,15),
 def twosComplement8(n):
     return n - 0x100 if n & 0x80 else n
 
+'''
 @functools.lru_cache(1 << 10)
 def C1(n, k, a, b):
     "Counts the compositions of `n` into `k` parts bounded by `a` and `b`" 
@@ -97,3 +98,4 @@ def random_restricted_composition(n, k, a, b):
         k -= 1
 
     return comp
+    '''
