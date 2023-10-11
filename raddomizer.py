@@ -1535,7 +1535,7 @@ class aboutWindow(QWidget):
         <div style = "text-align: center">
         <i style = "font-size:30px">About</i>
         <div style = "font-size: 20px">
-        &nbsp;&nbsp;This randomizer is a joint effort by LT and Radd.&nbsp;&nbsp;<br><br>
+        &nbsp;&nbsp;This randomizer is a joint effort by LT, Radd and Vennobennu.&nbsp;&nbsp;<br><br>
         &nbsp;For more information (and error reports), <br>
         please visit the <a href = https://github.com/eLTehh/Raddomizer 
         style = "color: #f7f3b9;">Github link here.</a>&nbsp;
